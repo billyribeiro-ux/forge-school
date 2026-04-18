@@ -7,6 +7,7 @@
 	registered.
 -->
 <script lang="ts">
+	import { track } from '$lib/analytics/events';
 	import { useCart, type CartLineItem } from './cart.svelte';
 
 	type Props = {
@@ -33,6 +34,7 @@
 			quantity: 1
 		};
 		cart.add(item);
+		track('add_to_cart', { productSlug });
 		justAdded = true;
 		if (resetTimer !== null) clearTimeout(resetTimer);
 		resetTimer = setTimeout(() => {
