@@ -1,7 +1,14 @@
 <script lang="ts">
 	import { useCart } from '$lib/cart/cart.svelte';
+	import type { PageProps } from './$types';
+
+	let { data, form }: PageProps = $props();
 
 	const cart = useCart();
+
+	const applied = $derived(data.appliedCoupon);
+	const discount = $derived(applied?.discountCents ?? 0);
+	const totalAfterDiscount = $derived(Math.max(0, cart.subtotalCents - discount));
 
 	function formatPrice(cents: number, currency: string): string {
 		return new Intl.NumberFormat('en-US', {
@@ -65,6 +72,44 @@
 			{/each}
 		</ol>
 
+		<section class="coupon" aria-labelledby="coupon-heading">
+			<h2 id="coupon-heading">Coupon</h2>
+			{#if applied === null}
+				<form method="POST" action="?/apply" class="coupon-form">
+					<label>
+						<span class="sr-only">Coupon code</span>
+						<input
+							name="code"
+							type="text"
+							autocomplete="off"
+							placeholder="Enter a code"
+							value={form?.code ?? ''}
+						/>
+					</label>
+					<button type="submit">Apply</button>
+				</form>
+				{#if form?.couponError !== undefined}
+					<p class="coupon-error" role="alert">{form.couponError}</p>
+				{/if}
+			{:else}
+				<div class="coupon-applied">
+					<span>
+						<strong>{applied.code}</strong>
+						applied —
+						{applied.discountType === 'percent'
+							? `${applied.discountValue}% off`
+							: `${formatPrice(applied.discountValue, cart.currency ?? 'usd')} off`}
+					</span>
+					<form method="POST" action="?/remove">
+						<button type="submit" class="link">Remove</button>
+					</form>
+				</div>
+			{/if}
+			{#if data.couponError !== undefined}
+				<p class="coupon-error" role="alert">{data.couponError}</p>
+			{/if}
+		</section>
+
 		<footer class="summary">
 			<dl>
 				<dt>Subtotal</dt>
@@ -72,7 +117,17 @@
 					{formatPrice(cart.subtotalCents, cart.currency ?? 'usd')}
 				</dd>
 			</dl>
-			<p class="summary-note">Taxes + any discounts are applied at checkout.</p>
+			{#if discount > 0}
+				<dl class="discount-row">
+					<dt>Discount</dt>
+					<dd>−{formatPrice(discount, cart.currency ?? 'usd')}</dd>
+				</dl>
+				<dl class="total-row">
+					<dt>Total</dt>
+					<dd>{formatPrice(totalAfterDiscount, cart.currency ?? 'usd')}</dd>
+				</dl>
+			{/if}
+			<p class="summary-note">Taxes are calculated at checkout.</p>
 			<div class="actions">
 				<button type="button" class="secondary" onclick={() => cart.clear()}>Clear cart</button>
 				<form method="POST" action="/cart/checkout">
@@ -220,6 +275,74 @@
 		.secondary:hover {
 			color: var(--color-fg);
 			border-color: var(--color-brand);
+		}
+		.coupon {
+			border-block-start: 1px solid var(--color-border);
+			padding-block-start: 1.5rem;
+			margin-block: 1.5rem;
+		}
+		.coupon h2 {
+			font-size: var(--font-size-base);
+			margin: 0 0 0.75rem;
+		}
+		.coupon-form {
+			display: flex;
+			gap: 0.5rem;
+		}
+		.coupon-form input {
+			flex: 1;
+			padding-inline: 0.75rem;
+			padding-block: 0.5rem;
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-md);
+			background-color: var(--color-bg);
+			color: var(--color-fg);
+			text-transform: uppercase;
+			letter-spacing: var(--letter-spacing-wide);
+		}
+		.coupon-form button {
+			padding-inline: 1.1rem;
+			padding-block: 0.5rem;
+			background-color: var(--color-bg-raised);
+			color: var(--color-fg);
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-md);
+			cursor: pointer;
+		}
+		.coupon-form button:hover {
+			border-color: var(--color-brand);
+		}
+		.coupon-applied {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin: 0;
+			color: var(--color-fg);
+		}
+		.coupon-applied .link {
+			background: transparent;
+			border: 0;
+			color: var(--color-fg-muted);
+			font-size: var(--font-size-sm);
+			cursor: pointer;
+			padding: 0.25rem 0.5rem;
+		}
+		.coupon-applied .link:hover {
+			color: var(--color-brand);
+		}
+		.coupon-error {
+			color: var(--color-danger, var(--color-brand));
+			font-size: var(--font-size-sm);
+			margin-block-start: 0.5rem;
+		}
+		.discount-row dd {
+			color: var(--color-fg-muted);
+		}
+		.total-row dt {
+			font-weight: var(--font-weight-bold);
+		}
+		.total-row dd {
+			font-weight: var(--font-weight-bold);
 		}
 		.sr-only {
 			position: absolute;

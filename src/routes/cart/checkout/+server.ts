@@ -20,12 +20,23 @@
 import { error, redirect } from '@sveltejs/kit';
 import { and, eq, inArray } from 'drizzle-orm';
 import { db } from '$lib/server/db';
-import { orderItems, orders, prices, products } from '$lib/server/db/schema';
+import {
+	couponRedemptions,
+	coupons,
+	orderItems,
+	orders,
+	prices,
+	products
+} from '$lib/server/db/schema';
 import { ensureSessionCookie } from '$lib/server/session';
 import { stripe } from '$lib/server/stripe/client';
+import { ensureStripeCoupon } from '$lib/server/stripe/coupons';
 import { CART_COOKIE_NAME, deserializeCart } from '$lib/cart/cart-persistence';
+import { computeCouponDiscount } from '$lib/cart/coupons';
 import { PUBLIC_APP_URL } from '$env/static/public';
 import type { RequestHandler } from './$types';
+
+const COUPON_COOKIE_NAME = 'forge_coupon';
 
 export const POST: RequestHandler = async ({ cookies }) => {
 	const raw = cookies.get(CART_COOKIE_NAME);
@@ -94,6 +105,31 @@ export const POST: RequestHandler = async ({ cookies }) => {
 
 	const sessionId = ensureSessionCookie(cookies);
 
+	// Resolve applied coupon (from cookie), re-validate against current subtotal.
+	const couponCode = cookies.get(COUPON_COOKIE_NAME);
+	let appliedCoupon: { id: string; stripeCouponId: string; discountCents: number } | null = null;
+	if (couponCode !== undefined && couponCode !== '') {
+		const [couponRow] = await db
+			.select()
+			.from(coupons)
+			.where(eq(coupons.code, couponCode))
+			.limit(1);
+		if (couponRow !== undefined) {
+			const result = computeCouponDiscount(couponRow, subtotalCents);
+			if (result.ok) {
+				const stripeCouponId = await ensureStripeCoupon(db, couponRow);
+				appliedCoupon = {
+					id: couponRow.id,
+					stripeCouponId,
+					discountCents: result.discountCents
+				};
+			}
+		}
+	}
+
+	const discountCents = appliedCoupon?.discountCents ?? 0;
+	const totalCents = Math.max(0, subtotalCents - discountCents);
+
 	const [order] = await db
 		.insert(orders)
 		.values({
@@ -101,12 +137,21 @@ export const POST: RequestHandler = async ({ cookies }) => {
 			status: 'open',
 			currency,
 			subtotalCents,
-			discountCents: 0,
-			totalCents: subtotalCents
+			discountCents,
+			totalCents,
+			...(appliedCoupon !== null && { couponId: appliedCoupon.id })
 		})
 		.returning();
 	if (order === undefined) {
 		error(500, { message: 'Failed to create order', errorId: 'cart-checkout-insert-failed' });
+	}
+
+	if (appliedCoupon !== null) {
+		await db.insert(couponRedemptions).values({
+			couponId: appliedCoupon.id,
+			orderId: order.id,
+			sessionId
+		});
 	}
 
 	await db.insert(orderItems).values(
@@ -139,6 +184,9 @@ export const POST: RequestHandler = async ({ cookies }) => {
 	const trialDays =
 		mode === 'subscription' ? priceById.get(items[0]!.priceId)!.price.trialPeriodDays : null;
 
+	// Stripe forbids combining `allow_promotion_codes` with `discounts`.
+	// If the user already applied one of our DB coupons we pass it via
+	// `discounts`; otherwise we leave promotion codes open on Stripe's page.
 	const session = await stripe.checkout.sessions.create({
 		mode,
 		line_items: lineItems,
@@ -146,7 +194,9 @@ export const POST: RequestHandler = async ({ cookies }) => {
 		cancel_url: cancelUrl,
 		client_reference_id: order.id,
 		metadata: baseMetadata,
-		allow_promotion_codes: true,
+		...(appliedCoupon !== null
+			? { discounts: [{ coupon: appliedCoupon.stripeCouponId }] }
+			: { allow_promotion_codes: true }),
 		...(mode === 'subscription'
 			? {
 					subscription_data: {
