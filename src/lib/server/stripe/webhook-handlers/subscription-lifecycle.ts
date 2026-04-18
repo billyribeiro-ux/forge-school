@@ -8,15 +8,13 @@
  * side-effect.
  */
 import type Stripe from 'stripe';
-import { and, eq } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { db } from '$lib/server/db';
+import { prices, subscriptions, type NewSubscription } from '$lib/server/db/schema';
 import {
-	entitlements,
-	prices,
-	products,
-	subscriptions,
-	type NewSubscription
-} from '$lib/server/db/schema';
+	grantSubscriptionEntitlement,
+	revokeSubscriptionEntitlement
+} from '$lib/server/entitlements';
 import { logger } from '$lib/server/logger';
 
 type ResolvedContext = {
@@ -109,46 +107,16 @@ async function upsertSubscription(
 	return { productId: price.productId, subscriptionRowId: upserted?.id ?? null };
 }
 
-async function grantSubscriptionEntitlement(
-	ctx: ResolvedContext,
-	productId: string
-): Promise<void> {
-	await db
-		.insert(entitlements)
-		.values({
-			sessionId: ctx.sessionId,
-			productId,
-			source: 'subscription',
-			sourceRef: ctx.subscription.id
-		})
-		.onConflictDoUpdate({
-			target: [entitlements.sessionId, entitlements.productId, entitlements.source],
-			set: { revokedAt: null }
-		});
-}
-
-async function revokeSubscriptionEntitlement(
-	ctx: ResolvedContext,
-	productId: string
-): Promise<void> {
-	await db
-		.update(entitlements)
-		.set({ revokedAt: new Date() })
-		.where(
-			and(
-				eq(entitlements.sessionId, ctx.sessionId),
-				eq(entitlements.productId, productId),
-				eq(entitlements.source, 'subscription')
-			)
-		);
-}
-
 export async function handleSubscriptionCreated(event: Stripe.Event): Promise<void> {
 	const ctx = readContext(event, 'customer.subscription.created');
 	if (ctx === null) return;
 	const { productId } = await upsertSubscription(ctx);
 	if (productId === null) return;
-	await grantSubscriptionEntitlement(ctx, productId);
+	await grantSubscriptionEntitlement(db, {
+		sessionId: ctx.sessionId,
+		productId,
+		subscriptionId: ctx.subscription.id
+	});
 	logger.info(
 		{ stripeEventId: event.id, subscriptionId: ctx.subscription.id, status: ctx.subscription.status },
 		'[webhook] subscription created + entitlement granted'
@@ -164,9 +132,13 @@ export async function handleSubscriptionUpdated(event: Stripe.Event): Promise<vo
 	const status = ctx.subscription.status;
 	// Active-ish states keep the entitlement; terminal states revoke it.
 	if (status === 'active' || status === 'trialing' || status === 'past_due') {
-		await grantSubscriptionEntitlement(ctx, productId);
+		await grantSubscriptionEntitlement(db, {
+			sessionId: ctx.sessionId,
+			productId,
+			subscriptionId: ctx.subscription.id
+		});
 	} else if (status === 'canceled' || status === 'unpaid' || status === 'incomplete_expired') {
-		await revokeSubscriptionEntitlement(ctx, productId);
+		await revokeSubscriptionEntitlement(db, { sessionId: ctx.sessionId, productId });
 	}
 
 	logger.info(
@@ -180,7 +152,7 @@ export async function handleSubscriptionDeleted(event: Stripe.Event): Promise<vo
 	if (ctx === null) return;
 	const { productId } = await upsertSubscription(ctx);
 	if (productId === null) return;
-	await revokeSubscriptionEntitlement(ctx, productId);
+	await revokeSubscriptionEntitlement(db, { sessionId: ctx.sessionId, productId });
 	logger.info(
 		{ stripeEventId: event.id, subscriptionId: ctx.subscription.id },
 		'[webhook] subscription deleted + entitlement revoked'

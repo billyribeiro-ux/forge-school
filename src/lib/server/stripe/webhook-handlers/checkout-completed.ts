@@ -16,7 +16,8 @@
 import type Stripe from 'stripe';
 import { eq } from 'drizzle-orm';
 import { db } from '$lib/server/db';
-import { entitlements, orders, payments, products } from '$lib/server/db/schema';
+import { orders, payments, products } from '$lib/server/db/schema';
+import { grantPurchaseEntitlement } from '$lib/server/entitlements';
 import { logger } from '$lib/server/logger';
 
 export async function handleCheckoutSessionCompleted(event: Stripe.Event): Promise<void> {
@@ -82,17 +83,11 @@ export async function handleCheckoutSessionCompleted(event: Stripe.Event): Promi
 			.limit(1);
 
 		if (product !== undefined) {
-			await db
-				.insert(entitlements)
-				.values({
-					sessionId: forgeSessionId,
-					productId: product.id,
-					source: 'purchase',
-					sourceRef: session.id
-				})
-				.onConflictDoNothing({
-					target: [entitlements.sessionId, entitlements.productId, entitlements.source]
-				});
+			await grantPurchaseEntitlement(db, {
+				sessionId: forgeSessionId,
+				productId: product.id,
+				sourceRef: session.id
+			});
 
 			logger.info(
 				{

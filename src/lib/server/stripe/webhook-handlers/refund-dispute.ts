@@ -11,9 +11,10 @@
  * handling disputes. For now the operational signal is a log line.
  */
 import type Stripe from 'stripe';
-import { and, eq } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { db } from '$lib/server/db';
-import { entitlements, orders, payments, refunds } from '$lib/server/db/schema';
+import { orders, payments, refunds } from '$lib/server/db/schema';
+import { revokePurchaseEntitlementsForSession } from '$lib/server/entitlements';
 import { logger } from '$lib/server/logger';
 
 export async function handleChargeRefunded(event: Stripe.Event): Promise<void> {
@@ -77,15 +78,7 @@ export async function handleChargeRefunded(event: Stripe.Event): Promise<void> {
 	if (charge.amount_refunded >= charge.amount) {
 		const [order] = await db.select().from(orders).where(eq(orders.id, payment.orderId)).limit(1);
 		if (order !== undefined) {
-			await db
-				.update(entitlements)
-				.set({ revokedAt: new Date() })
-				.where(
-					and(
-						eq(entitlements.sessionId, order.sessionId),
-						eq(entitlements.source, 'purchase')
-					)
-				);
+			await revokePurchaseEntitlementsForSession(db, { sessionId: order.sessionId });
 			logger.info(
 				{ stripeEventId: event.id, paymentId: payment.id, orderId: order.id },
 				'[webhook] charge.refunded (full) — purchase entitlements revoked'
