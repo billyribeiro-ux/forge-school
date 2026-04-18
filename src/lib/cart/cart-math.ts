@@ -85,9 +85,6 @@ export function setQuantity(
 	return items.map((it) => (it.priceId === priceId ? { ...it, quantity } : it));
 }
 
-export function removeItem(
-	items: readonly CartLineItem[],
-	priceId: string
-): CartLineItem[] {
+export function removeItem(items: readonly CartLineItem[], priceId: string): CartLineItem[] {
 	return items.filter((it) => it.priceId !== priceId);
 }

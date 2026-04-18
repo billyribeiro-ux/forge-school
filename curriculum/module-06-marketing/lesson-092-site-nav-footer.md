@@ -1,5 +1,6 @@
 ---
 number: 92
+commit: 24a5bb4db3d26420270eb41e409ca1ca6c921452
 slug: site-nav-footer
 title: Ship site-wide nav + footer
 module: 6

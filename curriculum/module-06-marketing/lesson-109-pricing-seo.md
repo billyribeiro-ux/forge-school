@@ -1,5 +1,6 @@
 ---
 number: 109
+commit: 9084c31bfa1dd05a2d6d7b230b0afb00a5057685
 slug: pricing-seo
 title: Adopt SeoMeta on /pricing
 module: 6

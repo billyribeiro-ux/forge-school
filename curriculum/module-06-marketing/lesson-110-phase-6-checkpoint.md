@@ -1,5 +1,6 @@
 ---
 number: 110
+commit: 2ef83c15345915e34ce0a76ea492f66e6d3a0c07
 slug: phase-6-checkpoint
 title: Tag phase-6-complete
 module: 6

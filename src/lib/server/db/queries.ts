@@ -8,20 +8,20 @@
 import { and, asc, eq, gt, ilike, isNull, or, sql } from 'drizzle-orm';
 import type { Db } from './index.ts';
 import {
-	courseLessons,
-	courseModules,
-	entitlements,
-	prices,
-	productCategories,
-	productCategoryMemberships,
-	products,
 	type CourseLesson,
 	type CourseModule,
+	courseLessons,
+	courseModules,
 	type Entitlement,
+	entitlements,
 	type Price,
 	type Product,
 	type ProductCategory,
-	type ProductKindValue
+	type ProductKindValue,
+	prices,
+	productCategories,
+	productCategoryMemberships,
+	products
 } from './schema.ts';
 
 export type ProductWithPrices = Product & { prices: Price[] };
@@ -101,10 +101,7 @@ export async function listProductsByCategorySlug(
 		.innerJoin(products, eq(products.id, productCategoryMemberships.productId))
 		.leftJoin(prices, and(eq(prices.productId, products.id), eq(prices.active, true)))
 		.where(
-			and(
-				eq(productCategoryMemberships.categoryId, category.id),
-				eq(products.status, 'active')
-			)
+			and(eq(productCategoryMemberships.categoryId, category.id), eq(products.status, 'active'))
 		)
 		.orderBy(products.createdAt, prices.createdAt);
 
@@ -192,10 +189,7 @@ export async function filterActiveProducts(
  * at most). A `tsvector` column is justified once the catalog exceeds
  * ~100 rows or users complain about search quality.
  */
-export async function searchActiveProducts(
-	db: Db,
-	query: string
-): Promise<ProductWithPrices[]> {
+export async function searchActiveProducts(db: Db, query: string): Promise<ProductWithPrices[]> {
 	const trimmed = query.trim();
 	if (trimmed === '') return [];
 	const pattern = `%${trimmed.replaceAll('%', '\\%').replaceAll('_', '\\_')}%`;
@@ -239,10 +233,7 @@ export async function searchActiveProducts(
  * use this; callers that check a single product slug use
  * `hasEntitlement`.
  */
-export async function getUserEntitlements(
-	db: Db,
-	sessionId: string
-): Promise<Entitlement[]> {
+export async function getUserEntitlements(db: Db, sessionId: string): Promise<Entitlement[]> {
 	return db
 		.select()
 		.from(entitlements)

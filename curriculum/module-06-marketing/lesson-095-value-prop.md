@@ -1,5 +1,6 @@
 ---
 number: 95
+commit: 5f135e76b4359f853bff4060dd0d46feb8fac75d
 slug: value-prop
 title: Add a three-column value-prop section to the landing
 module: 6

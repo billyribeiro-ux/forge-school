@@ -1,5 +1,6 @@
 ---
 number: 134
+commit: c286a9fa9729b45a2916cec14793e2a43b85fdae
 slug: index-changelog
 title: docs/INDEX.md + docs/CHANGELOG.md
 module: 8

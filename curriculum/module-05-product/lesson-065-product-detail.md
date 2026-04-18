@@ -1,5 +1,6 @@
 ---
 number: 65
+commit: 024f18aae3306ed4fb556a5707fd9dfee09bcca6
 slug: product-detail
 title: Build the /products/[slug] detail page
 module: 5

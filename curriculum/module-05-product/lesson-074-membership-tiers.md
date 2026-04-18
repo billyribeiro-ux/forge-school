@@ -1,5 +1,6 @@
 ---
 number: 74
+commit: b1ef9927deae874affaf1e5b87c9441c3f89a7b8
 slug: membership-tiers
 title: Derive membership tiers (free / pro / lifetime) from entitlements
 module: 5

@@ -1,5 +1,6 @@
 ---
 number: 129
+commit: 397234945bd59481912949b57039f16fe0d6bca7
 slug: testing-doc
 title: docs/TESTING.md — testing strategy
 module: 8

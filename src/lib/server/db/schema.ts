@@ -36,8 +36,7 @@ const updatedAt = () =>
 		.defaultNow()
 		.$onUpdate(() => new Date());
 
-const nullableTimestamp = (name: string) =>
-	timestamp(name, { withTimezone: true, mode: 'date' });
+const nullableTimestamp = (name: string) => timestamp(name, { withTimezone: true, mode: 'date' });
 
 /* ─── Enums ─────────────────────────────────────────────────────────────── */
 

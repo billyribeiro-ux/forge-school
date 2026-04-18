@@ -1,5 +1,6 @@
 ---
 number: 14
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: svelte-agentation
 title: Wire Svelte Agentation for dev-time source inspection
 module: 1

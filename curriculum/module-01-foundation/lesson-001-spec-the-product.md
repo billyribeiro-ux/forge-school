@@ -1,5 +1,6 @@
 ---
 number: 1
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: spec-the-product
 title: Spec the product before writing a single line of code
 module: 1

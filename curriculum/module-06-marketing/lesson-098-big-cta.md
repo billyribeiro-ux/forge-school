@@ -1,5 +1,6 @@
 ---
 number: 98
+commit: f3cb489b76635fc38c1f3ed5549eaf9ab5b326dd
 slug: big-cta
 title: Add a closing BigCTA section
 module: 6

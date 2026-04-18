@@ -1,5 +1,6 @@
 ---
 number: 67
+commit: 2b09ab6fc7d0cba24f0473e28b9828eeddaaaad9
 slug: product-search
 title: Build product search at /products/search
 module: 5

@@ -7,8 +7,9 @@
  * Invoke as part of the full dev seed (wired from scripts/seed-dev.ts),
  * or standalone via `pnpm tsx scripts/seed-course.ts`.
  */
-import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
+
 import { eq } from 'drizzle-orm';
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import * as schema from '../src/lib/server/db/schema.ts';
 
 const COURSE_PRODUCT_SLUG = 'forgeschool-lifetime';
@@ -70,9 +71,7 @@ const modules: ModuleSeed[] = [
 	}
 ];
 
-export async function seedCourse(
-	db: PostgresJsDatabase<typeof schema>
-): Promise<void> {
+export async function seedCourse(db: PostgresJsDatabase<typeof schema>): Promise<void> {
 	console.log('[seed] meta-course modules + lessons...');
 
 	const [product] = await db

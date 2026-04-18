@@ -1,5 +1,6 @@
 ---
 number: 37
+commit: 74adc7a5407944c87a096b5ddf14a64a0ccb61b1
 slug: landing-page
 title: Build the course landing page
 module: 3

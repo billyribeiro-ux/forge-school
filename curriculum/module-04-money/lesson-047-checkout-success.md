@@ -1,5 +1,6 @@
 ---
 number: 47
+commit: ce56486b391693a66a20b0c8065b0ceaae54538b
 slug: checkout-success
 title: Build the /checkout/success confirmation page
 module: 4

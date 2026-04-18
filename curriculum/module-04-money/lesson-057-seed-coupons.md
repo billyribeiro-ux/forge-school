@@ -1,5 +1,6 @@
 ---
 number: 57
+commit: d3d27e9dc031f4469de6d30ff37ec90695466707
 slug: seed-coupons
 title: Seed 12 coupon states covering the Stripe discount matrix
 module: 4

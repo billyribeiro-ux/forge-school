@@ -1,5 +1,6 @@
 ---
 number: 56
+commit: e2307b495844fa6ba5fcbdf05bbb7f80d0e68860
 slug: seed-personas
 title: Seed 12 billing personas for UI coverage
 module: 4

@@ -1,5 +1,6 @@
 ---
 number: 24
+commit: 09f519db068f2f190790dbc151b9b07ed9bb5ed2
 slug: seed-dev-script
 title: Build scripts/seed-dev.ts with production guards
 module: 2

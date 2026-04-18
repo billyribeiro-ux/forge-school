@@ -1,5 +1,6 @@
 ---
 number: 113
+commit: 343061fbf2120975ea27c3ab4f77bf16a8b11e0f
 slug: image-optimization
 title: Image optimization policy
 module: 7
@@ -20,7 +21,7 @@ ForgeSchool v1 ships minimal static imagery (the ForgeMark SVG, favicon). When p
 
 1. Source files live in `static/product-images/*.{jpg,png}`.
 2. `@sveltejs/enhanced-img` emits AVIF → WebP → JPEG at three sizes (480, 1024, 1600).
-3. `<enhanced:img>` picks the best match per viewport via `srcset`.
+3. The generated `enhanced:img` element picks the best match per viewport via `srcset`.
 4. All images are `loading="lazy"` except the hero's first image which is `eager` + `fetchpriority="high"`.
 
 ## The command

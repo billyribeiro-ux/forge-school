@@ -1,5 +1,6 @@
 ---
 number: 25
+commit: 6d3d6848a9c9d1059d9e729819b268e8c2757726
 slug: seed-first-product
 title: Seed the first test product
 module: 2

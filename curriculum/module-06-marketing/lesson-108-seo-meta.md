@@ -1,5 +1,6 @@
 ---
 number: 108
+commit: b128da51ce35ab7380efa7ee89f3e73f1fb014e6
 slug: seo-meta
 title: Add SeoMeta (OG + Twitter + JSON-LD) to landing
 module: 6

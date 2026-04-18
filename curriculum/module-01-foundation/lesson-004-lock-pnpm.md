@@ -1,5 +1,6 @@
 ---
 number: 4
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: lock-pnpm
 title: Lock pnpm as the only permitted package manager
 module: 1

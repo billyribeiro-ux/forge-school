@@ -1,5 +1,6 @@
 ---
 number: 132
+commit: 5e0159bf25e9d330a299018dcc3a2314098c2acb
 slug: security-monitoring
 title: docs/SECURITY.md + docs/MONITORING.md
 module: 8

@@ -1,5 +1,6 @@
 ---
 number: 76
+commit: b6b750191da6252215dd16f750aedf1b0de64dc5
 slug: upgrade-prompt
 title: Build the UpgradePrompt entitlement-gate component
 module: 5

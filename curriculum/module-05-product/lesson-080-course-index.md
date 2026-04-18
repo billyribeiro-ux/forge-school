@@ -1,5 +1,6 @@
 ---
 number: 80
+commit: a70e704d20b8931c2117216fec43ed6b093f51a8
 slug: course-index
 title: Entitlement-gated course index at /course
 module: 5

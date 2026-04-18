@@ -1,5 +1,6 @@
 ---
 number: 49
+commit: 85382f28b4fe59aad69cbe6167012cac7271fdc8
 slug: checkout-completed-grant
 title: Grant access on checkout.session.completed
 module: 4

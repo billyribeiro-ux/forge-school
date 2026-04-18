@@ -1,5 +1,6 @@
 ---
 number: 62
+commit: 091ab22843112803d556b6be5c9d5de923dfa970
 slug: module-4-checkpoint
 title: Validate Module 4 and tag the phase-4 checkpoint
 module: 4

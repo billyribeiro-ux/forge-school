@@ -1,5 +1,6 @@
 ---
 number: 33
+commit: d96032f6d83e600bc409df4301cc40e0fd5ef8e9
 slug: lesson-slug-route
 title: Build the /lessons/[slug] individual lesson route
 module: 3

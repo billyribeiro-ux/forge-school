@@ -3,8 +3,8 @@ import {
 	listCompletedOrdersForSession,
 	listSubscriptionsForSession
 } from '$lib/server/db/billing-queries';
-import { getSessionEntitlementsWithKind } from '$lib/server/entitlements/tier-queries';
 import { listEntitlementsForSession } from '$lib/server/entitlements';
+import { getSessionEntitlementsWithKind } from '$lib/server/entitlements/tier-queries';
 import { ensureSessionCookie } from '$lib/server/session';
 import type { PageServerLoad } from './$types';
 

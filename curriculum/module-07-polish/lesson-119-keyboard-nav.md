@@ -1,5 +1,6 @@
 ---
 number: 119
+commit: 0b2eeaf9dac94e8c8544cc20e53d866c0b8eb3f6
 slug: keyboard-nav
 title: Keyboard navigation verification
 module: 7

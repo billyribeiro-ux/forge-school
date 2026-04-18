@@ -18,8 +18,9 @@
  * SvelteKit build error because `$env/static/private` is not reachable from
  * the browser bundle. That is intentional.
  */
-import pino from 'pino';
+
 import type { LoggerOptions } from 'pino';
+import pino from 'pino';
 import { LOG_LEVEL } from '$env/static/private';
 
 const level: string = LOG_LEVEL !== '' ? LOG_LEVEL : 'info';

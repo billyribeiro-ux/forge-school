@@ -6,13 +6,9 @@
  * /account page, the /course gate, the RenewalBanner in Module 6).
  */
 import { and, eq, isNull } from 'drizzle-orm';
+import { type EntitlementWithKind, type Tier, tierFromEntitlements } from '$lib/entitlements/tier';
 import type { Db } from '$lib/server/db';
 import { entitlements, products } from '$lib/server/db/schema';
-import {
-	tierFromEntitlements,
-	type EntitlementWithKind,
-	type Tier
-} from '$lib/entitlements/tier';
 
 export async function getSessionEntitlementsWithKind(
 	db: Db,

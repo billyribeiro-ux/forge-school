@@ -35,10 +35,7 @@ export function computeCouponDiscount(
 	if (coupon.validUntil !== null && coupon.validUntil.getTime() <= now.getTime()) {
 		return { ok: false, reason: 'expired' };
 	}
-	if (
-		coupon.maxRedemptions !== null &&
-		coupon.redemptionsCount >= coupon.maxRedemptions
-	) {
+	if (coupon.maxRedemptions !== null && coupon.redemptionsCount >= coupon.maxRedemptions) {
 		return { ok: false, reason: 'max_redemptions_reached' };
 	}
 	if (subtotalCents <= 0) return { ok: false, reason: 'subtotal_zero' };

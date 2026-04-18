@@ -1,5 +1,6 @@
 ---
 number: 6
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: env-files
 title: Author .env.example and .env.local
 module: 1

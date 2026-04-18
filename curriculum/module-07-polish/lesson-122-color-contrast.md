@@ -1,5 +1,6 @@
 ---
 number: 122
+commit: ddefbd2f3a1ef04b0620588592d4dedc95b50ff0
 slug: color-contrast
 title: Color contrast audit
 module: 7

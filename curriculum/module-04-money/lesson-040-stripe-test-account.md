@@ -1,5 +1,6 @@
 ---
 number: 40
+commit: 130ba6850db3d8481bfbdc248d197777b5bba5eb
 slug: stripe-test-account
 title: Set up the Stripe test-mode account
 module: 4

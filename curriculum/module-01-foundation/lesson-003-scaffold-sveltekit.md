@@ -1,5 +1,6 @@
 ---
 number: 3
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: scaffold-sveltekit
 title: Scaffold the SvelteKit project
 module: 1

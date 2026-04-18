@@ -1,5 +1,6 @@
 ---
 number: 111
+commit: b69fc09013ad8c979edb0aa325bfb5fe4621d56c
 slug: plausible
 title: Wire Plausible analytics (opt-in, cookie-less)
 module: 7

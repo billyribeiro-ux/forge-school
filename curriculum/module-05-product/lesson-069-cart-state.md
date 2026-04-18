@@ -1,5 +1,6 @@
 ---
 number: 69
+commit: ba81e01c2c37121530c70f80f38eb4331d54a858
 slug: cart-state
 title: Build the client-side cart with Svelte 5 runes
 module: 5

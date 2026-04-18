@@ -5,16 +5,16 @@
 import { and, desc, eq } from 'drizzle-orm';
 import type { Db } from './index.ts';
 import {
-	orders,
-	payments,
-	prices,
-	products,
-	subscriptions,
 	type Order,
+	orders,
 	type Payment,
 	type Price,
 	type Product,
-	type Subscription
+	payments,
+	prices,
+	products,
+	type Subscription,
+	subscriptions
 } from './schema.ts';
 
 export type BillingSubscription = Subscription & {

@@ -34,21 +34,102 @@ type PurchasePersona = {
 };
 
 const subscriptionPersonas: SubscriptionPersona[] = [
-	{ label: 'trialing-fresh',       productSlug: 'forgeschool-pro-monthly', status: 'trialing', cancelAtPeriodEnd: false, periodDaysFromNow: 7,  trialDaysFromNow: 7 },
-	{ label: 'trialing-ending-soon', productSlug: 'forgeschool-pro-monthly', status: 'trialing', cancelAtPeriodEnd: false, periodDaysFromNow: 2,  trialDaysFromNow: 2 },
-	{ label: 'active-monthly',       productSlug: 'forgeschool-pro-monthly', status: 'active',   cancelAtPeriodEnd: false, periodDaysFromNow: 18, trialDaysFromNow: null },
-	{ label: 'active-yearly',        productSlug: 'forgeschool-pro-yearly',  status: 'active',   cancelAtPeriodEnd: false, periodDaysFromNow: 240, trialDaysFromNow: null },
-	{ label: 'cancel-at-period-end', productSlug: 'forgeschool-pro-monthly', status: 'active',   cancelAtPeriodEnd: true,  periodDaysFromNow: 12, trialDaysFromNow: null },
-	{ label: 'past-due',             productSlug: 'forgeschool-pro-monthly', status: 'past_due', cancelAtPeriodEnd: false, periodDaysFromNow: 3,  trialDaysFromNow: null },
-	{ label: 'cancelled-grace',      productSlug: 'forgeschool-pro-monthly', status: 'cancelled',cancelAtPeriodEnd: false, periodDaysFromNow: 5,  trialDaysFromNow: null },
-	{ label: 'unpaid',               productSlug: 'forgeschool-pro-monthly', status: 'unpaid',   cancelAtPeriodEnd: false, periodDaysFromNow: -2, trialDaysFromNow: null },
-	{ label: 'paused',               productSlug: 'forgeschool-pro-yearly',  status: 'paused',   cancelAtPeriodEnd: false, periodDaysFromNow: 100, trialDaysFromNow: null }
+	{
+		label: 'trialing-fresh',
+		productSlug: 'forgeschool-pro-monthly',
+		status: 'trialing',
+		cancelAtPeriodEnd: false,
+		periodDaysFromNow: 7,
+		trialDaysFromNow: 7
+	},
+	{
+		label: 'trialing-ending-soon',
+		productSlug: 'forgeschool-pro-monthly',
+		status: 'trialing',
+		cancelAtPeriodEnd: false,
+		periodDaysFromNow: 2,
+		trialDaysFromNow: 2
+	},
+	{
+		label: 'active-monthly',
+		productSlug: 'forgeschool-pro-monthly',
+		status: 'active',
+		cancelAtPeriodEnd: false,
+		periodDaysFromNow: 18,
+		trialDaysFromNow: null
+	},
+	{
+		label: 'active-yearly',
+		productSlug: 'forgeschool-pro-yearly',
+		status: 'active',
+		cancelAtPeriodEnd: false,
+		periodDaysFromNow: 240,
+		trialDaysFromNow: null
+	},
+	{
+		label: 'cancel-at-period-end',
+		productSlug: 'forgeschool-pro-monthly',
+		status: 'active',
+		cancelAtPeriodEnd: true,
+		periodDaysFromNow: 12,
+		trialDaysFromNow: null
+	},
+	{
+		label: 'past-due',
+		productSlug: 'forgeschool-pro-monthly',
+		status: 'past_due',
+		cancelAtPeriodEnd: false,
+		periodDaysFromNow: 3,
+		trialDaysFromNow: null
+	},
+	{
+		label: 'cancelled-grace',
+		productSlug: 'forgeschool-pro-monthly',
+		status: 'cancelled',
+		cancelAtPeriodEnd: false,
+		periodDaysFromNow: 5,
+		trialDaysFromNow: null
+	},
+	{
+		label: 'unpaid',
+		productSlug: 'forgeschool-pro-monthly',
+		status: 'unpaid',
+		cancelAtPeriodEnd: false,
+		periodDaysFromNow: -2,
+		trialDaysFromNow: null
+	},
+	{
+		label: 'paused',
+		productSlug: 'forgeschool-pro-yearly',
+		status: 'paused',
+		cancelAtPeriodEnd: false,
+		periodDaysFromNow: 100,
+		trialDaysFromNow: null
+	}
 ];
 
 const purchasePersonas: PurchasePersona[] = [
-	{ label: 'lifetime-owner',        productSlug: 'forgeschool-lifetime', status: 'complete', daysAgo: 30,  refund: null },
-	{ label: 'lifetime-refunded',     productSlug: 'forgeschool-lifetime', status: 'complete', daysAgo: 60,  refund: { amountCents: 49700, reason: 'requested_by_customer' } },
-	{ label: 'lifetime-partial-ref',  productSlug: 'forgeschool-lifetime', status: 'complete', daysAgo: 90,  refund: { amountCents: 10000, reason: 'goodwill' } }
+	{
+		label: 'lifetime-owner',
+		productSlug: 'forgeschool-lifetime',
+		status: 'complete',
+		daysAgo: 30,
+		refund: null
+	},
+	{
+		label: 'lifetime-refunded',
+		productSlug: 'forgeschool-lifetime',
+		status: 'complete',
+		daysAgo: 60,
+		refund: { amountCents: 49700, reason: 'requested_by_customer' }
+	},
+	{
+		label: 'lifetime-partial-ref',
+		productSlug: 'forgeschool-lifetime',
+		status: 'complete',
+		daysAgo: 90,
+		refund: { amountCents: 10000, reason: 'goodwill' }
+	}
 ];
 
 function daysFromNow(days: number): Date {

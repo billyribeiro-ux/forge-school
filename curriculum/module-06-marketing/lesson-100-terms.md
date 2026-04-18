@@ -1,5 +1,6 @@
 ---
 number: 100
+commit: f93e7f539c8a6a73e8f3e9d3594c9af0c98f99f8
 slug: terms
 title: Build /terms
 module: 6

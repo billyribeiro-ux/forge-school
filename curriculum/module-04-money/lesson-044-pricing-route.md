@@ -1,5 +1,6 @@
 ---
 number: 44
+commit: bc0b51b8fd8439ac089a8d6381d703a7a4895cca
 slug: pricing-route
 title: Build the /pricing route
 module: 4

@@ -11,7 +11,7 @@
  */
 import { eq } from 'drizzle-orm';
 import type { Db } from '$lib/server/db';
-import { coupons, type Coupon } from '$lib/server/db/schema';
+import { type Coupon, coupons } from '$lib/server/db/schema';
 import { stripe } from './client';
 
 export async function ensureStripeCoupon(db: Db, coupon: Coupon): Promise<string> {

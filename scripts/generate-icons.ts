@@ -21,7 +21,7 @@
  * not transform color attributes. If a raw SVG has hardcoded colors, fix
  * it at the source, not in the generator.
  */
-import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 

@@ -1,5 +1,6 @@
 ---
 number: 103
+commit: f837b85e0866aaa6cc0a69ebfb94bcebb5e4fee1
 slug: cookie-notice
 title: Build /cookie-notice
 module: 6

@@ -18,10 +18,10 @@
 import { and, eq, isNull } from 'drizzle-orm';
 import type { Db } from '$lib/server/db';
 import {
-	entitlements,
-	products,
 	type Entitlement,
-	type NewEntitlement
+	entitlements,
+	type NewEntitlement,
+	products
 } from '$lib/server/db/schema';
 
 export async function grantPurchaseEntitlement(

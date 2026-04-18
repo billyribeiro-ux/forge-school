@@ -1,5 +1,6 @@
 ---
 number: 83
+commit: a1e828d8b58c977cb85d52c42ef058a1f276db56
 slug: subscription-lifecycle-ui
 title: Wire status banners into the subscription rows
 module: 5

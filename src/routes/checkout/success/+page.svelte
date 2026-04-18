@@ -1,7 +1,14 @@
 <script lang="ts">
+	import { track } from '$lib/analytics/events';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
+
+	$effect(() => {
+		if (data.sessionId !== null && data.sessionId !== '') {
+			track('checkout_completed', { stripeCheckoutSessionId: data.sessionId });
+		}
+	});
 </script>
 
 <svelte:head>

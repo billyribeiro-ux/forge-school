@@ -1,5 +1,6 @@
 ---
 number: 5
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: typescript-strict
 title: Enable full TypeScript strict mode
 module: 1

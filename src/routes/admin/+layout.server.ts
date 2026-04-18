@@ -12,14 +12,9 @@
 import { error } from '@sveltejs/kit';
 import { count } from 'drizzle-orm';
 import { dev } from '$app/environment';
-import { db } from '$lib/server/db';
-import {
-	coupons,
-	orders,
-	products,
-	subscriptions
-} from '$lib/server/db/schema';
 import { ENABLE_ADMIN_SHELL } from '$env/static/private';
+import { db } from '$lib/server/db';
+import { coupons, orders, products, subscriptions } from '$lib/server/db/schema';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async () => {

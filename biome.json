@@ -1,0 +1,59 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
+	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+	"files": {
+		"includes": [
+			"src/**/*.{ts,js}",
+			"scripts/**/*.{ts,js}",
+			"tests/**/*.{ts,js}",
+			"!**/*.svelte",
+			"!.svelte-kit/**",
+			"!node_modules/**",
+			"!build/**",
+			"!coverage/**",
+			"!playwright-report/**"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 100,
+		"lineEnding": "lf"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"suspicious": {
+				"noExplicitAny": "error",
+				"noConsole": { "level": "warn", "options": { "allow": ["warn", "error", "info"] } }
+			},
+			"style": {
+				"useImportType": "warn",
+				"useConst": "error",
+				"noNonNullAssertion": "off"
+			},
+			"correctness": {
+				"noUnusedVariables": "off",
+				"noUnusedFunctionParameters": "off"
+			},
+			"complexity": {
+				"useLiteralKeys": "off",
+				"noUselessEmptyExport": "off"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["scripts/**", "src/lib/server/logger.ts"],
+			"linter": { "rules": { "suspicious": { "noConsole": "off" } } }
+		}
+	],
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single",
+			"semicolons": "always",
+			"trailingCommas": "none"
+		}
+	}
+}

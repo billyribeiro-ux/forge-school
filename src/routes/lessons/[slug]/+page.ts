@@ -16,8 +16,14 @@ export const load = ({ params }) => {
 		Component: lesson.Component,
 		meta: lesson.meta,
 		module,
-		prev: prev === null ? null : { slug: prev.meta.slug, title: prev.meta.title, number: prev.meta.number },
-		next: next === null ? null : { slug: next.meta.slug, title: next.meta.title, number: next.meta.number }
+		prev:
+			prev === null
+				? null
+				: { slug: prev.meta.slug, title: prev.meta.title, number: prev.meta.number },
+		next:
+			next === null
+				? null
+				: { slug: next.meta.slug, title: next.meta.title, number: next.meta.number }
 	};
 };
 

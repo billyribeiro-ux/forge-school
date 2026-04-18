@@ -1,6 +1,6 @@
+import { tierLabel } from '$lib/entitlements/tier';
 import { db } from '$lib/server/db';
 import { getSessionEntitlementsWithKind } from '$lib/server/entitlements/tier-queries';
-import { tierLabel } from '$lib/entitlements/tier';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {

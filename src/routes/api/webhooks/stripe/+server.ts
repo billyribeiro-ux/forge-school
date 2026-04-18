@@ -16,14 +16,16 @@
  * could POST synthetic events and trigger our handlers. With it,
  * only payloads signed by our Stripe account's webhook secret pass.
  */
-import type { RequestHandler } from './$types';
+
 import { json } from '@sveltejs/kit';
+import type Stripe from 'stripe';
 import { STRIPE_WEBHOOK_SECRET } from '$env/static/private';
 import { db } from '$lib/server/db';
 import { webhookEvents } from '$lib/server/db/schema';
 import { logger } from '$lib/server/logger';
 import { stripe } from '$lib/server/stripe/client';
 import { dispatchEvent } from '$lib/server/stripe/webhook-handlers';
+import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request }) => {
 	if (STRIPE_WEBHOOK_SECRET === '' || STRIPE_WEBHOOK_SECRET === 'whsec_replace_me') {
@@ -39,7 +41,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const rawBody = await request.text();
 
-	let event;
+	let event: Stripe.Event;
 	try {
 		event = stripe.webhooks.constructEvent(rawBody, signature, STRIPE_WEBHOOK_SECRET);
 	} catch (err) {

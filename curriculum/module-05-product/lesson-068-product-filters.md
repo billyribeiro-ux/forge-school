@@ -1,5 +1,6 @@
 ---
 number: 68
+commit: f2276b378aa02e65b190781e0301b2db4171be3e
 slug: product-filters
 title: Add kind / category / max-price filters to /products
 module: 5

@@ -1,5 +1,6 @@
 ---
 number: 17
+commit: 04e220690718d494c3687387d46b42eaaa940fce
 slug: docker-postgres
 title: Docker Compose for local Postgres
 module: 2

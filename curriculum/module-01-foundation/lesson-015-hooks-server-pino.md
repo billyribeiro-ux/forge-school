@@ -1,5 +1,6 @@
 ---
 number: 15
+commit: e308e69d8cff56a9e3cf38d28e8dbc573cdad281
 slug: hooks-server-pino
 title: Scaffold hooks.server.ts with pino logger + error handler
 module: 1

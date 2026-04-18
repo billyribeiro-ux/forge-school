@@ -1,5 +1,6 @@
 ---
 number: 8
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: oklch-tokens
 title: Build the OKLCH color token foundation
 module: 1

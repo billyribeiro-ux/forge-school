@@ -51,7 +51,10 @@ export async function handleInvoicePaymentFailed(event: Stripe.Event): Promise<v
 	if (event.type !== 'invoice.payment_failed') {
 		throw new Error(`[webhook] wrong handler for event type ${event.type}`);
 	}
-	logInvoice(event, '[webhook] invoice.payment_failed (grace period; revoke via subscription.updated)');
+	logInvoice(
+		event,
+		'[webhook] invoice.payment_failed (grace period; revoke via subscription.updated)'
+	);
 }
 
 export async function handleInvoicePaymentActionRequired(event: Stripe.Event): Promise<void> {

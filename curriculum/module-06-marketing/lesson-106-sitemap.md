@@ -1,5 +1,6 @@
 ---
 number: 106
+commit: 7eee9a3d5a4aed8c5ba35a72f92cb69f03cf349f
 slug: sitemap
 title: Serve sitemap.xml dynamically
 module: 6

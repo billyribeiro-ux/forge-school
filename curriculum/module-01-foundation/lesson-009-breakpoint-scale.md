@@ -1,5 +1,6 @@
 ---
 number: 9
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: breakpoint-scale
 title: Build the 9-tier breakpoint scale
 module: 1

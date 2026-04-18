@@ -3,6 +3,7 @@
 	import RevealOnScroll from '$lib/components/marketing/RevealOnScroll.svelte';
 	import BigCTA from '$lib/components/marketing/BigCTA.svelte';
 	import FAQ from '$lib/components/marketing/FAQ.svelte';
+	import PricingPreview from '$lib/components/marketing/PricingPreview.svelte';
 	import SeoMeta from '$lib/components/marketing/SeoMeta.svelte';
 	import StackGrid from '$lib/components/marketing/StackGrid.svelte';
 	import ValueProp from '$lib/components/marketing/ValueProp.svelte';
@@ -102,6 +103,7 @@
 		</div>
 	</section>
 
+	<PricingPreview />
 	<FAQ />
 
 	<section class="pe7-callout" aria-labelledby="pe7-heading">

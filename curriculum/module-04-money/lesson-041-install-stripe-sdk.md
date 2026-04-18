@@ -1,5 +1,6 @@
 ---
 number: 41
+commit: a5b8d6276b8b9fd14c270d6f133e9e7e0b0e38b1
 slug: install-stripe-sdk
 title: Install the Stripe Node SDK with a test-key boot guard
 module: 4

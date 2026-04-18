@@ -1,5 +1,6 @@
 ---
 number: 10
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: fluid-typography
 title: Build the fluid typography scale with clamp()
 module: 1

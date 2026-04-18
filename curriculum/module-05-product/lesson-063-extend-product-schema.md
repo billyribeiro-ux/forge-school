@@ -1,5 +1,6 @@
 ---
 number: 63
+commit: caabf073387ab6616bc9ca8574c29772d79aceb8
 slug: extend-product-schema
 title: Extend the products schema for browsing
 module: 5

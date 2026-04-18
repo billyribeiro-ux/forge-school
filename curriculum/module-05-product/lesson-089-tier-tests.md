@@ -1,5 +1,6 @@
 ---
 number: 89
+commit: 17f6a807adef09e8732f620ee1d9348f9e278a97
 slug: tier-tests
 title: Vitest unit coverage for tier derivation
 module: 5

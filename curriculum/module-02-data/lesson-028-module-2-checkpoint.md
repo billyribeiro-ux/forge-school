@@ -1,5 +1,6 @@
 ---
 number: 28
+commit: 8285589691616427778095419db1c9c1aa03e9b2
 slug: module-2-checkpoint
 title: Validate Module 2 and tag the phase-2 checkpoint
 module: 2

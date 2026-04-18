@@ -1,5 +1,6 @@
 ---
 number: 32
+commit: 93cf649cccdda26932f6e2c507c127f123336c67
 slug: lessons-listing-route
 title: Build the /lessons listing route
 module: 3

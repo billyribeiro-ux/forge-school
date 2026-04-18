@@ -1,5 +1,6 @@
 ---
 number: 52
+commit: 752010b0420fc26e53c7a6b08f23bc8e3de29403
 slug: invoice-events
 title: Handle invoice.paid / payment_failed / payment_action_required
 module: 4

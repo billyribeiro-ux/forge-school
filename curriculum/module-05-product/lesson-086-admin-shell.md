@@ -1,5 +1,6 @@
 ---
 number: 86
+commit: 56b294ad8e83ddbeebe0ea7b868bec08118736f2
 slug: admin-shell
 title: Build an admin shell behind a feature flag
 module: 5

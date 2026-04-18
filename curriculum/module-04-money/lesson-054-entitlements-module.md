@@ -1,5 +1,6 @@
 ---
 number: 54
+commit: ada8e8dfe503898768c584877da25bebd1135714
 slug: entitlements-module
 title: Extract entitlements into a dedicated server module
 module: 4

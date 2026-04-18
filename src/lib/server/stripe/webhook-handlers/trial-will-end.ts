@@ -16,8 +16,7 @@ export async function handleTrialWillEnd(event: Stripe.Event): Promise<void> {
 	const subscription = event.data.object;
 	const sessionId = subscription.metadata?.['forge_session_id'] ?? null;
 	const productSlug = subscription.metadata?.['forge_product_slug'] ?? null;
-	const trialEnd =
-		subscription.trial_end !== null ? new Date(subscription.trial_end * 1000) : null;
+	const trialEnd = subscription.trial_end !== null ? new Date(subscription.trial_end * 1000) : null;
 
 	logger.info(
 		{
