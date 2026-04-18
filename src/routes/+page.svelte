@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ForgeMark from '$lib/icons/generated/ForgeMark.svelte';
 	import RevealOnScroll from '$lib/components/marketing/RevealOnScroll.svelte';
+	import StackGrid from '$lib/components/marketing/StackGrid.svelte';
 	import ValueProp from '$lib/components/marketing/ValueProp.svelte';
 	import type { PageProps } from './$types';
 
@@ -71,6 +72,7 @@
 	</section>
 
 	<ValueProp />
+	<StackGrid />
 
 	<section class="modules-preview" aria-labelledby="modules-heading">
 		<div class="section-inner">
