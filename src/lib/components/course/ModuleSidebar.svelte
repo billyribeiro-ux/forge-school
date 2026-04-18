@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LessonMeta, ModuleIndex } from '$lib/curriculum';
+	import type { ModuleIndex } from '$lib/curriculum';
 
 	type Props = {
 		module: ModuleIndex;
@@ -8,7 +8,12 @@
 
 	let { module: mod, currentSlug }: Props = $props();
 
-	let isCurrent = $derived.by(() => (slug: string) => slug === currentSlug);
+	// Plain function closure — reads the reactive `currentSlug` prop at
+	// call time. No `$derived.by` needed: there is no heavy computation
+	// to memoize and wrapping a function in a derived is an anti-pattern.
+	function isCurrent(slug: string): boolean {
+		return slug === currentSlug;
+	}
 </script>
 
 <aside class="module-sidebar" aria-label="Module navigation">
@@ -20,7 +25,7 @@
 	<ol class="sidebar-lessons">
 		{#each mod.lessons as lesson (lesson.number)}
 			{@const current = isCurrent(lesson.slug)}
-			<li class="sidebar-item" class:current>
+			<li class={['sidebar-item', { current }]}>
 				<a href="/lessons/{lesson.slug}" aria-current={current ? 'page' : undefined}>
 					<span class="item-num">{String(lesson.number).padStart(3, '0')}</span>
 					<span class="item-title">{lesson.title}</span>
