@@ -8,7 +8,7 @@ moduleTitle: Content Pipeline
 phase: 3
 step: 6
 previous: 33
-next: null
+next: 35
 estimatedMinutes: 15
 filesTouched:
   - package.json

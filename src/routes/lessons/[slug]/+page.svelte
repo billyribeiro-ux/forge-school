@@ -50,6 +50,31 @@
 		<data.Component />
 	</div>
 
+	<nav class="lesson-nav" aria-label="Lesson navigation">
+		{#if data.prev !== null}
+			<a href="/lessons/{data.prev.slug}" class="nav-link nav-prev">
+				<span class="nav-label">← Previous</span>
+				<span class="nav-target">
+					<span class="nav-num">{String(data.prev.number).padStart(3, '0')}</span>
+					<span class="nav-title">{data.prev.title}</span>
+				</span>
+			</a>
+		{:else}
+			<span class="nav-placeholder"></span>
+		{/if}
+		{#if data.next !== null}
+			<a href="/lessons/{data.next.slug}" class="nav-link nav-next">
+				<span class="nav-label">Next →</span>
+				<span class="nav-target">
+					<span class="nav-num">{String(data.next.number).padStart(3, '0')}</span>
+					<span class="nav-title">{data.next.title}</span>
+				</span>
+			</a>
+		{:else}
+			<span class="nav-placeholder"></span>
+		{/if}
+	</nav>
+
 	<footer class="lesson-footer">
 		<a href="/lessons" class="back-link">← All lessons</a>
 	</footer>
@@ -189,10 +214,67 @@
 			color: var(--color-fg-muted);
 		}
 
-		.lesson-footer {
+		.lesson-nav {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1rem;
 			margin-block-start: 3rem;
 			padding-block-start: 2rem;
 			border-block-start: 1px solid var(--color-border);
+		}
+
+		.nav-link {
+			display: grid;
+			gap: 0.25rem;
+			padding: 1rem;
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-md);
+			text-decoration: none;
+			color: var(--color-fg);
+			transition:
+				border-color var(--duration-fast) var(--easing-standard),
+				background-color var(--duration-fast) var(--easing-standard);
+		}
+
+		.nav-link:hover {
+			border-color: var(--color-brand);
+			background-color: var(--color-bg-sunken);
+		}
+
+		.nav-next {
+			text-align: end;
+		}
+
+		.nav-placeholder {
+			display: block;
+		}
+
+		.nav-label {
+			font-size: var(--font-size-xs);
+			letter-spacing: var(--letter-spacing-widest);
+			text-transform: uppercase;
+			color: var(--color-fg-subtle);
+			font-weight: var(--font-weight-semibold);
+		}
+
+		.nav-target {
+			display: grid;
+			gap: 0.125rem;
+		}
+
+		.nav-num {
+			font-family: var(--font-mono);
+			font-size: var(--font-size-xs);
+			color: var(--color-fg-subtle);
+		}
+
+		.nav-title {
+			font-size: var(--font-size-base);
+			font-weight: var(--font-weight-medium);
+		}
+
+		.lesson-footer {
+			margin-block-start: 2rem;
 		}
 
 		.back-link {
