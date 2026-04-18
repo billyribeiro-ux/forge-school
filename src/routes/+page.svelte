@@ -3,6 +3,7 @@
 	import RevealOnScroll from '$lib/components/marketing/RevealOnScroll.svelte';
 	import BigCTA from '$lib/components/marketing/BigCTA.svelte';
 	import FAQ from '$lib/components/marketing/FAQ.svelte';
+	import SeoMeta from '$lib/components/marketing/SeoMeta.svelte';
 	import StackGrid from '$lib/components/marketing/StackGrid.svelte';
 	import ValueProp from '$lib/components/marketing/ValueProp.svelte';
 	import type { PageProps } from './$types';
@@ -13,13 +14,19 @@
 	let firstLesson = $derived(data.modules[0]?.lessons[0]);
 </script>
 
-<svelte:head>
-	<title>ForgeSchool — Build a PE7 fullstack platform, lesson by lesson</title>
-	<meta
-		name="description"
-		content="A {data.totalLessons}-lesson course that teaches production-grade fullstack engineering by building a real commerce platform. Every lesson is one git commit."
-	/>
-</svelte:head>
+<SeoMeta
+	title="Build a PE7 fullstack platform, lesson by lesson"
+	description="A {data.totalLessons}-lesson course that teaches production-grade fullstack engineering by building a real commerce platform. Every lesson is one git commit."
+	path="/"
+	jsonLd={{
+		'@context': 'https://schema.org',
+		'@type': 'Course',
+		name: 'ForgeSchool',
+		description: 'Build a PE7 fullstack platform, lesson by lesson.',
+		provider: { '@type': 'Organization', name: 'ForgeSchool', sameAs: 'https://forgeschool.dev' },
+		numberOfLessons: data.totalLessons
+	}}
+/>
 
 <main class="landing">
 	<section class="hero">
