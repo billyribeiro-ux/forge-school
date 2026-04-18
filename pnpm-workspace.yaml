@@ -1,0 +1,4 @@
+# Declares forgeschool as its own workspace root so pnpm never walks up
+# the filesystem and adopts a parent pnpm-workspace.yaml. This repo is a
+# single package, not a monorepo — `packages` is intentionally empty.
+packages: []
