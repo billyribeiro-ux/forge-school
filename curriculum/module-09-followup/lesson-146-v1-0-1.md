@@ -1,5 +1,6 @@
 ---
 number: 146
+commit: 7e57238a659b102d06cf3009fd612256f6d32d14
 slug: v1-0-1
 title: Tag v1.0.1 — close the SUCCESS CRITERIA gap
 module: 9
