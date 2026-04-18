@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ModuleSidebar from '$lib/components/course/ModuleSidebar.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -9,7 +10,12 @@
 	<meta name="description" content="Lesson {data.meta.number}: {data.meta.title}" />
 </svelte:head>
 
-<article class="lesson-page">
+<div class="lesson-layout">
+	{#if data.module !== null}
+		<ModuleSidebar module={data.module} currentSlug={data.meta.slug} />
+	{/if}
+
+	<article class="lesson-page">
 	<header class="lesson-header">
 		<nav class="breadcrumb" aria-label="Breadcrumb">
 			<a href="/lessons">Curriculum</a>
@@ -78,15 +84,32 @@
 	<footer class="lesson-footer">
 		<a href="/lessons" class="back-link">← All lessons</a>
 	</footer>
-</article>
+	</article>
+</div>
 
 <style>
 	@layer components {
-		.lesson-page {
-			max-inline-size: 52rem;
+		.lesson-layout {
+			display: grid;
+			gap: 2rem;
+			max-inline-size: 80rem;
 			margin-inline: auto;
 			padding-inline: 1.5rem;
 			padding-block: 3rem;
+		}
+
+		@media (min-width: 1024px) {
+			.lesson-layout {
+				grid-template-columns: 16rem 1fr;
+				gap: 3rem;
+			}
+		}
+
+		.lesson-page {
+			min-width: 0;
+			max-inline-size: 52rem;
+			justify-self: center;
+			inline-size: 100%;
 		}
 
 		.lesson-header {

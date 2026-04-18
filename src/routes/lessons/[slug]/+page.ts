@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { getLesson, getLessonByNumber, listLessons } from '$lib/curriculum';
+import { getLesson, getLessonByNumber, getModule, listLessons } from '$lib/curriculum';
 
 export const load = ({ params }) => {
 	const lesson = getLesson(params.slug);
@@ -11,9 +11,11 @@ export const load = ({ params }) => {
 	}
 	const prev = lesson.meta.previous !== null ? getLessonByNumber(lesson.meta.previous) : null;
 	const next = lesson.meta.next !== null ? getLessonByNumber(lesson.meta.next) : null;
+	const module = getModule(lesson.meta.moduleSlug);
 	return {
 		Component: lesson.Component,
 		meta: lesson.meta,
+		module,
 		prev: prev === null ? null : { slug: prev.meta.slug, title: prev.meta.title, number: prev.meta.number },
 		next: next === null ? null : { slug: next.meta.slug, title: next.meta.title, number: next.meta.number }
 	};
