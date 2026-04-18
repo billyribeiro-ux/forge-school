@@ -1,59 +1,31 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	// Reactive progress 0..1. Updated via <svelte:window> listeners;
+	// the bar's transform is driven by style:transform below, so no
+	// bind:this or imperative DOM writes are needed.
+	let progress = $state(0);
+	let rafId: number | null = null;
 
-	let barEl: HTMLDivElement | undefined = $state();
+	function measure(): void {
+		rafId = null;
+		const doc = document.documentElement;
+		const maxScroll = doc.scrollHeight - doc.clientHeight;
+		progress = maxScroll <= 0 ? 0 : Math.min(1, Math.max(0, window.scrollY / maxScroll));
+	}
 
-	onMount(() => {
-		if (barEl === undefined) return;
-		if (typeof window === 'undefined') return;
-
+	function schedule(): void {
 		// Respect user's motion preference: if they've opted out, the bar
-		// stays at its CSS default (scaleX(0)) and we skip the listener.
-		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-		let cleanup: (() => void) | undefined;
-
-		if (prefersReducedMotion) {
-			return;
-		}
-
-		let rafId: number | null = null;
-
-		const update = () => {
-			rafId = null;
-			if (barEl === undefined) return;
-			const doc = document.documentElement;
-			const maxScroll = doc.scrollHeight - doc.clientHeight;
-			const progress = maxScroll <= 0 ? 0 : Math.min(1, Math.max(0, window.scrollY / maxScroll));
-			barEl.style.transform = `scaleX(${progress})`;
-		};
-
-		const onScroll = () => {
-			if (rafId !== null) return;
-			rafId = requestAnimationFrame(update);
-		};
-
-		// Load Motion lazily. It powers richer animation in future lessons;
-		// for the progress bar a plain scroll listener keyed to rAF is enough.
-		import('motion').then(() => {
-			update();
-			window.addEventListener('scroll', onScroll, { passive: true });
-			window.addEventListener('resize', onScroll, { passive: true });
-			cleanup = () => {
-				window.removeEventListener('scroll', onScroll);
-				window.removeEventListener('resize', onScroll);
-				if (rafId !== null) cancelAnimationFrame(rafId);
-			};
-		});
-
-		return () => {
-			cleanup?.();
-		};
-	});
+		// stays at 0 and we skip updates entirely. (CSS also disables the
+		// transition under the same media query.)
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		if (rafId !== null) return;
+		rafId = requestAnimationFrame(measure);
+	}
 </script>
 
+<svelte:window onscroll={schedule} onresize={schedule} onload={schedule} />
+
 <div class="reading-progress" aria-hidden="true">
-	<div class="bar" bind:this={barEl}></div>
+	<div class="bar" style:transform="scaleX({progress})"></div>
 </div>
 
 <style>

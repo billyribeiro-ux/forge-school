@@ -38,7 +38,7 @@
 	);
 </script>
 
-<p class="renewal" class:cancelling={cancelAtPeriodEnd}>{message}</p>
+<p class={['renewal', { cancelling: cancelAtPeriodEnd }]}>{message}</p>
 
 <style>
 	@layer components {

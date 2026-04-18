@@ -38,7 +38,7 @@
 	<section class="grid" aria-label="Plans">
 		{#each data.products as product (product.id)}
 			{@const primaryPrice = product.prices[0]}
-			<article class="card" class:lifetime={product.kind === 'lifetime'}>
+			<article class={['card', { lifetime: product.kind === 'lifetime' }]}>
 				<p class="kind">{product.kind === 'lifetime' ? 'Lifetime' : 'Subscription'}</p>
 				<h2>{product.name}</h2>
 				<p class="description">{product.description}</p>

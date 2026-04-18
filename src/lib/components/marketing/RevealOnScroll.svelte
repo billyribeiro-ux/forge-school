@@ -12,6 +12,7 @@
 -->
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import type { Attachment } from 'svelte/attachments';
 
 	type Props = {
 		delayMs?: number;
@@ -20,19 +21,15 @@
 
 	let { delayMs = 0, children }: Props = $props();
 
-	let node: HTMLDivElement | undefined = $state();
 	let visible = $state(false);
-	let reducedMotion = $state(false);
 
-	$effect(() => {
-		if (typeof window === 'undefined') return;
-		reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		if (reducedMotion) {
+	// Attachment: runs once on mount with the element, returns a cleanup.
+	// Replaces the Svelte 4-era `bind:this` + `$effect` pattern.
+	const reveal: Attachment<HTMLElement> = (node) => {
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 			visible = true;
 			return;
 		}
-		if (node === undefined) return;
-		const target = node;
 		const observer = new IntersectionObserver(
 			(entries) => {
 				for (const entry of entries) {
@@ -44,12 +41,12 @@
 			},
 			{ rootMargin: '-8% 0px' }
 		);
-		observer.observe(target);
+		observer.observe(node);
 		return () => observer.disconnect();
-	});
+	};
 </script>
 
-<div bind:this={node} class="reveal" class:visible style:transition-delay="{delayMs}ms">
+<div {@attach reveal} class={['reveal', { visible }]} style:transition-delay="{delayMs}ms">
 	{@render children()}
 </div>
 

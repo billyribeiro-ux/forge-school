@@ -9,21 +9,16 @@
 	only the `scrolled` class toggles post-mount.
 -->
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	let scrolled = $state(false);
 
-	onMount(() => {
-		function onScroll(): void {
-			scrolled = window.scrollY > 8;
-		}
-		onScroll();
-		window.addEventListener('scroll', onScroll, { passive: true });
-		return () => window.removeEventListener('scroll', onScroll);
-	});
+	function onScroll(): void {
+		scrolled = window.scrollY > 8;
+	}
 </script>
 
-<nav class="site-nav" class:scrolled aria-label="Primary">
+<svelte:window onscroll={onScroll} />
+
+<nav class={['site-nav', { scrolled }]} aria-label="Primary">
 	<a class="brand" href="/">
 		<span class="mark" aria-hidden="true">◆</span>
 		<span class="brand-text">ForgeSchool</span>
