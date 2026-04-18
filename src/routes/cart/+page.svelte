@@ -75,7 +75,9 @@
 			<p class="summary-note">Taxes + any discounts are applied at checkout.</p>
 			<div class="actions">
 				<button type="button" class="secondary" onclick={() => cart.clear()}>Clear cart</button>
-				<a class="primary" href="/cart/checkout">Checkout →</a>
+				<form method="POST" action="/cart/checkout">
+					<button type="submit" class="primary">Checkout →</button>
+				</form>
 			</div>
 		</footer>
 	{/if}
@@ -200,6 +202,8 @@
 			border-radius: var(--radius-md);
 			font-weight: var(--font-weight-medium);
 			text-decoration: none;
+			border: 0;
+			cursor: pointer;
 		}
 		.primary:hover {
 			background-color: var(--color-brand-hover);
