@@ -21,6 +21,7 @@ import postgres from 'postgres';
 import * as schema from '../src/lib/server/db/schema.ts';
 import { loadEnv, refuseIfProdLike, requireDatabaseUrl } from './lib/env.ts';
 import { createStripe } from './lib/stripe.ts';
+import { seedPersonas } from './seed-personas.ts';
 
 loadEnv();
 const databaseUrl = requireDatabaseUrl('seed');
@@ -211,6 +212,7 @@ async function main(): Promise<void> {
 	try {
 		console.log('[seed] inserting dev fixtures...');
 		await seedProducts(db);
+		await seedPersonas(db);
 		console.log('[seed] done');
 	} finally {
 		await client.end({ timeout: 5 });
