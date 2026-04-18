@@ -20,12 +20,15 @@
 		"db:migrate": "tsx scripts/migrate.ts",
 		"db:reset": "tsx scripts/reset.ts",
 		"db:seed": "tsx scripts/seed-dev.ts",
-		"db:studio": "drizzle-kit studio"
+		"db:studio": "drizzle-kit studio",
+		"test": "vitest run",
+		"test:watch": "vitest"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
+		"@types/node": "^25.6.0",
 		"dotenv": "^17.4.2",
 		"drizzle-kit": "^0.31.10",
 		"mdsvex": "^0.12.7",
@@ -34,7 +37,8 @@
 		"svelte-check": "^4.4.6",
 		"tsx": "^4.21.0",
 		"typescript": "^6.0.2",
-		"vite": "^8.0.7"
+		"vite": "^8.0.7",
+		"vitest": "^4.1.4"
 	},
 	"dependencies": {
 		"@iconify-json/carbon": "^1.2.20",
