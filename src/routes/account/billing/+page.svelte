@@ -84,6 +84,31 @@
 		{/if}
 	</section>
 
+	{#if data.lifetimeEntitlements.length > 0}
+		<section class="card lifetime-card">
+			<header class="card-header">
+				<h2>
+					<span class="crown" aria-hidden="true">◆</span>
+					Lifetime access
+				</h2>
+				<span class="lifetime-badge">Permanent</span>
+			</header>
+			<p class="lifetime-copy">
+				One-time purchase. No renewals, no billing cycle. Every lesson in ForgeSchool is yours for
+				good.
+			</p>
+			<ul class="list">
+				{#each data.lifetimeEntitlements as ent (ent.id)}
+					<li class="row small">
+						<p class="row-meta">
+							Granted {formatDate(ent.grantedAt)} · source <strong>{ent.source}</strong>
+						</p>
+					</li>
+				{/each}
+			</ul>
+		</section>
+	{/if}
+
 	<section class="card">
 		<header class="card-header"><h2>Purchase history</h2></header>
 		{#if data.payments.length === 0}
@@ -214,6 +239,39 @@
 			margin-block-start: 0.75rem;
 			display: grid;
 			gap: 0.5rem;
+		}
+		.lifetime-card {
+			border-color: var(--color-brand);
+			background: linear-gradient(
+				135deg,
+				var(--color-bg-raised) 0%,
+				var(--color-bg-raised) 80%,
+				color-mix(in oklch, var(--color-brand) 12%, var(--color-bg-raised)) 100%
+			);
+		}
+		.lifetime-card h2 {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+		.crown {
+			color: var(--color-brand);
+			font-size: var(--font-size-lg);
+		}
+		.lifetime-badge {
+			font-size: var(--font-size-xs);
+			letter-spacing: var(--letter-spacing-widest);
+			text-transform: uppercase;
+			padding-inline: 0.6rem;
+			padding-block: 0.15rem;
+			background-color: var(--color-brand);
+			color: var(--color-brand-fg);
+			border-radius: var(--radius-full);
+			font-weight: var(--font-weight-semibold);
+		}
+		.lifetime-copy {
+			color: var(--color-fg-muted);
+			margin-block: 0 1rem;
 		}
 		.row-side {
 			text-align: end;
