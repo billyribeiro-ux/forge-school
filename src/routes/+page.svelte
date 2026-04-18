@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ForgeMark from '$lib/icons/generated/ForgeMark.svelte';
 	import RevealOnScroll from '$lib/components/marketing/RevealOnScroll.svelte';
+	import ValueProp from '$lib/components/marketing/ValueProp.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -68,6 +69,8 @@
 			</RevealOnScroll>
 		</div>
 	</section>
+
+	<ValueProp />
 
 	<section class="modules-preview" aria-labelledby="modules-heading">
 		<div class="section-inner">
