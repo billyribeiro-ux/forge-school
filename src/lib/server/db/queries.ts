@@ -14,7 +14,8 @@ import {
 	products,
 	type Price,
 	type Product,
-	type ProductCategory
+	type ProductCategory,
+	type ProductKindValue
 } from './schema.ts';
 
 export type ProductWithPrices = Product & { prices: Price[] };
@@ -114,6 +115,66 @@ export async function listProductsByCategorySlug(
 	}
 
 	return { category, products: [...byId.values()] };
+}
+
+export type ProductFilters = {
+	kind?: ProductKindValue;
+	categorySlug?: string;
+	maxPriceCents?: number;
+};
+
+/**
+ * Filter the active catalog by any combination of kind / category / max
+ * price. Empty filters return the full active list. Max-price filters
+ * on the CHEAPEST active price per product (a product with a $49 monthly
+ * and $497 yearly clears a $100 max).
+ */
+export async function filterActiveProducts(
+	db: Db,
+	filters: ProductFilters
+): Promise<ProductWithPrices[]> {
+	const conditions = [eq(products.status, 'active')];
+	if (filters.kind !== undefined) {
+		conditions.push(eq(products.kind, filters.kind));
+	}
+	if (filters.categorySlug !== undefined) {
+		conditions.push(
+			sql`exists (
+				select 1 from ${productCategoryMemberships} m
+				join ${productCategories} c on c.id = m.category_id
+				where m.product_id = ${products.id} and c.slug = ${filters.categorySlug}
+			)`
+		);
+	}
+	if (filters.maxPriceCents !== undefined) {
+		conditions.push(
+			sql`exists (
+				select 1 from ${prices} p
+				where p.product_id = ${products.id} and p.active = true
+				  and p.unit_amount_cents <= ${filters.maxPriceCents}
+			)`
+		);
+	}
+
+	const rows = await db
+		.select({ product: products, price: prices })
+		.from(products)
+		.leftJoin(prices, and(eq(prices.productId, products.id), eq(prices.active, true)))
+		.where(and(...conditions))
+		.orderBy(products.name, prices.createdAt);
+
+	const byId = new Map<string, ProductWithPrices>();
+	for (const row of rows) {
+		let existing = byId.get(row.product.id);
+		if (existing === undefined) {
+			existing = { ...row.product, prices: [] };
+			byId.set(row.product.id, existing);
+		}
+		if (row.price !== null) {
+			existing.prices.push(row.price);
+		}
+	}
+	return [...byId.values()];
 }
 
 /**

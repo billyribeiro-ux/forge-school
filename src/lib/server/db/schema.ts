@@ -386,6 +386,7 @@ export type NewSubscription = typeof subscriptions.$inferInsert;
 export type Entitlement = typeof entitlements.$inferSelect;
 export type NewEntitlement = typeof entitlements.$inferInsert;
 export type ProductCategory = typeof productCategories.$inferSelect;
+export type ProductKindValue = (typeof productKind.enumValues)[number];
 export type Coupon = typeof coupons.$inferSelect;
 export type NewCoupon = typeof coupons.$inferInsert;
 export type CouponRedemption = typeof couponRedemptions.$inferSelect;
