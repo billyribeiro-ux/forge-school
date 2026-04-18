@@ -15,9 +15,10 @@
  * Or the full reset+seed loop:
  *     pnpm db:reset && pnpm db:seed
  */
-import type Stripe from 'stripe';
+
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import type Stripe from 'stripe';
 import * as schema from '../src/lib/server/db/schema.ts';
 import { loadEnv, refuseIfProdLike, requireDatabaseUrl } from './lib/env.ts';
 import { createStripe } from './lib/stripe.ts';
@@ -60,8 +61,7 @@ const catalog: ProductSpec[] = [
 	{
 		slug: 'forgeschool-lifetime',
 		name: 'ForgeSchool — Lifetime',
-		description:
-			'One-time purchase, permanent access to every lesson and every future module.',
+		description: 'One-time purchase, permanent access to every lesson and every future module.',
 		kind: 'lifetime',
 		prices: [
 			{
@@ -203,9 +203,7 @@ async function seedProducts(db: ReturnType<typeof drizzle<typeof schema>>): Prom
 				});
 		}
 
-		console.log(
-			`[seed]   ✓ ${spec.slug} (${stripeProduct.id}) · ${spec.prices.length} price(s)`
-		);
+		console.log(`[seed]   ✓ ${spec.slug} (${stripeProduct.id}) · ${spec.prices.length} price(s)`);
 	}
 }
 

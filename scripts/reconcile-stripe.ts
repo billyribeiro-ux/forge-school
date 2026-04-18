@@ -16,8 +16,9 @@
  * Invoke:
  *     pnpm exec tsx scripts/reconcile-stripe.ts
  */
-import { drizzle } from 'drizzle-orm/postgres-js';
+
 import { eq } from 'drizzle-orm';
+import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import * as schema from '../src/lib/server/db/schema.ts';
 import { loadEnv, refuseIfProdLike, requireDatabaseUrl } from './lib/env.ts';
@@ -67,9 +68,7 @@ async function reconcile(): Promise<Report> {
 		// ── Prices: amount drift ────────────────────────────────────────────
 		const dbPrices = await db.select().from(schema.prices);
 		for (const dp of dbPrices) {
-			const sp = await stripe.prices
-				.retrieve(dp.stripePriceId)
-				.catch(() => null);
+			const sp = await stripe.prices.retrieve(dp.stripePriceId).catch(() => null);
 			if (sp === null) {
 				report.deletedInStripe.push(`price:${dp.stripePriceId}`);
 				continue;
@@ -87,9 +86,7 @@ async function reconcile(): Promise<Report> {
 		// ── Subscriptions: status drift ─────────────────────────────────────
 		const dbSubs = await db.select().from(schema.subscriptions);
 		for (const dbSub of dbSubs) {
-			const ss = await stripe.subscriptions
-				.retrieve(dbSub.stripeSubscriptionId)
-				.catch(() => null);
+			const ss = await stripe.subscriptions.retrieve(dbSub.stripeSubscriptionId).catch(() => null);
 			if (ss === null) {
 				report.deletedInStripe.push(`subscription:${dbSub.stripeSubscriptionId}`);
 				continue;
@@ -126,9 +123,7 @@ function printReport(r: Report): boolean {
 		hasDrift = true;
 		console.log(`  Price drift (${r.priceDrift.length}):`);
 		for (const d of r.priceDrift) {
-			console.log(
-				`    - ${d.priceId}: db=${d.dbAmountCents} stripe=${d.stripeAmountCents}`
-			);
+			console.log(`    - ${d.priceId}: db=${d.dbAmountCents} stripe=${d.stripeAmountCents}`);
 		}
 	}
 	if (r.subscriptionDrift.length > 0) {
