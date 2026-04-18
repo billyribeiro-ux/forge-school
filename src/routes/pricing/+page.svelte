@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SeoMeta from '$lib/components/marketing/SeoMeta.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -18,13 +19,11 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Pricing — ForgeSchool</title>
-	<meta
-		name="description"
-		content="One-time, monthly, or yearly — pick the plan that fits how you learn."
-	/>
-</svelte:head>
+<SeoMeta
+	title="Pricing"
+	description="One-time, monthly, or yearly — pick the plan that fits how you learn."
+	path="/pricing"
+/>
 
 <main class="pricing">
 	<header class="hero">
