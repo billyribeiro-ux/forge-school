@@ -5,8 +5,9 @@
  * Lesson slugs come from the filesystem-backed curriculum loader, so
  * the sitemap stays in sync as new lessons land.
  */
-import { listLessons } from '$lib/curriculum';
+
 import { PUBLIC_APP_URL } from '$env/static/public';
+import { listLessons } from '$lib/curriculum';
 import type { RequestHandler } from './$types';
 
 const STATIC_PATHS = [
@@ -29,7 +30,11 @@ export const GET: RequestHandler = () => {
 	const now = new Date().toISOString();
 
 	const urls = [
-		...STATIC_PATHS.map((p) => ({ loc: `${origin}${p}`, lastmod: now, priority: p === '/' ? 1.0 : 0.8 })),
+		...STATIC_PATHS.map((p) => ({
+			loc: `${origin}${p}`,
+			lastmod: now,
+			priority: p === '/' ? 1.0 : 0.8
+		})),
 		...lessons.map((l) => ({
 			loc: `${origin}/lessons/${l.slug}`,
 			lastmod: now,

@@ -10,8 +10,9 @@
  * `dispute.closed`) is covered when Billy's support team starts
  * handling disputes. For now the operational signal is a log line.
  */
-import type Stripe from 'stripe';
+
 import { eq } from 'drizzle-orm';
+import type Stripe from 'stripe';
 import { db } from '$lib/server/db';
 import { orders, payments, refunds } from '$lib/server/db/schema';
 import { revokePurchaseEntitlementsForSession } from '$lib/server/entitlements';

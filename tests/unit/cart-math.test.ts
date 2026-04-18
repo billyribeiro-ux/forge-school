@@ -1,13 +1,13 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
 	addOrIncrement,
 	assertSingleCurrency,
+	type CartLineItem,
 	lineItemTotalCents,
 	removeItem,
 	setQuantity,
 	subtotalCents,
-	totalQuantity,
-	type CartLineItem
+	totalQuantity
 } from '../../src/lib/cart/cart-math.ts';
 
 function makeItem(over: Partial<CartLineItem> = {}): CartLineItem {
@@ -47,8 +47,9 @@ describe('cart-math', () => {
 
 	describe('totalQuantity', () => {
 		it('sums quantities', () => {
-			expect(totalQuantity([makeItem({ quantity: 2 }), makeItem({ priceId: 'p2', quantity: 3 })]))
-				.toBe(5);
+			expect(
+				totalQuantity([makeItem({ quantity: 2 }), makeItem({ priceId: 'p2', quantity: 3 })])
+			).toBe(5);
 		});
 	});
 

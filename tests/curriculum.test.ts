@@ -52,7 +52,10 @@ describe('curriculum loader', () => {
 		for (const lesson of lessons) {
 			if (lesson.previous !== null) {
 				const prev = getLessonByNumber(lesson.previous);
-				expect(prev, `lesson ${lesson.number}: previous=${lesson.previous} should resolve`).not.toBeNull();
+				expect(
+					prev,
+					`lesson ${lesson.number}: previous=${lesson.previous} should resolve`
+				).not.toBeNull();
 			}
 			if (lesson.next !== null) {
 				const next = getLessonByNumber(lesson.next);

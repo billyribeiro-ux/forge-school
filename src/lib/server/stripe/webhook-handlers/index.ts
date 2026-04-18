@@ -17,17 +17,17 @@ import type Stripe from 'stripe';
 import { logger } from '$lib/server/logger';
 import { handleCheckoutSessionCompleted } from './checkout-completed.ts';
 import {
-	handleSubscriptionCreated,
-	handleSubscriptionDeleted,
-	handleSubscriptionUpdated
-} from './subscription-lifecycle.ts';
-import { handleTrialWillEnd } from './trial-will-end.ts';
-import {
 	handleInvoicePaid,
 	handleInvoicePaymentActionRequired,
 	handleInvoicePaymentFailed
 } from './invoice-events.ts';
 import { handleChargeDisputeCreated, handleChargeRefunded } from './refund-dispute.ts';
+import {
+	handleSubscriptionCreated,
+	handleSubscriptionDeleted,
+	handleSubscriptionUpdated
+} from './subscription-lifecycle.ts';
+import { handleTrialWillEnd } from './trial-will-end.ts';
 
 export async function dispatchEvent(event: Stripe.Event): Promise<void> {
 	switch (event.type) {

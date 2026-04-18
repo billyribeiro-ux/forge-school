@@ -10,11 +10,11 @@
  */
 import { error, redirect } from '@sveltejs/kit';
 import { desc, eq } from 'drizzle-orm';
+import { PUBLIC_APP_URL } from '$env/static/public';
 import { db } from '$lib/server/db';
 import { subscriptions } from '$lib/server/db/schema';
 import { ensureSessionCookie } from '$lib/server/session';
 import { stripe } from '$lib/server/stripe/client';
-import { PUBLIC_APP_URL } from '$env/static/public';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ cookies }) => {

@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
+	type EntitlementWithKind,
 	tierAtLeast,
 	tierFromEntitlements,
-	tierLabel,
-	type EntitlementWithKind
+	tierLabel
 } from '../../src/lib/entitlements/tier.ts';
 
 function makeEnt(over: Partial<EntitlementWithKind> = {}): EntitlementWithKind {
@@ -39,9 +39,9 @@ describe('tierFromEntitlements', () => {
 	});
 
 	it('returns lifetime for a purchase entitlement on a lifetime product', () => {
-		expect(
-			tierFromEntitlements([makeEnt({ source: 'purchase', productKind: 'lifetime' })])
-		).toBe('lifetime');
+		expect(tierFromEntitlements([makeEnt({ source: 'purchase', productKind: 'lifetime' })])).toBe(
+			'lifetime'
+		);
 	});
 
 	it('prefers lifetime when both a subscription and a lifetime entitlement are active', () => {
@@ -55,9 +55,9 @@ describe('tierFromEntitlements', () => {
 	});
 
 	it('ignores a purchase entitlement on a non-lifetime product', () => {
-		expect(
-			tierFromEntitlements([makeEnt({ source: 'purchase', productKind: 'course' })])
-		).toBe('free');
+		expect(tierFromEntitlements([makeEnt({ source: 'purchase', productKind: 'course' })])).toBe(
+			'free'
+		);
 	});
 
 	it('ignores a grant source (admin grants of arbitrary products)', () => {

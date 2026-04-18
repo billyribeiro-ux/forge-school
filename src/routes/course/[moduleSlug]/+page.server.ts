@@ -6,8 +6,8 @@
  */
 import { error, redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
-import { hasEntitlement } from '$lib/server/entitlements';
 import { getCourseModuleWithLessons } from '$lib/server/db/queries';
+import { hasEntitlement } from '$lib/server/entitlements';
 import { ensureSessionCookie } from '$lib/server/session';
 
 const COURSE_PRODUCT_SLUG = 'forgeschool-lifetime';

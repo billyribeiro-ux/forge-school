@@ -19,6 +19,9 @@
  */
 import { error, redirect } from '@sveltejs/kit';
 import { and, eq, inArray } from 'drizzle-orm';
+import { PUBLIC_APP_URL } from '$env/static/public';
+import { CART_COOKIE_NAME, deserializeCart } from '$lib/cart/cart-persistence';
+import { computeCouponDiscount } from '$lib/cart/coupons';
 import { db } from '$lib/server/db';
 import {
 	couponRedemptions,
@@ -31,9 +34,6 @@ import {
 import { ensureSessionCookie } from '$lib/server/session';
 import { stripe } from '$lib/server/stripe/client';
 import { ensureStripeCoupon } from '$lib/server/stripe/coupons';
-import { CART_COOKIE_NAME, deserializeCart } from '$lib/cart/cart-persistence';
-import { computeCouponDiscount } from '$lib/cart/coupons';
-import { PUBLIC_APP_URL } from '$env/static/public';
 import type { RequestHandler } from './$types';
 
 const COUPON_COOKIE_NAME = 'forge_coupon';
@@ -52,11 +52,7 @@ export const POST: RequestHandler = async ({ cookies }) => {
 		.from(prices)
 		.innerJoin(products, eq(prices.productId, products.id))
 		.where(
-			and(
-				inArray(prices.id, priceIds),
-				eq(prices.active, true),
-				eq(products.status, 'active')
-			)
+			and(inArray(prices.id, priceIds), eq(prices.active, true), eq(products.status, 'active'))
 		);
 
 	const priceById = new Map(priceRows.map((r) => [r.price.id, r]));
@@ -75,9 +71,7 @@ export const POST: RequestHandler = async ({ cookies }) => {
 	for (const item of items) {
 		const row = priceById.get(item.priceId)!;
 		const thisMode: 'payment' | 'subscription' =
-			row.price.interval === null || row.price.interval === 'one_time'
-				? 'payment'
-				: 'subscription';
+			row.price.interval === null || row.price.interval === 'one_time' ? 'payment' : 'subscription';
 		if (thisMode !== mode) {
 			error(400, {
 				message:

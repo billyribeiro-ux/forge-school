@@ -13,8 +13,9 @@
  * Every DB write is idempotent (onConflictDoNothing / onConflictDoUpdate)
  * so retried deliveries after a partial failure are safe.
  */
-import type Stripe from 'stripe';
+
 import { eq } from 'drizzle-orm';
+import type Stripe from 'stripe';
 import { db } from '$lib/server/db';
 import { orders, payments, products } from '$lib/server/db/schema';
 import { grantPurchaseEntitlement } from '$lib/server/entitlements';

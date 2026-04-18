@@ -10,14 +10,12 @@
  * the server is the single reader/writer of its shape. This keeps the
  * format changeable without breaking shipped clients.
  */
-import { error, fail, redirect } from '@sveltejs/kit';
+
 import type { Cookies } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
+import { getCourseLesson, getNextCourseLessonInModule } from '$lib/server/db/queries';
 import { hasEntitlement } from '$lib/server/entitlements';
-import {
-	getCourseLesson,
-	getNextCourseLessonInModule
-} from '$lib/server/db/queries';
 import { ensureSessionCookie } from '$lib/server/session';
 
 const COURSE_PRODUCT_SLUG = 'forgeschool-lifetime';

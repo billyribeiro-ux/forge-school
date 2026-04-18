@@ -11,9 +11,10 @@
  * handling, enum coercion). Integration tests against the real DB
  * are the PE7 contract.
  */
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { getProductBySlug, listActivePricesForProduct } from './queries.ts';
 import * as schema from './schema.ts';
 
@@ -63,7 +64,9 @@ describe('queries — products', () => {
 		const activePrices = await listActivePricesForProduct(db, product.id);
 
 		expect(activePrices.length).toBeGreaterThanOrEqual(1);
-		const lifetime = activePrices.find((p) => p.stripePriceId === 'price_test_forgeschool_lifetime_497');
+		const lifetime = activePrices.find(
+			(p) => p.stripePriceId === 'price_test_forgeschool_lifetime_497'
+		);
 		expect(lifetime).toBeDefined();
 		expect(lifetime?.unitAmountCents).toBe(49700);
 		expect(lifetime?.currency).toBe('usd');

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { computeCouponDiscount, failureMessage } from '../../src/lib/cart/coupons.ts';
 import type { Coupon } from '../../src/lib/server/db/schema.ts';
 
@@ -90,10 +90,7 @@ describe('coupons.computeCouponDiscount', () => {
 	it('accepts when validFrom is in the past and validUntil is in the future', () => {
 		const past = new Date(Date.now() - 1000);
 		const future = new Date(Date.now() + 1000 * 60 * 60 * 24);
-		const result = computeCouponDiscount(
-			makeCoupon({ validFrom: past, validUntil: future }),
-			5000
-		);
+		const result = computeCouponDiscount(makeCoupon({ validFrom: past, validUntil: future }), 5000);
 		expect(result.ok).toBe(true);
 	});
 });

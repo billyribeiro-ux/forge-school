@@ -15,7 +15,7 @@
  * call `tierAtLeast(locals.tier, 'pro')` directly and branch on it.
  */
 import { redirect } from '@sveltejs/kit';
-import { tierAtLeast, type Tier } from '$lib/entitlements/tier';
+import { type Tier, tierAtLeast } from '$lib/entitlements/tier';
 
 export function requireTier(
 	actual: Tier,

@@ -1,4 +1,4 @@
-import { fail, type Actions } from '@sveltejs/kit';
+import { type Actions, fail } from '@sveltejs/kit';
 import { RESEND_API_KEY, RESEND_FROM_EMAIL } from '$env/static/private';
 
 const MAX_MESSAGE_LENGTH = 5000;

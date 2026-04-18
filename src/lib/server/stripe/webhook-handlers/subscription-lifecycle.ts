@@ -7,10 +7,11 @@
  * place; each event has a thin wrapper that decides the entitlement
  * side-effect.
  */
-import type Stripe from 'stripe';
+
 import { eq } from 'drizzle-orm';
+import type Stripe from 'stripe';
 import { db } from '$lib/server/db';
-import { prices, subscriptions, type NewSubscription } from '$lib/server/db/schema';
+import { type NewSubscription, prices, subscriptions } from '$lib/server/db/schema';
 import {
 	grantSubscriptionEntitlement,
 	revokeSubscriptionEntitlement
@@ -71,9 +72,7 @@ async function upsertSubscription(
 		sessionId: ctx.sessionId,
 		stripeSubscriptionId: subscription.id,
 		stripeCustomerId:
-			typeof subscription.customer === 'string'
-				? subscription.customer
-				: subscription.customer.id,
+			typeof subscription.customer === 'string' ? subscription.customer : subscription.customer.id,
 		priceId: price.id,
 		status: subscription.status as
 			| 'trialing'
@@ -118,7 +117,11 @@ export async function handleSubscriptionCreated(event: Stripe.Event): Promise<vo
 		subscriptionId: ctx.subscription.id
 	});
 	logger.info(
-		{ stripeEventId: event.id, subscriptionId: ctx.subscription.id, status: ctx.subscription.status },
+		{
+			stripeEventId: event.id,
+			subscriptionId: ctx.subscription.id,
+			status: ctx.subscription.status
+		},
 		'[webhook] subscription created + entitlement granted'
 	);
 }

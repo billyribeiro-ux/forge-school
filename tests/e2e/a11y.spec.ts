@@ -1,5 +1,5 @@
 import { AxeBuilder } from '@axe-core/playwright';
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 /**
  * Accessibility scan — every public page passes axe-core's WCAG 2.2 AA

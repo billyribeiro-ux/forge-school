@@ -13,11 +13,11 @@
 import {
 	addOrIncrement,
 	assertSingleCurrency,
+	type CartLineItem,
 	removeItem,
 	setQuantity,
 	subtotalCents,
-	totalQuantity,
-	type CartLineItem
+	totalQuantity
 } from './cart-math';
 
 export type { CartLineItem } from './cart-math';

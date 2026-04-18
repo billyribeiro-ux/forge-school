@@ -1,15 +1,12 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { entitlements, products } from '../../src/lib/server/db/schema.ts';
 import {
 	grantPurchaseEntitlement,
 	grantSubscriptionEntitlement,
+	hasEntitlement,
 	revokePurchaseEntitlementsForSession,
-	revokeSubscriptionEntitlement,
-	hasEntitlement
+	revokeSubscriptionEntitlement
 } from '../../src/lib/server/entitlements/index.ts';
-import {
-	entitlements,
-	products
-} from '../../src/lib/server/db/schema.ts';
 
 /**
  * Argument-shape tests. We mock Drizzle's chain to capture every call —
