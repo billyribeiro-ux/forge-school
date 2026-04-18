@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ForgeMark from '$lib/icons/generated/ForgeMark.svelte';
+	import RevealOnScroll from '$lib/components/marketing/RevealOnScroll.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -58,20 +59,19 @@
 
 	<section class="modules-preview" aria-labelledby="modules-heading">
 		<div class="section-inner">
-			<h2 id="modules-heading">The eight modules</h2>
+			<RevealOnScroll>
+				<h2 id="modules-heading">The eight modules</h2>
+			</RevealOnScroll>
 			<ol class="module-grid">
-				{#each data.modules as mod (mod.number)}
-					<li class="module-card">
-						<p class="module-num">Module {mod.number}</p>
-						<h3>{mod.title}</h3>
-						<p class="module-count">{mod.lessons.length} lessons</p>
-					</li>
+				{#each data.modules as mod, i (mod.number)}
+					<RevealOnScroll delayMs={i * 60}>
+						<li class="module-card">
+							<p class="module-num">Module {mod.number}</p>
+							<h3>{mod.title}</h3>
+							<p class="module-count">{mod.lessons.length} lessons</p>
+						</li>
+					</RevealOnScroll>
 				{/each}
-				<li class="module-card module-placeholder">
-					<p class="module-num">Modules 4–8</p>
-					<h3>Coming as the course builds out</h3>
-					<p class="module-count">Money, Product, Marketing, Polish, Ship</p>
-				</li>
 			</ol>
 		</div>
 	</section>
@@ -243,11 +243,6 @@
 
 		.module-card:hover {
 			border-color: var(--color-brand);
-		}
-
-		.module-placeholder {
-			background-color: var(--color-bg-sunken);
-			opacity: 0.8;
 		}
 
 		.module-num {
