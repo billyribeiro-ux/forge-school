@@ -37,6 +37,7 @@ pnpm dev
 |---------|-------------|
 | `pnpm dev` | Start development server |
 | `pnpm build` | Production build |
+| `pnpm preview` | Preview production build |
 | `pnpm check` | TypeScript type checking |
 | `pnpm lint` | Biome lint + format check |
 | `pnpm test` | Run Vitest unit tests |
