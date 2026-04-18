@@ -8,7 +8,7 @@ moduleTitle: Money
 phase: 4
 step: 18
 previous: 56
-next: null
+next: 58
 estimatedMinutes: 10
 filesTouched:
   - scripts/seed-coupons.ts
