@@ -79,13 +79,17 @@ export const products = pgTable(
 		kind: productKind('kind').notNull(),
 		status: productStatus('status').notNull().default('draft'),
 		stripeProductId: text('stripe_product_id'),
+		tags: text('tags').array().notNull().default([]),
+		thumbnailUrl: text('thumbnail_url'),
+		featuredOrder: integer('featured_order'),
 		createdAt: createdAt(),
 		updatedAt: updatedAt()
 	},
 	(t) => [
 		uniqueIndex('products_slug_uq').on(t.slug),
 		uniqueIndex('products_stripe_product_id_uq').on(t.stripeProductId),
-		index('products_status_kind_idx').on(t.status, t.kind)
+		index('products_status_kind_idx').on(t.status, t.kind),
+		index('products_featured_idx').on(t.featuredOrder)
 	]
 );
 

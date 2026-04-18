@@ -8,6 +8,13 @@
       "when": 1776485325022,
       "tag": "0000_ambitious_carlie_cooper",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1776508493585,
+      "tag": "0001_extend_products_browse_fields",
+      "breakpoints": true
     }
   ]
 }
