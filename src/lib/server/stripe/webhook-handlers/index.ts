@@ -27,6 +27,7 @@ import {
 	handleInvoicePaymentActionRequired,
 	handleInvoicePaymentFailed
 } from './invoice-events.ts';
+import { handleChargeDisputeCreated, handleChargeRefunded } from './refund-dispute.ts';
 
 export async function dispatchEvent(event: Stripe.Event): Promise<void> {
 	switch (event.type) {
@@ -54,8 +55,12 @@ export async function dispatchEvent(event: Stripe.Event): Promise<void> {
 		case 'invoice.payment_action_required':
 			await handleInvoicePaymentActionRequired(event);
 			return;
-
-		// Refund / dispute handlers land in lesson 053.
+		case 'charge.refunded':
+			await handleChargeRefunded(event);
+			return;
+		case 'charge.dispute.created':
+			await handleChargeDisputeCreated(event);
+			return;
 
 		default:
 			logger.info(
