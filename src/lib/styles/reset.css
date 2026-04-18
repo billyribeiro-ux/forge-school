@@ -1,0 +1,127 @@
+/* -----------------------------------------------------------------------------
+   ForgeSchool — CSS reset
+
+   A minimal, modern reset wrapped in @layer reset so nothing here can
+   accidentally fight application styles. This is not normalize.css — it
+   is a deliberate list of fixes for behavior that browsers still get
+   wrong or inconsistently in 2026.
+----------------------------------------------------------------------------- */
+
+@layer reset {
+	/* Universal box-sizing — every element and pseudo-element is border-box */
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	/* Remove default margin from everything — components opt in explicitly */
+	* {
+		margin: 0;
+	}
+
+	/* Prevent horizontal overflow on html/body; let the app control layout */
+	html,
+	body {
+		min-block-size: 100%;
+		block-size: 100%;
+	}
+
+	/* Reasonable body defaults the app layer can override */
+	body {
+		line-height: 1.5;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+	}
+
+	/* Media elements behave as block-level and never overflow their container */
+	img,
+	picture,
+	video,
+	canvas,
+	svg {
+		display: block;
+		max-inline-size: 100%;
+		block-size: auto;
+	}
+
+	/* Inputs inherit typography rather than using UA sans-serif fallback */
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+		color: inherit;
+	}
+
+	button {
+		background: transparent;
+		border: 0;
+		padding: 0;
+		cursor: pointer;
+	}
+
+	/* Preserve long words without breaking layout */
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	li {
+		overflow-wrap: break-word;
+	}
+
+	/* Headings inherit weight from the base layer, not UA bold */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: inherit;
+		font-weight: inherit;
+		line-height: inherit;
+	}
+
+	/* Anchors inherit color; base layer and components decide on hover/visited */
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	/* Remove default list styling — components add it back when wanted */
+	ul,
+	ol {
+		list-style: none;
+		padding: 0;
+	}
+
+	/* Tables collapse borders by default for predictable cell rendering */
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+	/* Forms and fieldsets have no default styling */
+	fieldset {
+		border: 0;
+		padding: 0;
+	}
+
+	/* Respect motion preference at the reset level — every animation and
+	   transition is instant for users who opted out. Components can still
+	   declare per-animation behavior, but the default is respected. */
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}

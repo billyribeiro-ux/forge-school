@@ -1,0 +1,31 @@
+/* -----------------------------------------------------------------------------
+   ForgeSchool — cascade layer order
+
+   This file declares the precedence order for every named @layer in the
+   codebase. Importing this FIRST — before any other stylesheet — locks the
+   order in place. Layers declared later in source but registered here are
+   still ordered by the declaration below.
+
+   Order (lowest → highest precedence):
+
+     reset       — normalize browser defaults (below everything)
+     tokens      — design tokens (CSS custom properties)
+     base        — element-level base styles (html, body, headings, links)
+     components  — component-scoped styles authored in .svelte files
+     utilities   — utility classes (margin/padding helpers, visually-hidden)
+     overrides   — emergency one-offs that must win (use sparingly)
+
+   Why this order:
+   - reset must come first so nothing overrides token values with UA defaults
+   - tokens next because base styles reference var(--...)
+   - base before components because components inherit from element defaults
+   - components before utilities so a utility class can trump a component rule
+   - overrides last, and kept nearly empty — the existence of this layer is
+     a release valve, not a habit.
+
+   Styles written OUTSIDE any @layer rank higher than ALL layers. That is
+   intentional for a small set of rules (animations, @font-face) but every
+   other rule in this codebase lives inside a layer.
+----------------------------------------------------------------------------- */
+
+@layer reset, tokens, base, components, utilities, overrides;
