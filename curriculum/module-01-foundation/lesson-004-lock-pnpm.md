@@ -1,12 +1,19 @@
-# Lesson 004 — Lock pnpm as the only permitted package manager
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 4
-**Previous lesson:** 003 — Scaffold the SvelteKit project
-**Next lesson:** 005 — Enable full TypeScript strict mode
-**Estimated time:** 8 minutes
-**Files touched:** `package.json`, `.npmrc`, `pnpm-workspace.yaml`
-
+---
+number: 4
+slug: lock-pnpm
+title: Lock pnpm as the only permitted package manager
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 4
+previous: 3
+next: 5
+estimatedMinutes: 8
+filesTouched:
+  - package.json
+  - .npmrc
+  - pnpm-workspace.yaml
 ---
 
 ## Context

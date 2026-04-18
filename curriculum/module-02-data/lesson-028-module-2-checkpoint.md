@@ -1,12 +1,16 @@
-# Lesson 028 — Validate Module 2 and tag the phase-2 checkpoint
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 12 (final)
-**Previous lesson:** 027 — Open Drizzle Studio and explore the schema
-**Next lesson:** 029 — Design the curriculum folder structure (Module 3 opens)
-**Estimated time:** 10 minutes
-**Files touched:** none (verification + git tag)
-
+---
+number: 28
+slug: module-2-checkpoint
+title: Validate Module 2 and tag the phase-2 checkpoint
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 12
+previous: 27
+next: 29
+estimatedMinutes: 10
+filesTouched: []
 ---
 
 ## Context

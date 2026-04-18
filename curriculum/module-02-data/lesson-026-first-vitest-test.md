@@ -1,12 +1,22 @@
-# Lesson 026 — Write the first Vitest unit test for a DB query
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 10
-**Previous lesson:** 025 — Seed the first test product
-**Next lesson:** 027 — Open Drizzle Studio and explore the schema
-**Estimated time:** 20 minutes
-**Files touched:** `package.json`, `pnpm-lock.yaml`, `vitest.config.ts`, `tests/setup.ts`, `src/lib/server/db/queries.ts`, `src/lib/server/db/queries.test.ts`
-
+---
+number: 26
+slug: first-vitest-test
+title: Write the first Vitest unit test for a DB query
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 10
+previous: 25
+next: 27
+estimatedMinutes: 20
+filesTouched:
+  - package.json
+  - pnpm-lock.yaml
+  - vitest.config.ts
+  - tests/setup.ts
+  - src/lib/server/db/queries.ts
+  - src/lib/server/db/queries.test.ts
 ---
 
 ## Context

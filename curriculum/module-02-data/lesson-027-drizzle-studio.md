@@ -1,12 +1,16 @@
-# Lesson 027 — Open Drizzle Studio and explore the schema
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 11
-**Previous lesson:** 026 — Write the first Vitest unit test for a DB query
-**Next lesson:** 028 — Validate Module 2 and tag the phase-2 checkpoint
-**Estimated time:** 10 minutes
-**Files touched:** none (this lesson is a UI tour, not a code change)
-
+---
+number: 27
+slug: drizzle-studio
+title: Open Drizzle Studio and explore the schema
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 11
+previous: 26
+next: 28
+estimatedMinutes: 10
+filesTouched: []
 ---
 
 ## Context

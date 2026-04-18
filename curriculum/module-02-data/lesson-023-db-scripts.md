@@ -1,12 +1,18 @@
-# Lesson 023 — Add `db:reset`, `db:seed`, and `db:studio` scripts
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 7
-**Previous lesson:** 022 — Run the first migration
-**Next lesson:** 024 — Build `scripts/seed-dev.ts` with production guards
-**Estimated time:** 10 minutes
-**Files touched:** `package.json`, `scripts/reset.ts`
-
+---
+number: 23
+slug: db-scripts
+title: Add db:reset, db:seed, and db:studio scripts
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 7
+previous: 22
+next: 24
+estimatedMinutes: 10
+filesTouched:
+  - package.json
+  - scripts/reset.ts
 ---
 
 ## Context

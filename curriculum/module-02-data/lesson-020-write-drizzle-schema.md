@@ -1,12 +1,17 @@
-# Lesson 020 — Write the Drizzle schema
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 4
-**Previous lesson:** 019 — Design the schema on paper (`docs/ARCHITECTURE.md`)
-**Next lesson:** 021 — Generate the first migration
-**Estimated time:** 30 minutes
-**Files touched:** `src/lib/server/db/schema.ts`
-
+---
+number: 20
+slug: write-drizzle-schema
+title: Write the Drizzle schema
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 4
+previous: 19
+next: 21
+estimatedMinutes: 30
+filesTouched:
+  - src/lib/server/db/schema.ts
 ---
 
 ## Context

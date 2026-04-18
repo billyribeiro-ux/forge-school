@@ -1,12 +1,20 @@
-# Lesson 011 — Set up the `@layer` cascade
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 11
-**Previous lesson:** 010 — Build the fluid typography scale with `clamp()`
-**Next lesson:** 012 — Install Iconify with Phosphor and Carbon icon sets
-**Estimated time:** 15 minutes
-**Files touched:** `src/lib/styles/layers.css`, `src/lib/styles/reset.css`, `src/lib/styles/base.css`, `src/routes/+layout.svelte`
-
+---
+number: 11
+slug: layer-cascade
+title: Set up the @layer cascade
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 11
+previous: 10
+next: 12
+estimatedMinutes: 15
+filesTouched:
+  - src/lib/styles/layers.css
+  - src/lib/styles/reset.css
+  - src/lib/styles/base.css
+  - src/routes/+layout.svelte
 ---
 
 ## Context

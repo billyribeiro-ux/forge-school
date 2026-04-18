@@ -1,12 +1,18 @@
-# Lesson 009 — Build the 9-tier breakpoint scale
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 9
-**Previous lesson:** 008 — Build the OKLCH color token foundation
-**Next lesson:** 010 — Build the fluid typography scale with `clamp()`
-**Estimated time:** 10 minutes
-**Files touched:** `src/lib/styles/breakpoints.css`, `src/routes/+layout.svelte`
-
+---
+number: 9
+slug: breakpoint-scale
+title: Build the 9-tier breakpoint scale
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 9
+previous: 8
+next: 10
+estimatedMinutes: 10
+filesTouched:
+  - src/lib/styles/breakpoints.css
+  - src/routes/+layout.svelte
 ---
 
 ## Context

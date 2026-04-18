@@ -1,12 +1,18 @@
-# Lesson 008 — Build the OKLCH color token foundation
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 8
-**Previous lesson:** 007 — Install mdsvex and wire Markdown rendering
-**Next lesson:** 009 — Build the 9-tier breakpoint scale
-**Estimated time:** 20 minutes
-**Files touched:** `src/lib/styles/tokens.css`, `src/routes/+layout.svelte`
-
+---
+number: 8
+slug: oklch-tokens
+title: Build the OKLCH color token foundation
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 8
+previous: 7
+next: 9
+estimatedMinutes: 20
+filesTouched:
+  - src/lib/styles/tokens.css
+  - src/routes/+layout.svelte
 ---
 
 ## Context

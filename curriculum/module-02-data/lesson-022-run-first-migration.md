@@ -1,12 +1,18 @@
-# Lesson 022 — Run the first migration
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 6
-**Previous lesson:** 021 — Generate the first migration
-**Next lesson:** 023 — Add `db:reset`, `db:seed`, `db:studio` scripts
-**Estimated time:** 10 minutes
-**Files touched:** `package.json`, `scripts/migrate.ts`
-
+---
+number: 22
+slug: run-first-migration
+title: Run the first migration
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 6
+previous: 21
+next: 23
+estimatedMinutes: 10
+filesTouched:
+  - package.json
+  - scripts/migrate.ts
 ---
 
 ## Context

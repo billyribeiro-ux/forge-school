@@ -1,12 +1,18 @@
-# Lesson 010 — Build the fluid typography scale with `clamp()`
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 10
-**Previous lesson:** 009 — Build the 9-tier breakpoint scale
-**Next lesson:** 011 — Set up the `@layer` cascade
-**Estimated time:** 15 minutes
-**Files touched:** `src/lib/styles/typography.css`, `src/routes/+layout.svelte`
-
+---
+number: 10
+slug: fluid-typography
+title: Build the fluid typography scale with clamp()
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 10
+previous: 9
+next: 11
+estimatedMinutes: 15
+filesTouched:
+  - src/lib/styles/typography.css
+  - src/routes/+layout.svelte
 ---
 
 ## Context

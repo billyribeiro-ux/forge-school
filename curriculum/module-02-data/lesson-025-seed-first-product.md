@@ -1,12 +1,17 @@
-# Lesson 025 — Seed the first test product
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 9
-**Previous lesson:** 024 — Build `scripts/seed-dev.ts` with production guards
-**Next lesson:** 026 — Write the first Vitest unit test for a DB query
-**Estimated time:** 10 minutes
-**Files touched:** `scripts/seed-dev.ts`
-
+---
+number: 25
+slug: seed-first-product
+title: Seed the first test product
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 9
+previous: 24
+next: 26
+estimatedMinutes: 10
+filesTouched:
+  - scripts/seed-dev.ts
 ---
 
 ## Context

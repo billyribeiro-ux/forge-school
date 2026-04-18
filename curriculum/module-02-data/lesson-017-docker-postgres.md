@@ -1,12 +1,17 @@
-# Lesson 017 — Docker Compose for local Postgres
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 1
-**Previous lesson:** 016 — Validate the foundation and tag the Module 1 checkpoint
-**Next lesson:** 018 — Install Drizzle ORM + `drizzle-kit` + `postgres.js`
-**Estimated time:** 10 minutes
-**Files touched:** `docker-compose.yml`
-
+---
+number: 17
+slug: docker-postgres
+title: Docker Compose for local Postgres
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 1
+previous: 16
+next: 18
+estimatedMinutes: 10
+filesTouched:
+  - docker-compose.yml
 ---
 
 ## Context

@@ -1,12 +1,17 @@
-# Lesson 019 — Design the schema on paper first
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 3
-**Previous lesson:** 018 — Install Drizzle ORM + `drizzle-kit` + `postgres.js`
-**Next lesson:** 020 — Write the Drizzle schema in `src/lib/server/db/schema.ts`
-**Estimated time:** 30 minutes
-**Files touched:** `docs/ARCHITECTURE.md`
-
+---
+number: 19
+slug: design-schema
+title: Design the schema on paper first
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 3
+previous: 18
+next: 20
+estimatedMinutes: 30
+filesTouched:
+  - docs/ARCHITECTURE.md
 ---
 
 ## Context

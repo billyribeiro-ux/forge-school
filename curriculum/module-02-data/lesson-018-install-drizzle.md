@@ -1,12 +1,21 @@
-# Lesson 018 — Install Drizzle ORM, drizzle-kit, and postgres.js
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 2
-**Previous lesson:** 017 — Docker Compose for local Postgres
-**Next lesson:** 019 — Design the schema on paper (`docs/ARCHITECTURE.md`)
-**Estimated time:** 15 minutes
-**Files touched:** `package.json`, `pnpm-lock.yaml`, `drizzle.config.ts`, `src/lib/server/db/index.ts`, `src/lib/server/db/schema.ts`
-
+---
+number: 18
+slug: install-drizzle
+title: Install Drizzle ORM, drizzle-kit, and postgres.js
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 2
+previous: 17
+next: 19
+estimatedMinutes: 15
+filesTouched:
+  - package.json
+  - pnpm-lock.yaml
+  - drizzle.config.ts
+  - src/lib/server/db/index.ts
+  - src/lib/server/db/schema.ts
 ---
 
 ## Context

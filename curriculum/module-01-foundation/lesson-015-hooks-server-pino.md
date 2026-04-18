@@ -1,12 +1,21 @@
-# Lesson 015 — Scaffold `hooks.server.ts` with pino logger + error handler
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 15
-**Previous lesson:** 014 — Wire Svelte Agentation for dev-time source inspection
-**Next lesson:** 016 — Validate the foundation and tag the Module 1 checkpoint
-**Estimated time:** 20 minutes
-**Files touched:** `package.json`, `pnpm-lock.yaml`, `src/lib/server/logger.ts`, `src/hooks.server.ts`, `src/app.d.ts`
-
+---
+number: 15
+slug: hooks-server-pino
+title: Scaffold hooks.server.ts with pino logger + error handler
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 15
+previous: 14
+next: 16
+estimatedMinutes: 20
+filesTouched:
+  - package.json
+  - pnpm-lock.yaml
+  - src/lib/server/logger.ts
+  - src/hooks.server.ts
+  - src/app.d.ts
 ---
 
 ## Context

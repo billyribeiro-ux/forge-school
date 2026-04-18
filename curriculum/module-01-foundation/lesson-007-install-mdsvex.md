@@ -1,12 +1,21 @@
-# Lesson 007 — Install mdsvex and wire Markdown rendering
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 7
-**Previous lesson:** 006 — Author `.env.example` and `.env.local`
-**Next lesson:** 008 — Build the PE7 CSS foundation — OKLCH color tokens
-**Estimated time:** 10 minutes
-**Files touched:** `package.json`, `pnpm-lock.yaml`, `svelte.config.js`, `src/routes/+page.svelte` (removed), `src/routes/+page.md` (added)
-
+---
+number: 7
+slug: install-mdsvex
+title: Install mdsvex and wire Markdown rendering
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 7
+previous: 6
+next: 8
+estimatedMinutes: 10
+filesTouched:
+  - package.json
+  - pnpm-lock.yaml
+  - svelte.config.js
+  - src/routes/+page.svelte
+  - src/routes/+page.md
 ---
 
 ## Context

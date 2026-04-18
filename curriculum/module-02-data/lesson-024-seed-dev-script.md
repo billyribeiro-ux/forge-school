@@ -1,12 +1,19 @@
-# Lesson 024 — Build `scripts/seed-dev.ts` with production guards
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 8
-**Previous lesson:** 023 — Add `db:reset`, `db:seed`, `db:studio` scripts
-**Next lesson:** 025 — Seed the first test product
-**Estimated time:** 15 minutes
-**Files touched:** `scripts/lib/env.ts`, `scripts/reset.ts`, `scripts/seed-dev.ts`
-
+---
+number: 24
+slug: seed-dev-script
+title: Build scripts/seed-dev.ts with production guards
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 8
+previous: 23
+next: 25
+estimatedMinutes: 15
+filesTouched:
+  - scripts/lib/env.ts
+  - scripts/reset.ts
+  - scripts/seed-dev.ts
 ---
 
 ## Context

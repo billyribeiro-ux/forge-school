@@ -1,12 +1,19 @@
-# Lesson 021 — Generate the first migration
-
-**Module:** 2 — Data
-**Phase:** PE7 Build Order → Phase 2, Step 5
-**Previous lesson:** 020 — Write the Drizzle schema
-**Next lesson:** 022 — Run the first migration
-**Estimated time:** 5 minutes
-**Files touched:** `drizzle.config.ts`, `drizzle/migrations/0000_*.sql`, `drizzle/migrations/meta/*.json`
-
+---
+number: 21
+slug: generate-first-migration
+title: Generate the first migration
+module: 2
+moduleSlug: data
+moduleTitle: Data
+phase: 2
+step: 5
+previous: 20
+next: 22
+estimatedMinutes: 5
+filesTouched:
+  - drizzle.config.ts
+  - drizzle/migrations/0000_*.sql
+  - drizzle/migrations/meta/
 ---
 
 ## Context

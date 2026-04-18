@@ -1,12 +1,16 @@
-# Lesson 016 — Validate the foundation and tag the Module 1 checkpoint
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 16 (final)
-**Previous lesson:** 015 — Scaffold `hooks.server.ts` with pino logger + error handler
-**Next lesson:** 017 — Start Module 2 with Docker Compose for local Postgres
-**Estimated time:** 10 minutes
-**Files touched:** none (this lesson is verification + a git tag)
-
+---
+number: 16
+slug: module-1-checkpoint
+title: Validate the foundation and tag the Module 1 checkpoint
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 16
+previous: 15
+next: 17
+estimatedMinutes: 10
+filesTouched: []
 ---
 
 ## Context

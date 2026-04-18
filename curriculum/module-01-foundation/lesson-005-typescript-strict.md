@@ -1,12 +1,17 @@
-# Lesson 005 — Enable full TypeScript strict mode
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 5
-**Previous lesson:** 004 — Lock pnpm as the only permitted package manager
-**Next lesson:** 006 — Author `.env.example` and `.env.local`
-**Estimated time:** 10 minutes
-**Files touched:** `tsconfig.json`
-
+---
+number: 5
+slug: typescript-strict
+title: Enable full TypeScript strict mode
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 5
+previous: 4
+next: 6
+estimatedMinutes: 10
+filesTouched:
+  - tsconfig.json
 ---
 
 ## Context

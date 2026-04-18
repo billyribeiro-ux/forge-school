@@ -1,12 +1,18 @@
-# Lesson 006 — Author `.env.example` and `.env.local`
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 6
-**Previous lesson:** 005 — Enable full TypeScript strict mode
-**Next lesson:** 007 — Install mdsvex and wire Markdown rendering
-**Estimated time:** 10 minutes
-**Files touched:** `.env.example`, `.env.local` (gitignored)
-
+---
+number: 6
+slug: env-files
+title: Author .env.example and .env.local
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 6
+previous: 5
+next: 7
+estimatedMinutes: 10
+filesTouched:
+  - .env.example
+  - .env.local
 ---
 
 ## Context

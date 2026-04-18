@@ -1,12 +1,19 @@
-# Lesson 012 — Install Iconify with Phosphor and Carbon icon sets
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 12
-**Previous lesson:** 011 — Set up the `@layer` cascade
-**Next lesson:** 013 — Build the `svg-to-svelte` icon generator
-**Estimated time:** 10 minutes
-**Files touched:** `package.json`, `pnpm-lock.yaml`, `src/routes/+page.md`
-
+---
+number: 12
+slug: iconify
+title: Install Iconify with Phosphor and Carbon icon sets
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 12
+previous: 11
+next: 13
+estimatedMinutes: 10
+filesTouched:
+  - package.json
+  - pnpm-lock.yaml
+  - src/routes/+page.md
 ---
 
 ## Context

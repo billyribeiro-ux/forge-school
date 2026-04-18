@@ -1,12 +1,30 @@
-# Lesson 003 — Scaffold the SvelteKit project
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 3
-**Previous lesson:** 002 — Create the project folder and initialize git
-**Next lesson:** 004 — Lock pnpm as the only permitted package manager
-**Estimated time:** 10 minutes
-**Files touched:** `package.json`, `svelte.config.js`, `vite.config.ts`, `tsconfig.json`, `.npmrc`, `src/app.html`, `src/app.d.ts`, `src/routes/+layout.svelte`, `src/routes/+page.svelte`, `src/lib/index.ts`, `src/lib/assets/favicon.svg`, `static/robots.txt`, `.gitignore`, `README.md`
-
+---
+number: 3
+slug: scaffold-sveltekit
+title: Scaffold the SvelteKit project
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 3
+previous: 2
+next: 4
+estimatedMinutes: 10
+filesTouched:
+  - package.json
+  - svelte.config.js
+  - vite.config.ts
+  - tsconfig.json
+  - .npmrc
+  - src/app.html
+  - src/app.d.ts
+  - src/routes/+layout.svelte
+  - src/routes/+page.svelte
+  - src/lib/index.ts
+  - src/lib/assets/favicon.svg
+  - static/robots.txt
+  - .gitignore
+  - README.md
 ---
 
 ## Context

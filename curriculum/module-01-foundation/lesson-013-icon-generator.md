@@ -1,12 +1,22 @@
-# Lesson 013 — Build the SVG-to-Svelte icon generator
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 13
-**Previous lesson:** 012 — Install Iconify with Phosphor and Carbon icon sets
-**Next lesson:** 014 — Wire Svelte Agentation for dev-time source-aware inspection
-**Estimated time:** 20 minutes
-**Files touched:** `package.json`, `pnpm-lock.yaml`, `scripts/generate-icons.ts`, `src/lib/icons/raw/forge-mark.svg`, `src/lib/icons/generated/ForgeMark.svelte`, `src/routes/+page.md`
-
+---
+number: 13
+slug: icon-generator
+title: Build the SVG-to-Svelte icon generator
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 13
+previous: 12
+next: 14
+estimatedMinutes: 20
+filesTouched:
+  - package.json
+  - pnpm-lock.yaml
+  - scripts/generate-icons.ts
+  - src/lib/icons/raw/forge-mark.svg
+  - src/lib/icons/generated/ForgeMark.svelte
+  - src/routes/+page.md
 ---
 
 ## Context

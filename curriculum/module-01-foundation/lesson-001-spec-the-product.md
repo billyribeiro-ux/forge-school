@@ -1,12 +1,17 @@
-# Lesson 001 — Spec the product before writing a single line of code
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 1
-**Previous lesson:** None — this is where it starts
-**Next lesson:** 002 — Create the project folder and initialize git
-**Estimated time:** 15 minutes
-**Files touched:** `docs/SPEC.md`
-
+---
+number: 1
+slug: spec-the-product
+title: Spec the product before writing a single line of code
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 1
+previous: null
+next: 2
+estimatedMinutes: 15
+filesTouched:
+  - docs/SPEC.md
 ---
 
 ## Context

@@ -1,12 +1,17 @@
-# Lesson 014 — Wire Svelte Agentation for dev-time source inspection
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 14
-**Previous lesson:** 013 — Build the SVG-to-Svelte icon generator
-**Next lesson:** 015 — Scaffold `hooks.server.ts` with pino logger + error handler
-**Estimated time:** 5 minutes
-**Files touched:** `svelte.config.js`
-
+---
+number: 14
+slug: svelte-agentation
+title: Wire Svelte Agentation for dev-time source inspection
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 14
+previous: 13
+next: 15
+estimatedMinutes: 5
+filesTouched:
+  - svelte.config.js
 ---
 
 ## Context

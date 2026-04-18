@@ -1,12 +1,18 @@
-# Lesson 002 — Create the project folder and initialize git
-
-**Module:** 1 — Foundation
-**Phase:** PE7 Build Order → Phase 1, Step 2
-**Previous lesson:** 001 — Spec the product before writing a single line of code
-**Next lesson:** 003 — Scaffold the SvelteKit project
-**Estimated time:** 5 minutes
-**Files touched:** `README.md`, `.gitignore`
-
+---
+number: 2
+slug: create-project-folder
+title: Create the project folder and initialize git
+module: 1
+moduleSlug: foundation
+moduleTitle: Foundation
+phase: 1
+step: 2
+previous: 1
+next: 3
+estimatedMinutes: 5
+filesTouched:
+  - README.md
+  - .gitignore
 ---
 
 ## Context
