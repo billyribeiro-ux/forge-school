@@ -8,7 +8,7 @@ moduleTitle: Content Pipeline
 phase: 3
 step: 9
 previous: 36
-next: null
+next: 38
 estimatedMinutes: 20
 filesTouched:
   - src/routes/+page.md

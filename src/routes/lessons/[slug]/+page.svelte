@@ -1,9 +1,12 @@
 <script lang="ts">
 	import ModuleSidebar from '$lib/components/course/ModuleSidebar.svelte';
+	import ReadingProgress from '$lib/components/course/ReadingProgress.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 </script>
+
+<ReadingProgress />
 
 <svelte:head>
 	<title>{data.meta.title} — ForgeSchool</title>
