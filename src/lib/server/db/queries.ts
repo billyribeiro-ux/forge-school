@@ -5,13 +5,19 @@
  * functions / endpoints) gives us a testable, named surface for every
  * data-access pattern the app uses. One function == one test.
  */
-import { and, eq, ilike, or, sql } from 'drizzle-orm';
+import { and, asc, eq, gt, ilike, isNull, or, sql } from 'drizzle-orm';
 import type { Db } from './index.ts';
 import {
+	courseLessons,
+	courseModules,
+	entitlements,
 	prices,
 	productCategories,
 	productCategoryMemberships,
 	products,
+	type CourseLesson,
+	type CourseModule,
+	type Entitlement,
 	type Price,
 	type Product,
 	type ProductCategory,
@@ -222,6 +228,131 @@ export async function searchActiveProducts(
 		}
 	}
 	return [...byId.values()];
+}
+
+/**
+ * Every non-revoked entitlement for a given anonymous session. The
+ * session-scoped read that gates `/account`, `/course`, and the rest
+ * of the app's entitlement-aware surfaces. Mirrors the semantics of
+ * `entitlements.hasEntitlement` but returns the full row set instead
+ * of a single boolean — callers that need to render "what do I own?"
+ * use this; callers that check a single product slug use
+ * `hasEntitlement`.
+ */
+export async function getUserEntitlements(
+	db: Db,
+	sessionId: string
+): Promise<Entitlement[]> {
+	return db
+		.select()
+		.from(entitlements)
+		.where(and(eq(entitlements.sessionId, sessionId), isNull(entitlements.revokedAt)));
+}
+
+/* ─── Meta-course queries ───────────────────────────────────────────────── */
+
+export type CourseModuleWithLessonCount = CourseModule & { lessonCount: number };
+
+/**
+ * List every module under a course product, ordered by `orderIndex`,
+ * each annotated with its lesson count. Drives the `/course` index.
+ */
+export async function listCourseModulesByProductSlug(
+	db: Db,
+	productSlug: string
+): Promise<CourseModuleWithLessonCount[]> {
+	const rows = await db
+		.select({
+			module: courseModules,
+			lessonCount: sql<number>`count(${courseLessons.id})::int`
+		})
+		.from(courseModules)
+		.innerJoin(products, eq(products.id, courseModules.productId))
+		.leftJoin(courseLessons, eq(courseLessons.moduleId, courseModules.id))
+		.where(eq(products.slug, productSlug))
+		.groupBy(courseModules.id)
+		.orderBy(asc(courseModules.orderIndex));
+
+	return rows.map((r) => ({ ...r.module, lessonCount: r.lessonCount }));
+}
+
+export type CourseModuleWithLessons = CourseModule & { lessons: CourseLesson[] };
+
+/**
+ * Load a single module (scoped to a course product) plus all its lessons
+ * in order. Returns `null` when the module slug is unknown under that
+ * product. Drives `/course/[moduleSlug]`.
+ */
+export async function getCourseModuleWithLessons(
+	db: Db,
+	args: { productSlug: string; moduleSlug: string }
+): Promise<CourseModuleWithLessons | null> {
+	const [moduleRow] = await db
+		.select({ module: courseModules })
+		.from(courseModules)
+		.innerJoin(products, eq(products.id, courseModules.productId))
+		.where(and(eq(products.slug, args.productSlug), eq(courseModules.slug, args.moduleSlug)))
+		.limit(1);
+
+	if (moduleRow === undefined) return null;
+
+	const lessons = await db
+		.select()
+		.from(courseLessons)
+		.where(eq(courseLessons.moduleId, moduleRow.module.id))
+		.orderBy(asc(courseLessons.orderIndex));
+
+	return { ...moduleRow.module, lessons };
+}
+
+/**
+ * Load a single lesson (scoped to a course product + module slug pair).
+ * Returns `null` when any part of the path is unknown. Drives
+ * `/course/[moduleSlug]/[lessonSlug]`.
+ */
+export async function getCourseLesson(
+	db: Db,
+	args: { productSlug: string; moduleSlug: string; lessonSlug: string }
+): Promise<{ module: CourseModule; lesson: CourseLesson } | null> {
+	const [row] = await db
+		.select({ module: courseModules, lesson: courseLessons })
+		.from(courseLessons)
+		.innerJoin(courseModules, eq(courseModules.id, courseLessons.moduleId))
+		.innerJoin(products, eq(products.id, courseModules.productId))
+		.where(
+			and(
+				eq(products.slug, args.productSlug),
+				eq(courseModules.slug, args.moduleSlug),
+				eq(courseLessons.slug, args.lessonSlug)
+			)
+		)
+		.limit(1);
+
+	if (row === undefined) return null;
+	return row;
+}
+
+/**
+ * Resolve the next lesson in the same module by `orderIndex`. Returns
+ * `null` when the given lesson is the last in its module.
+ */
+export async function getNextCourseLessonInModule(
+	db: Db,
+	args: { moduleId: string; currentOrderIndex: number }
+): Promise<CourseLesson | null> {
+	const [row] = await db
+		.select()
+		.from(courseLessons)
+		.where(
+			and(
+				eq(courseLessons.moduleId, args.moduleId),
+				gt(courseLessons.orderIndex, args.currentOrderIndex)
+			)
+		)
+		.orderBy(asc(courseLessons.orderIndex))
+		.limit(1);
+
+	return row ?? null;
 }
 
 /**
