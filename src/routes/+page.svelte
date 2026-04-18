@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ForgeMark from '$lib/icons/generated/ForgeMark.svelte';
 	import RevealOnScroll from '$lib/components/marketing/RevealOnScroll.svelte';
+	import FAQ from '$lib/components/marketing/FAQ.svelte';
 	import StackGrid from '$lib/components/marketing/StackGrid.svelte';
 	import ValueProp from '$lib/components/marketing/ValueProp.svelte';
 	import type { PageProps } from './$types';
@@ -92,6 +93,8 @@
 			</ol>
 		</div>
 	</section>
+
+	<FAQ />
 
 	<section class="pe7-callout" aria-labelledby="pe7-heading">
 		<div class="section-inner">
