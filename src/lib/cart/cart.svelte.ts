@@ -20,6 +20,8 @@ import {
 	type CartLineItem
 } from './cart-math';
 
+export type { CartLineItem } from './cart-math';
+
 export type Cart = {
 	readonly items: readonly CartLineItem[];
 	readonly subtotalCents: number;

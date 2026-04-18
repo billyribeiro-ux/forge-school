@@ -1,4 +1,6 @@
 <script lang="ts">
+	import AddToCartButton from '$lib/cart/AddToCartButton.svelte';
+	import CartBadge from '$lib/cart/CartBadge.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -24,7 +26,10 @@
 </svelte:head>
 
 <main class="product-page">
-	<nav class="breadcrumb"><a href="/products">← All products</a></nav>
+	<nav class="breadcrumb">
+		<a href="/products">← All products</a>
+		<CartBadge />
+	</nav>
 
 	<article>
 		<header>
@@ -56,10 +61,19 @@
 								<p class="trial">{price.trialPeriodDays}-day free trial</p>
 							{/if}
 						</div>
-						<form method="POST" action="/checkout/{data.product.slug}">
-							<input type="hidden" name="priceId" value={price.id} />
-							<button type="submit" class="cta">Start checkout</button>
-						</form>
+						<div class="price-actions">
+							<AddToCartButton
+								priceId={price.id}
+								productSlug={data.product.slug}
+								productName={data.product.name}
+								unitAmountCents={price.unitAmountCents}
+								currency={price.currency}
+							/>
+							<form method="POST" action="/checkout/{data.product.slug}">
+								<input type="hidden" name="priceId" value={price.id} />
+								<button type="submit" class="cta">Buy now</button>
+							</form>
+						</div>
 					</li>
 				{/each}
 			</ol>
@@ -78,6 +92,13 @@
 		.breadcrumb {
 			margin-block-end: 2rem;
 			font-size: var(--font-size-sm);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.price-actions {
+			display: inline-flex;
+			gap: 0.5rem;
 		}
 		.breadcrumb a {
 			color: var(--color-fg-muted);

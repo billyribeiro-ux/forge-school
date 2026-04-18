@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CartBadge from '$lib/cart/CartBadge.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -23,6 +24,7 @@
 		<p class="lede">Browse by kind — lifetime courses, subscription plans, bundles.</p>
 		<p class="hero-actions">
 			<a class="search-link" href="/products/search">Search products →</a>
+			<CartBadge />
 		</p>
 	</header>
 
