@@ -1,7 +1,18 @@
 import adapter from '@sveltejs/adapter-auto';
+import { mdsvex } from 'mdsvex';
+
+/** @type {import('mdsvex').MdsvexOptions} */
+const mdsvexOptions = {
+	extensions: ['.md', '.svx'],
+	smartypants: {
+		dashes: 'oldschool'
+	}
+};
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	extensions: ['.svelte', '.md', '.svx'],
+	preprocess: [mdsvex(mdsvexOptions)],
 	compilerOptions: {
 		// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
 		runes: ({ filename }) => (filename.split(/[/\\]/).includes('node_modules') ? undefined : true)
