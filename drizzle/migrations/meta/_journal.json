@@ -15,6 +15,13 @@
       "when": 1776508493585,
       "tag": "0001_extend_products_browse_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1776513783559,
+      "tag": "0002_meta_course_tables",
+      "breakpoints": true
     }
   ]
 }
