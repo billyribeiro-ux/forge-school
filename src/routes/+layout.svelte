@@ -1,6 +1,7 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
 	import CartPersistence from '$lib/cart/CartPersistence.svelte';
+	import Plausible from '$lib/components/marketing/Plausible.svelte';
 	import SiteFooter from '$lib/components/marketing/SiteFooter.svelte';
 	import SiteNav from '$lib/components/marketing/SiteNav.svelte';
 	import { page } from '$app/state';
@@ -24,6 +25,7 @@
 </svelte:head>
 
 <CartPersistence />
+<Plausible />
 
 {#if chromeVisible}
 	<SiteNav />

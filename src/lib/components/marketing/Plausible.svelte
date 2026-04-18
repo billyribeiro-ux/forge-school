@@ -10,8 +10,8 @@
 	const domain = PUBLIC_PLAUSIBLE_DOMAIN;
 </script>
 
-{#if domain !== ''}
-	<svelte:head>
+<svelte:head>
+	{#if domain !== ''}
 		<script defer data-domain={domain} src="https://plausible.io/js/script.js"></script>
-	</svelte:head>
-{/if}
+	{/if}
+</svelte:head>
