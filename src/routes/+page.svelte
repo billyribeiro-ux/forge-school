@@ -20,40 +20,52 @@
 <main class="landing">
 	<section class="hero">
 		<div class="hero-inner">
-			<ForgeMark size="3rem" />
-			<p class="eyebrow">ForgeSchool</p>
-			<h1>
-				Learn production engineering by building a<br />
-				<span class="accent">real fullstack platform</span>.
-			</h1>
-			<p class="lede">
-				{data.totalLessons} lessons across {data.modules.length} modules. Every lesson is one git
-				commit you author with us — from blank repo to shipped product. SvelteKit 2, Svelte 5
-				runes, TypeScript strict, Postgres + Drizzle, Stripe, Motion. No shortcuts, no hacks,
-				built for ten-year longevity.
-			</p>
-			<div class="cta-row">
-				{#if firstLesson !== undefined}
-					<a class="cta primary" href="/lessons/{firstLesson.slug}">
-						Start Lesson 001 — {firstLesson.title}
-					</a>
-				{/if}
-				<a class="cta secondary" href="/lessons">Browse curriculum</a>
-			</div>
-			<dl class="stats">
-				<div class="stat">
-					<dt>Lessons</dt>
-					<dd>{data.totalLessons}</dd>
+			<RevealOnScroll>
+				<ForgeMark size="3rem" />
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={80}>
+				<p class="eyebrow">ForgeSchool</p>
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={140}>
+				<h1>
+					Learn production engineering by building a<br />
+					<span class="accent">real fullstack platform</span>.
+				</h1>
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={220}>
+				<p class="lede">
+					{data.totalLessons} lessons across {data.modules.length} modules. Every lesson is one git
+					commit you author with us — from blank repo to shipped product. SvelteKit 2, Svelte 5
+					runes, TypeScript strict, Postgres + Drizzle, Stripe, Motion. No shortcuts, no hacks,
+					built for ten-year longevity.
+				</p>
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={300}>
+				<div class="cta-row">
+					{#if firstLesson !== undefined}
+						<a class="cta primary" href="/lessons/{firstLesson.slug}">
+							Start Lesson 001 — {firstLesson.title}
+						</a>
+					{/if}
+					<a class="cta secondary" href="/lessons">Browse curriculum</a>
 				</div>
-				<div class="stat">
-					<dt>Modules</dt>
-					<dd>{data.modules.length}</dd>
-				</div>
-				<div class="stat">
-					<dt>Estimated time</dt>
-					<dd>{totalHours} hours</dd>
-				</div>
-			</dl>
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={380}>
+				<dl class="stats">
+					<div class="stat">
+						<dt>Lessons</dt>
+						<dd>{data.totalLessons}</dd>
+					</div>
+					<div class="stat">
+						<dt>Modules</dt>
+						<dd>{data.modules.length}</dd>
+					</div>
+					<div class="stat">
+						<dt>Estimated time</dt>
+						<dd>{totalHours} hours</dd>
+					</div>
+				</dl>
+			</RevealOnScroll>
 		</div>
 	</section>
 
