@@ -8,7 +8,7 @@ moduleTitle: Content Pipeline
 phase: 3
 step: 8
 previous: 35
-next: null
+next: 37
 estimatedMinutes: 15
 filesTouched:
   - src/lib/components/course/ModuleSidebar.svelte
@@ -158,7 +158,7 @@ pnpm dev  # visit /lessons/install-drizzle (Module 2 lesson)
 
 Expected:
 - At window widths ≥1024px: sidebar lists all Module 2 lessons on the left; `install-drizzle` row is highlighted.
-- At widths <1024px: sidebar hidden, lesson body full-width.
+- At widths below 1024px: sidebar hidden, lesson body full-width.
 - Clicking a sidebar lesson navigates; the new page's sidebar highlights the newly-active lesson.
 - Screen reader announces "current page" on the active sidebar link (aria-current).
 
