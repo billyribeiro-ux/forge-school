@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { track } from '$lib/analytics/events';
 	import { useCart } from '$lib/cart/cart.svelte';
 	import type { PageProps } from './$types';
 
@@ -9,6 +10,21 @@
 	const applied = $derived(data.appliedCoupon);
 	const discount = $derived(applied?.discountCents ?? 0);
 	const totalAfterDiscount = $derived(Math.max(0, cart.subtotalCents - discount));
+
+	let lastTrackedCoupon = $state<string | null>(null);
+	$effect(() => {
+		if (applied !== null && applied.code !== lastTrackedCoupon) {
+			track('coupon_applied', { code: applied.code });
+			lastTrackedCoupon = applied.code;
+		}
+	});
+
+	function trackCheckoutStarted(): void {
+		track('checkout_started', {
+			itemCount: String(cart.items.length),
+			subtotalCents: String(cart.subtotalCents)
+		});
+	}
 
 	function formatPrice(cents: number, currency: string): string {
 		return new Intl.NumberFormat('en-US', {
@@ -130,7 +146,7 @@
 			<p class="summary-note">Taxes are calculated at checkout.</p>
 			<div class="actions">
 				<button type="button" class="secondary" onclick={() => cart.clear()}>Clear cart</button>
-				<form method="POST" action="/cart/checkout">
+				<form method="POST" action="/cart/checkout" onsubmit={trackCheckoutStarted}>
 					<button type="submit" class="primary">Checkout →</button>
 				</form>
 			</div>

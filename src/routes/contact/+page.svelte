@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { track } from '$lib/analytics/events';
 	import type { PageProps } from './$types';
 
 	let { form }: PageProps = $props();
@@ -6,6 +7,10 @@
 	const values = $derived(form?.values ?? { name: '', email: '', message: '' });
 	const sent = $derived(form?.sent === true);
 	const error = $derived(form && 'error' in form ? form.error : undefined);
+
+	$effect(() => {
+		if (sent) track('contact_submitted');
+	});
 </script>
 
 <svelte:head>
