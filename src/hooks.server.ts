@@ -17,7 +17,12 @@ import { building } from '$app/environment';
 import { db } from '$lib/server/db';
 import { getSessionTier } from '$lib/server/entitlements/tier-queries';
 import { logger } from '$lib/server/logger';
+import { getSentry, initSentry } from '$lib/server/sentry';
 import { ensureSessionCookie } from '$lib/server/session';
+
+if (!building) {
+	void initSentry();
+}
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const startedAt = performance.now();
@@ -76,6 +81,10 @@ export const handleError: HandleServerError = ({ error, event, status, message }
 		},
 		'unhandled_server_error'
 	);
+
+	getSentry()?.captureException(error, {
+		tags: { errorId, path: event.url.pathname, status: String(status) }
+	});
 
 	return {
 		message: 'An unexpected error occurred',
