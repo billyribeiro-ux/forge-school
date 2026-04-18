@@ -16,15 +16,28 @@
 import type Stripe from 'stripe';
 import { logger } from '$lib/server/logger';
 import { handleCheckoutSessionCompleted } from './checkout-completed.ts';
+import {
+	handleSubscriptionCreated,
+	handleSubscriptionDeleted,
+	handleSubscriptionUpdated
+} from './subscription-lifecycle.ts';
 
 export async function dispatchEvent(event: Stripe.Event): Promise<void> {
 	switch (event.type) {
 		case 'checkout.session.completed':
 			await handleCheckoutSessionCompleted(event);
 			return;
+		case 'customer.subscription.created':
+			await handleSubscriptionCreated(event);
+			return;
+		case 'customer.subscription.updated':
+			await handleSubscriptionUpdated(event);
+			return;
+		case 'customer.subscription.deleted':
+			await handleSubscriptionDeleted(event);
+			return;
 
-		// Subscription / invoice / refund handlers land in lessons 050-053.
-		// Until then, those events are logged-and-skipped.
+		// Invoice / refund handlers land in lessons 051-053.
 
 		default:
 			logger.info(
