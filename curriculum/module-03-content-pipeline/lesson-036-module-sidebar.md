@@ -1,5 +1,6 @@
 ---
 number: 36
+commit: f6096a128af0457b0b955d60cb123a4c0c87ab01
 slug: module-sidebar
 title: Add the per-module sidebar navigation
 module: 3

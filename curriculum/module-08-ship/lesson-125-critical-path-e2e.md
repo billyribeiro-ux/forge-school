@@ -1,5 +1,6 @@
 ---
 number: 125
+commit: e3b5fe6404e29bb2f6924c557cf05787f9ce21ea
 slug: critical-path-e2e
 title: Critical-path Playwright smoke suite
 module: 8

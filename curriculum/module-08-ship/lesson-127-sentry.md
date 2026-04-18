@@ -1,5 +1,6 @@
 ---
 number: 127
+commit: d5202fc1942ee01fcbcb2e5c40692a0dffcf3004
 slug: sentry
 title: Wire Sentry through hooks.server.ts
 module: 8

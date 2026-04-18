@@ -1,5 +1,6 @@
 ---
 number: 130
+commit: d42b6d5426d06ad374a082f4295194ee73a383dd
 slug: restore-migrations
 title: docs/RESTORE.md + docs/MIGRATIONS.md
 module: 8

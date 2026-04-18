@@ -1,5 +1,6 @@
 ---
 number: 21
+commit: a29a4448c41597594d26098c302a02d04a2c5eb2
 slug: generate-first-migration
 title: Generate the first migration
 module: 2

@@ -1,5 +1,6 @@
 ---
 number: 19
+commit: ff9a4afb508ae181c797303daa1ca87437eaa14b
 slug: design-schema
 title: Design the schema on paper first
 module: 2

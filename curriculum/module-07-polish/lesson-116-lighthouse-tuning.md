@@ -1,5 +1,6 @@
 ---
 number: 116
+commit: f57dbd394dcc7c6daef2d32a903199bc1b1f3667
 slug: lighthouse-tuning
 title: Tune to Lighthouse 95+ on every public page
 module: 7

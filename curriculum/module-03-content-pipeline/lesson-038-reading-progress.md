@@ -1,5 +1,6 @@
 ---
 number: 38
+commit: f416fb7e08bc73045e8d537d47e4e5128931343f
 slug: reading-progress
 title: Install Motion and add the reading-progress indicator
 module: 3

@@ -1,5 +1,6 @@
 ---
 number: 87
+commit: ff2f99068afa5f80ff1a051cf209ad3c88cd2ab2
 slug: cart-math-tests
 title: Vitest unit coverage for cart arithmetic
 module: 5

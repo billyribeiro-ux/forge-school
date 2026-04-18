@@ -1,5 +1,6 @@
 ---
 number: 46
+commit: 26a8f45e7ab48480e1126636f9739f2a5ffadb22
 slug: checkout-smoke-test
 title: Smoke-test the full Stripe Checkout flow
 module: 4

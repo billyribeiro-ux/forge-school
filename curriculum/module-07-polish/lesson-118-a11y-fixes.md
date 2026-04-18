@@ -1,5 +1,6 @@
 ---
 number: 118
+commit: e70cc584f74332d54bbdb1b4c452e9b4be581e00
 slug: a11y-fixes
 title: Fix accessibility violations surfaced by the audit
 module: 7

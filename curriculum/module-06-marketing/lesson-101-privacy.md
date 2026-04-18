@@ -1,5 +1,6 @@
 ---
 number: 101
+commit: d725b698cacef712b4b61f56bba09ab1687fa098
 slug: privacy
 title: Build /privacy
 module: 6

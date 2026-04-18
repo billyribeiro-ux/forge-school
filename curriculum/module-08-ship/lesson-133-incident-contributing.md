@@ -1,5 +1,6 @@
 ---
 number: 133
+commit: a47deccdd15a6eae87fe0a6c4015763fadc5bdc1
 slug: incident-contributing
 title: docs/INCIDENT_RESPONSE.md + docs/CONTRIBUTING.md
 module: 8

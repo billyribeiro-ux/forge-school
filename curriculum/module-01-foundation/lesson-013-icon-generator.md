@@ -1,5 +1,6 @@
 ---
 number: 13
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: icon-generator
 title: Build the SVG-to-Svelte icon generator
 module: 1

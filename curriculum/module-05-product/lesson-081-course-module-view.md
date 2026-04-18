@@ -1,5 +1,6 @@
 ---
 number: 81
+commit: 3c64a0640e8857108b2992921f1c7a4827b836cc
 slug: course-module-view
 title: Course module view at /course/[moduleSlug]
 module: 5

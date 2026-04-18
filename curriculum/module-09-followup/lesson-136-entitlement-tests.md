@@ -1,5 +1,6 @@
 ---
 number: 136
+commit: c7f994ff37008677f6ab2f729819a2d7c4d43c23
 slug: entitlement-tests
 title: Entitlement grant/revoke unit tests with mocked Drizzle
 module: 9

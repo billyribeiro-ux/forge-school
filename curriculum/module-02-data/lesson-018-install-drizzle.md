@@ -1,5 +1,6 @@
 ---
 number: 18
+commit: ee5bf22177ff0f9f96509949723cb8cf8cb268d1
 slug: install-drizzle
 title: Install Drizzle ORM, drizzle-kit, and postgres.js
 module: 2

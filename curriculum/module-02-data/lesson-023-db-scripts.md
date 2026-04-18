@@ -1,5 +1,6 @@
 ---
 number: 23
+commit: 9dd7b0a73719add8a5ae84f039e09d4fb76a4b6f
 slug: db-scripts
 title: Add db:reset, db:seed, and db:studio scripts
 module: 2

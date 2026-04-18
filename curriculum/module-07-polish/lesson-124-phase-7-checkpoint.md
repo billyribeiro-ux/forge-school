@@ -1,5 +1,6 @@
 ---
 number: 124
+commit: 02a52cad5b0324cb81c43dcac4ff4d3be74ec8fa
 slug: phase-7-checkpoint
 title: Tag phase-7-complete
 module: 7

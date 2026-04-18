@@ -1,5 +1,6 @@
 ---
 number: 27
+commit: 88ac201e7542a1d7dee9742318c79d879688966e
 slug: drizzle-studio
 title: Open Drizzle Studio and explore the schema
 module: 2

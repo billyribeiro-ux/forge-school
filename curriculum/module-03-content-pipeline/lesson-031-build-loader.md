@@ -1,5 +1,6 @@
 ---
 number: 31
+commit: 76c3c6f67842807dea9aa5a5b7ac9cdec9de5cfd
 slug: build-loader
 title: Build the curriculum loader
 module: 3

@@ -1,5 +1,6 @@
 ---
 number: 39
+commit: 9f997845202c43585a8ee8dd89c9cb63d6962d8c
 slug: module-3-checkpoint
 title: Validate Module 3 and tag the phase-3 checkpoint
 module: 3

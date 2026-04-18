@@ -1,5 +1,6 @@
 ---
 number: 71
+commit: 5e2ef0806a556ce43b5951481754d15dc48df146
 slug: cart-ui
 title: Build the cart UI — add, remove, update quantity
 module: 5

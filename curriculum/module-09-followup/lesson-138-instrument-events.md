@@ -1,5 +1,6 @@
 ---
 number: 138
+commit: 63f6a0c30adb808fc51311714dcc6800613f01a4
 slug: instrument-events
 title: Instrument the full custom-event funnel
 module: 9

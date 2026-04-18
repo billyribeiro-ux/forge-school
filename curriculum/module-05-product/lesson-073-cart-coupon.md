@@ -1,5 +1,6 @@
 ---
 number: 73
+commit: 5dc42a1f6523cb40e2ec07efe38bd0ac9cd0ffa1
 slug: cart-coupon
 title: Apply a coupon in the cart + Stripe mirror
 module: 5

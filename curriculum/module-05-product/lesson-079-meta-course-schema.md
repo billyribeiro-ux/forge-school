@@ -1,5 +1,6 @@
 ---
 number: 79
+commit: 9d31582cc65cc601260bea5b4265d6af533f1aa4
 slug: meta-course-schema
 title: Seed the meta-course product data + schema
 module: 5

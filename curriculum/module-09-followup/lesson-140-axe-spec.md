@@ -1,5 +1,6 @@
 ---
 number: 140
+commit: d8641b6bdc6728ee6b0a8ff3a23b3d6990e8e5fe
 slug: axe-spec
 title: Install @axe-core/playwright + ship the a11y E2E spec
 module: 9

@@ -1,5 +1,6 @@
 ---
 number: 16
+commit: f2efe86a2df615352af2b05d799ac8eee965c00a
 slug: module-1-checkpoint
 title: Validate the foundation and tag the Module 1 checkpoint
 module: 1

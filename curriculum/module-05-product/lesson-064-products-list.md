@@ -1,5 +1,6 @@
 ---
 number: 64
+commit: 3dd1bc5b413b6124c1b44bce55ff108b7ad82af1
 slug: products-list
 title: Build the /products catalog list page
 module: 5

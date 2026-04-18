@@ -1,5 +1,6 @@
 ---
 number: 43
+commit: dda670e8f227199a7170d99efdb146a3f38977ed
 slug: seed-stripe-products
 title: Seed Stripe test-mode products + prices
 module: 4

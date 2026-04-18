@@ -1,5 +1,6 @@
 ---
 number: 26
+commit: e71c5492bd186b39e266b9411c9be2a6a1905589
 slug: first-vitest-test
 title: Write the first Vitest unit test for a DB query
 module: 2

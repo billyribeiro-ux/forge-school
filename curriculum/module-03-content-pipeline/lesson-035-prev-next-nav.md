@@ -1,5 +1,6 @@
 ---
 number: 35
+commit: 8cd447f956ad84dec24bed686141a038b4ac405b
 slug: prev-next-nav
 title: Add per-lesson prev/next navigation
 module: 3

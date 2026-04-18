@@ -1,5 +1,6 @@
 ---
 number: 96
+commit: 432bbbbd7e44a5a22916df4206d5fe76cae9e9e5
 slug: stack-grid
 title: Add "The stack" pill grid
 module: 6

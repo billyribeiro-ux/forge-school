@@ -1,5 +1,6 @@
 ---
 number: 55
+commit: 2e7f815b692cd1df1bda3aadb3d91154ab73c610
 slug: billing-portal
 title: /account/billing with Stripe Billing Portal handoff
 module: 4

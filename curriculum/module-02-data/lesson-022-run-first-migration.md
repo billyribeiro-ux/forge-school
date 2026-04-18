@@ -1,5 +1,6 @@
 ---
 number: 22
+commit: 53ff89aa5d808a75a179fd122b8e8ade6c113d17
 slug: run-first-migration
 title: Run the first migration
 module: 2

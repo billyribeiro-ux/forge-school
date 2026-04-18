@@ -1,5 +1,6 @@
 ---
 number: 112
+commit: d1fc73aec69f39f21b625ef1d6bf938ebfee31a7
 slug: event-tracking
 title: Type-safe custom event tracking via Plausible
 module: 7

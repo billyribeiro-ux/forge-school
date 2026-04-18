@@ -1,5 +1,6 @@
 ---
 number: 135
+commit: 77d472ff349785135c87101a032f5c465bb17843
 slug: v1-release
 title: Tag v1.0.0 — the first release
 module: 8

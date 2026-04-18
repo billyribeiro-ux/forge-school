@@ -1,5 +1,6 @@
 ---
 number: 139
+commit: f4b8a87c5f175a4337ae5b1b5388162beaec1adb
 slug: client-sentry
 title: Wire Sentry on the client
 module: 9

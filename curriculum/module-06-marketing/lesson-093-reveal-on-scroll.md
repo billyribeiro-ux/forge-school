@@ -1,5 +1,6 @@
 ---
 number: 93
+commit: d56e750c474a4c51d11febf69bd0336b7f57f441
 slug: reveal-on-scroll
 title: Build RevealOnScroll + apply to the landing module grid
 module: 6

@@ -1,5 +1,6 @@
 ---
 number: 2
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: create-project-folder
 title: Create the project folder and initialize git
 module: 1

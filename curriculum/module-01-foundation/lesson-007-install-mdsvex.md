@@ -1,5 +1,6 @@
 ---
 number: 7
+commit: 1d81d1d946c2d7b2933e999231feb36f4adb53ae
 slug: install-mdsvex
 title: Install mdsvex and wire Markdown rendering
 module: 1

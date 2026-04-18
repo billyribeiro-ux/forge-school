@@ -1,5 +1,6 @@
 ---
 number: 34
+commit: d2c73b729a43796875eae62498076ad3d9a36af3
 slug: shiki-syntax-highlighting
 title: Render Markdown code blocks with shiki
 module: 3

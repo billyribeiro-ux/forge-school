@@ -1,5 +1,6 @@
 ---
 number: 50
+commit: ca7b26c2625fb7e2c7a0101ed4159678aa19aad3
 slug: subscription-lifecycle
 title: Handle subscription created / updated / deleted
 module: 4

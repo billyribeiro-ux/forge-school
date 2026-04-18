@@ -1,5 +1,6 @@
 ---
 number: 90
+commit: dbcd1378fdc6311c1fded151671e8fd6c55565fe
 slug: cart-full-loop-e2e
 title: Playwright full-loop cart → checkout → coupon E2E
 module: 5

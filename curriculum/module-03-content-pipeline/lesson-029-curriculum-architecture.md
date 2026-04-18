@@ -1,5 +1,6 @@
 ---
 number: 29
+commit: 4d2c780e56feac2e41eeff0f12cadc79cfb48ed7
 slug: curriculum-architecture
 title: Design the curriculum folder structure
 module: 3

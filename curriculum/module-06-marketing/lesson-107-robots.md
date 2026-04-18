@@ -1,5 +1,6 @@
 ---
 number: 107
+commit: 782aaeb7c228f281647a893981a81a1720c1034a
 slug: robots
 title: Serve robots.txt with disallow rules
 module: 6

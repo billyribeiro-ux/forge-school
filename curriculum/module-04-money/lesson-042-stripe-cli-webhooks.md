@@ -1,5 +1,6 @@
 ---
 number: 42
+commit: 79b6461178bb817d672854ecfebb0b4d8471d5f7
 slug: stripe-cli-webhooks
 title: Wire the Stripe CLI for local webhook forwarding
 module: 4

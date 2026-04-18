@@ -1,5 +1,6 @@
 ---
 number: 94
+commit: ee082ad8baa021c77b307c303a61bbfb44ef74b3
 slug: hero-reveal
 title: Stagger the hero's reveal on landing
 module: 6

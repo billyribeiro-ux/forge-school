@@ -1,5 +1,6 @@
 ---
 number: 72
+commit: 815adb60c6960df474cebdf9bc8e0eeba6f0ea39
 slug: cart-checkout-handoff
 title: Hand the cart off to Stripe Checkout
 module: 5

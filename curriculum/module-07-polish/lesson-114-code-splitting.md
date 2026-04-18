@@ -1,5 +1,6 @@
 ---
 number: 114
+commit: c57bda87b64272040d7fdf7d60b7e752ec41a7c3
 slug: code-splitting
 title: Code-splitting + prefetch audit
 module: 7

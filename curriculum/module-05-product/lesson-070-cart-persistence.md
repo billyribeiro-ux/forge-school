@@ -1,5 +1,6 @@
 ---
 number: 70
+commit: 49ff3147df26b54ea42295739f6e49643e556f53
 slug: cart-persistence
 title: Persist the cart to a cookie across refreshes
 module: 5

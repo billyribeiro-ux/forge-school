@@ -1,5 +1,6 @@
 ---
 number: 20
+commit: 1d4292d5192d9f7738e9c95ad5ee13fc4a4649be
 slug: write-drizzle-schema
 title: Write the Drizzle schema
 module: 2

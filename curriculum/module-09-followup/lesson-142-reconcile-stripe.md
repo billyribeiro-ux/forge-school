@@ -1,5 +1,6 @@
 ---
 number: 142
+commit: 931f336fdfbf61ba494fed25ccc1e7069136dd0c
 slug: reconcile-stripe
 title: scripts/reconcile-stripe.ts — DB ↔ Stripe drift detector
 module: 9

@@ -1,5 +1,6 @@
 ---
 number: 48
+commit: 905865234bcf0b212030a0df9972577a992e2c2c
 slug: webhook-receiver
 title: Build the Stripe webhook receiver with signature verification
 module: 4

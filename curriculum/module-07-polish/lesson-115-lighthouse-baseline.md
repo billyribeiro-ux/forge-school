@@ -1,5 +1,6 @@
 ---
 number: 115
+commit: 2d79a528c8038e373ba6aad7803ec9c6e823f7ff
 slug: lighthouse-baseline
 title: Lighthouse baseline measurement
 module: 7

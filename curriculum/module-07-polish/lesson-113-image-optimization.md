@@ -1,5 +1,6 @@
 ---
 number: 113
+commit: 343061fbf2120975ea27c3ab4f77bf16a8b11e0f
 slug: image-optimization
 title: Image optimization policy
 module: 7

@@ -1,5 +1,6 @@
 ---
 number: 75
+commit: 66137e321bcc42c086d56da90713603b6f3a043e
 slug: entitlement-gating
 title: Gate routes by tier via hooks.server.ts
 module: 5

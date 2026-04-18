@@ -1,5 +1,6 @@
 ---
 number: 45
+commit: 4f6ec51aa1a5f22f30f2041c9a72bdad8645dcf6
 slug: checkout-endpoint
 title: Build /checkout/[product]/+server.ts with Stripe Checkout Session
 module: 4

@@ -1,5 +1,6 @@
 ---
 number: 84
+commit: 682d012d583a5faee1c392e975e1eb8ac95b7f6c
 slug: lifetime-ui
 title: Render lifetime purchases distinctly on /account/billing
 module: 5

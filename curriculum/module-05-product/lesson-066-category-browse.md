@@ -1,5 +1,6 @@
 ---
 number: 66
+commit: 59a2310983b2027d29f3ae0ad4323d17ca00e7eb
 slug: category-browse
 title: Build category browsing at /products/category/[slug]
 module: 5

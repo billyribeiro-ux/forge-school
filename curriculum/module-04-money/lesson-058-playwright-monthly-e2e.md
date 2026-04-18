@@ -1,5 +1,6 @@
 ---
 number: 58
+commit: a10339008dd0af923c9ef1dc72632aabd8111302
 slug: playwright-monthly-e2e
 title: Install Playwright and write the monthly checkout E2E
 module: 4

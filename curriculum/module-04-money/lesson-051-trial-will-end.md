@@ -1,5 +1,6 @@
 ---
 number: 51
+commit: 4a3830f93655728488cd03e0adc78824c307cd8d
 slug: trial-will-end
 title: Handle customer.subscription.trial_will_end
 module: 4

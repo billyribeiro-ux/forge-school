@@ -1,5 +1,6 @@
 ---
 number: 82
+commit: aeca900dd5d04f32930b0a6554558af95093daa3
 slug: course-lesson-view
 title: Course lesson view + progression cookie
 module: 5

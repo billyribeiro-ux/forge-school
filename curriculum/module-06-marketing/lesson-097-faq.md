@@ -1,5 +1,6 @@
 ---
 number: 97
+commit: 1de37dfd3ec36514ecd65569133bfe26e29fa127
 slug: faq
 title: Add a FAQ accordion
 module: 6

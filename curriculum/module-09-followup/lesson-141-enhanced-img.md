@@ -1,5 +1,6 @@
 ---
 number: 141
+commit: e137413c6d22d0e5f761c5a4d63431872552fae2
 slug: enhanced-img
 title: Install @sveltejs/enhanced-img + wire the Vite plugin
 module: 9
@@ -21,7 +22,7 @@ filesTouched:
 
 Lesson 113 documented the image policy. PROMPT step 114 calls for the actual pipeline. This lesson installs `@sveltejs/enhanced-img` + wires the Vite plugin so future product images get AVIF + WebP + JPEG variants at three sizes for free.
 
-No product images ship in v1 — the catalog uses thumbnails-by-CSS-only — but with the plugin in place, dropping a JPEG into `src/lib/assets/products/` and using `<enhanced:img>` is one line away.
+No product images ship in v1 — the catalog uses thumbnails-by-CSS-only — but with the plugin in place, dropping a JPEG into `src/lib/assets/products/` and using the `enhanced:img` element is one line away.
 
 ## The command
 
@@ -58,9 +59,9 @@ pnpm check && pnpm build
 
 ## What could go wrong
 
-**Symptom:** `pnpm build` fails with "CompileError: <enhanced:img> was left open"
-**Cause:** mdsvex sees the literal `<enhanced:img>` in a markdown file, tries to compile it as Svelte, and flags an unclosed tag.
-**Fix:** Refer to the element by name (without the angle brackets) inside markdown prose. Code blocks are fine because mdsvex skips them.
+**Symptom:** `pnpm build` fails with "CompileError" referencing the `enhanced:img` element inside a markdown prose paragraph
+**Cause:** mdsvex (and the enhanced-img plugin) see the literal element, try to compile it as Svelte, and flag an unclosed tag.
+**Fix:** Refer to the element by name (without the angle brackets) inside markdown prose. Code blocks are fine because the plugins skip them.
 
 **Symptom:** SVG imports stop working
 **Cause:** `enhanced-img` matches `*.{jpg,jpeg,png,webp,avif,gif}` — SVGs go through Vite's default asset handling.
@@ -73,19 +74,12 @@ pnpm check        # 0 errors
 pnpm build        # ✓ built
 ```
 
-When the first product image lands:
-
-```svelte
-<script lang="ts">
-  import productImage from '$lib/assets/products/forgeschool-lifetime.jpg?enhanced&w=480;1024;1600';
-</script>
-<enhanced:img src={productImage} alt="..." />
-```
+When the first product image lands, the consumer-side pattern is a single Svelte file that imports the image with the `?enhanced` query suffix and renders the `enhanced:img` element with `src={productImage}` + an `alt` string. See `docs/IMAGES.md` for the complete snippet.
 
 ## Mistake log
 
 - Reversed the plugin order initially. SvelteKit reported "Could not resolve enhanced:img" because `sveltekit()` ran first. Swapped.
-- mdsvex reject-on-compile of the literal `<enhanced:img>` reference in lesson 113 — caught by the next `pnpm build`. Edited the prose to drop the angle brackets.
+- mdsvex reject-on-compile of the literal `enhanced:img` reference in lesson 113 — caught by the next `pnpm build`. Edited the prose to drop the angle brackets.
 
 ## Commit
 

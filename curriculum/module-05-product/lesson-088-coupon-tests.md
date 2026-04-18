@@ -1,5 +1,6 @@
 ---
 number: 88
+commit: 3fddc4c950b2ca13f6e081031ed23b4eff4d9512
 slug: coupon-tests
 title: Vitest unit coverage for coupon application
 module: 5

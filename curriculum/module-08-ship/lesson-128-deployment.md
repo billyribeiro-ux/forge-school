@@ -1,5 +1,6 @@
 ---
 number: 128
+commit: 9f1cc1c1e07c0afc5642ac892bfeb72056727126
 slug: deployment
 title: Ship docs/DEPLOYMENT.md + docs/STAGING.md
 module: 8

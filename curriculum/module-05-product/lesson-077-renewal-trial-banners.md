@@ -1,5 +1,6 @@
 ---
 number: 77
+commit: baf34b2138f643c8bd62af187f5d286a0605be4b
 slug: renewal-trial-banners
 title: Build RenewalBanner + TrialCountdown components
 module: 5

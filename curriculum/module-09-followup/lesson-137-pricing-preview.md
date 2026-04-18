@@ -1,5 +1,6 @@
 ---
 number: 137
+commit: db7df114ac8ec833bd9cab9ac509458eb5a6e884
 slug: pricing-preview
 title: Add a PricingPreview teaser to the landing
 module: 9
