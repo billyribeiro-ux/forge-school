@@ -22,6 +22,11 @@ import {
 	handleSubscriptionUpdated
 } from './subscription-lifecycle.ts';
 import { handleTrialWillEnd } from './trial-will-end.ts';
+import {
+	handleInvoicePaid,
+	handleInvoicePaymentActionRequired,
+	handleInvoicePaymentFailed
+} from './invoice-events.ts';
 
 export async function dispatchEvent(event: Stripe.Event): Promise<void> {
 	switch (event.type) {
@@ -40,8 +45,17 @@ export async function dispatchEvent(event: Stripe.Event): Promise<void> {
 		case 'customer.subscription.trial_will_end':
 			await handleTrialWillEnd(event);
 			return;
+		case 'invoice.paid':
+			await handleInvoicePaid(event);
+			return;
+		case 'invoice.payment_failed':
+			await handleInvoicePaymentFailed(event);
+			return;
+		case 'invoice.payment_action_required':
+			await handleInvoicePaymentActionRequired(event);
+			return;
 
-		// Invoice / refund handlers land in lessons 052-053.
+		// Refund / dispute handlers land in lesson 053.
 
 		default:
 			logger.info(
