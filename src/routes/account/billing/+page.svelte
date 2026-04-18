@@ -1,4 +1,7 @@
 <script lang="ts">
+	import PastDueWarning from '$lib/components/entitlement/PastDueWarning.svelte';
+	import RenewalBanner from '$lib/components/entitlement/RenewalBanner.svelte';
+	import TrialCountdown from '$lib/components/entitlement/TrialCountdown.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -51,13 +54,29 @@
 								{formatCents(sub.price.unitAmountCents, sub.price.currency)} /
 								{sub.price.interval === 'year' ? 'year' : 'month'}
 							</p>
+							<div class="row-banners">
+								{#if sub.status === 'past_due' || sub.status === 'unpaid'}
+									<PastDueWarning
+										subscriptionId={sub.id}
+										updatePaymentUrl="/account/billing"
+									/>
+								{/if}
+								{#if sub.status === 'trialing' && sub.trialEnd !== null}
+									<TrialCountdown
+										trialEnd={sub.trialEnd}
+										trialLengthDays={sub.price.trialPeriodDays ?? 14}
+									/>
+								{/if}
+								{#if (sub.status === 'active' || sub.status === 'trialing') && sub.currentPeriodEnd !== null}
+									<RenewalBanner
+										currentPeriodEnd={sub.currentPeriodEnd}
+										cancelAtPeriodEnd={sub.cancelAtPeriodEnd}
+									/>
+								{/if}
+							</div>
 						</div>
 						<div class="row-side">
 							<span class="status status-{sub.status}">{sub.status.replace('_', ' ')}</span>
-							<p class="row-meta">Renews {formatDate(sub.currentPeriodEnd)}</p>
-							{#if sub.cancelAtPeriodEnd}
-								<p class="row-meta warning">Cancels at period end</p>
-							{/if}
 						</div>
 					</li>
 				{/each}
@@ -190,6 +209,11 @@
 		}
 		.row-meta.warning {
 			color: var(--color-warning-700);
+		}
+		.row-banners {
+			margin-block-start: 0.75rem;
+			display: grid;
+			gap: 0.5rem;
 		}
 		.row-side {
 			text-align: end;
