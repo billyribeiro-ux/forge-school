@@ -1,5 +1,11 @@
 <script lang="ts">
 	import ForgeMark from '$lib/icons/generated/ForgeMark.svelte';
+	import RevealOnScroll from '$lib/components/marketing/RevealOnScroll.svelte';
+	import BigCTA from '$lib/components/marketing/BigCTA.svelte';
+	import FAQ from '$lib/components/marketing/FAQ.svelte';
+	import SeoMeta from '$lib/components/marketing/SeoMeta.svelte';
+	import StackGrid from '$lib/components/marketing/StackGrid.svelte';
+	import ValueProp from '$lib/components/marketing/ValueProp.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -8,75 +14,98 @@
 	let firstLesson = $derived(data.modules[0]?.lessons[0]);
 </script>
 
-<svelte:head>
-	<title>ForgeSchool — Build a PE7 fullstack platform, lesson by lesson</title>
-	<meta
-		name="description"
-		content="A {data.totalLessons}-lesson course that teaches production-grade fullstack engineering by building a real commerce platform. Every lesson is one git commit."
-	/>
-</svelte:head>
+<SeoMeta
+	title="Build a PE7 fullstack platform, lesson by lesson"
+	description="A {data.totalLessons}-lesson course that teaches production-grade fullstack engineering by building a real commerce platform. Every lesson is one git commit."
+	path="/"
+	jsonLd={{
+		'@context': 'https://schema.org',
+		'@type': 'Course',
+		name: 'ForgeSchool',
+		description: 'Build a PE7 fullstack platform, lesson by lesson.',
+		provider: { '@type': 'Organization', name: 'ForgeSchool', sameAs: 'https://forgeschool.dev' },
+		numberOfLessons: data.totalLessons
+	}}
+/>
 
 <main class="landing">
 	<section class="hero">
 		<div class="hero-inner">
-			<ForgeMark size="3rem" />
-			<p class="eyebrow">ForgeSchool</p>
-			<h1>
-				Learn production engineering by building a<br />
-				<span class="accent">real fullstack platform</span>.
-			</h1>
-			<p class="lede">
-				{data.totalLessons} lessons across {data.modules.length} modules. Every lesson is one git
-				commit you author with us — from blank repo to shipped product. SvelteKit 2, Svelte 5
-				runes, TypeScript strict, Postgres + Drizzle, Stripe, Motion. No shortcuts, no hacks,
-				built for ten-year longevity.
-			</p>
-			<div class="cta-row">
-				{#if firstLesson !== undefined}
-					<a class="cta primary" href="/lessons/{firstLesson.slug}">
-						Start Lesson 001 — {firstLesson.title}
-					</a>
-				{/if}
-				<a class="cta secondary" href="/lessons">Browse curriculum</a>
-			</div>
-			<dl class="stats">
-				<div class="stat">
-					<dt>Lessons</dt>
-					<dd>{data.totalLessons}</dd>
+			<RevealOnScroll>
+				<ForgeMark size="3rem" />
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={80}>
+				<p class="eyebrow">ForgeSchool</p>
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={140}>
+				<h1>
+					Learn production engineering by building a<br />
+					<span class="accent">real fullstack platform</span>.
+				</h1>
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={220}>
+				<p class="lede">
+					{data.totalLessons} lessons across {data.modules.length} modules. Every lesson is one git
+					commit you author with us — from blank repo to shipped product. SvelteKit 2, Svelte 5
+					runes, TypeScript strict, Postgres + Drizzle, Stripe, Motion. No shortcuts, no hacks,
+					built for ten-year longevity.
+				</p>
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={300}>
+				<div class="cta-row">
+					{#if firstLesson !== undefined}
+						<a class="cta primary" href="/lessons/{firstLesson.slug}">
+							Start Lesson 001 — {firstLesson.title}
+						</a>
+					{/if}
+					<a class="cta secondary" href="/lessons">Browse curriculum</a>
 				</div>
-				<div class="stat">
-					<dt>Modules</dt>
-					<dd>{data.modules.length}</dd>
-				</div>
-				<div class="stat">
-					<dt>Estimated time</dt>
-					<dd>{totalHours} hours</dd>
-				</div>
-			</dl>
+			</RevealOnScroll>
+			<RevealOnScroll delayMs={380}>
+				<dl class="stats">
+					<div class="stat">
+						<dt>Lessons</dt>
+						<dd>{data.totalLessons}</dd>
+					</div>
+					<div class="stat">
+						<dt>Modules</dt>
+						<dd>{data.modules.length}</dd>
+					</div>
+					<div class="stat">
+						<dt>Estimated time</dt>
+						<dd>{totalHours} hours</dd>
+					</div>
+				</dl>
+			</RevealOnScroll>
 		</div>
 	</section>
 
+	<ValueProp />
+	<StackGrid />
+
 	<section class="modules-preview" aria-labelledby="modules-heading">
 		<div class="section-inner">
-			<h2 id="modules-heading">The eight modules</h2>
+			<RevealOnScroll>
+				<h2 id="modules-heading">The eight modules</h2>
+			</RevealOnScroll>
 			<ol class="module-grid">
-				{#each data.modules as mod (mod.number)}
-					<li class="module-card">
-						<p class="module-num">Module {mod.number}</p>
-						<h3>{mod.title}</h3>
-						<p class="module-count">{mod.lessons.length} lessons</p>
-					</li>
+				{#each data.modules as mod, i (mod.number)}
+					<RevealOnScroll delayMs={i * 60}>
+						<li class="module-card">
+							<p class="module-num">Module {mod.number}</p>
+							<h3>{mod.title}</h3>
+							<p class="module-count">{mod.lessons.length} lessons</p>
+						</li>
+					</RevealOnScroll>
 				{/each}
-				<li class="module-card module-placeholder">
-					<p class="module-num">Modules 4–8</p>
-					<h3>Coming as the course builds out</h3>
-					<p class="module-count">Money, Product, Marketing, Polish, Ship</p>
-				</li>
 			</ol>
 		</div>
 	</section>
 
+	<FAQ />
+
 	<section class="pe7-callout" aria-labelledby="pe7-heading">
+		<!-- PE7 callout retained above the CTA -->
 		<div class="section-inner">
 			<h2 id="pe7-heading">Why PE7?</h2>
 			<p>
@@ -88,6 +117,8 @@
 			</p>
 		</div>
 	</section>
+
+	<BigCTA />
 </main>
 
 <style>
@@ -243,11 +274,6 @@
 
 		.module-card:hover {
 			border-color: var(--color-brand);
-		}
-
-		.module-placeholder {
-			background-color: var(--color-bg-sunken);
-			opacity: 0.8;
 		}
 
 		.module-num {

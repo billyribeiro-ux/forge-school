@@ -1,4 +1,7 @@
 <script lang="ts">
+	import PastDueWarning from '$lib/components/entitlement/PastDueWarning.svelte';
+	import RenewalBanner from '$lib/components/entitlement/RenewalBanner.svelte';
+	import TrialCountdown from '$lib/components/entitlement/TrialCountdown.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -51,19 +54,60 @@
 								{formatCents(sub.price.unitAmountCents, sub.price.currency)} /
 								{sub.price.interval === 'year' ? 'year' : 'month'}
 							</p>
+							<div class="row-banners">
+								{#if sub.status === 'past_due' || sub.status === 'unpaid'}
+									<PastDueWarning
+										subscriptionId={sub.id}
+										updatePaymentUrl="/account/billing"
+									/>
+								{/if}
+								{#if sub.status === 'trialing' && sub.trialEnd !== null}
+									<TrialCountdown
+										trialEnd={sub.trialEnd}
+										trialLengthDays={sub.price.trialPeriodDays ?? 14}
+									/>
+								{/if}
+								{#if (sub.status === 'active' || sub.status === 'trialing') && sub.currentPeriodEnd !== null}
+									<RenewalBanner
+										currentPeriodEnd={sub.currentPeriodEnd}
+										cancelAtPeriodEnd={sub.cancelAtPeriodEnd}
+									/>
+								{/if}
+							</div>
 						</div>
 						<div class="row-side">
 							<span class="status status-{sub.status}">{sub.status.replace('_', ' ')}</span>
-							<p class="row-meta">Renews {formatDate(sub.currentPeriodEnd)}</p>
-							{#if sub.cancelAtPeriodEnd}
-								<p class="row-meta warning">Cancels at period end</p>
-							{/if}
 						</div>
 					</li>
 				{/each}
 			</ul>
 		{/if}
 	</section>
+
+	{#if data.lifetimeEntitlements.length > 0}
+		<section class="card lifetime-card">
+			<header class="card-header">
+				<h2>
+					<span class="crown" aria-hidden="true">◆</span>
+					Lifetime access
+				</h2>
+				<span class="lifetime-badge">Permanent</span>
+			</header>
+			<p class="lifetime-copy">
+				One-time purchase. No renewals, no billing cycle. Every lesson in ForgeSchool is yours for
+				good.
+			</p>
+			<ul class="list">
+				{#each data.lifetimeEntitlements as ent (ent.id)}
+					<li class="row small">
+						<p class="row-meta">
+							Granted {formatDate(ent.grantedAt)} · source <strong>{ent.source}</strong>
+						</p>
+					</li>
+				{/each}
+			</ul>
+		</section>
+	{/if}
 
 	<section class="card">
 		<header class="card-header"><h2>Purchase history</h2></header>
@@ -190,6 +234,44 @@
 		}
 		.row-meta.warning {
 			color: var(--color-warning-700);
+		}
+		.row-banners {
+			margin-block-start: 0.75rem;
+			display: grid;
+			gap: 0.5rem;
+		}
+		.lifetime-card {
+			border-color: var(--color-brand);
+			background: linear-gradient(
+				135deg,
+				var(--color-bg-raised) 0%,
+				var(--color-bg-raised) 80%,
+				color-mix(in oklch, var(--color-brand) 12%, var(--color-bg-raised)) 100%
+			);
+		}
+		.lifetime-card h2 {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+		.crown {
+			color: var(--color-brand);
+			font-size: var(--font-size-lg);
+		}
+		.lifetime-badge {
+			font-size: var(--font-size-xs);
+			letter-spacing: var(--letter-spacing-widest);
+			text-transform: uppercase;
+			padding-inline: 0.6rem;
+			padding-block: 0.15rem;
+			background-color: var(--color-brand);
+			color: var(--color-brand-fg);
+			border-radius: var(--radius-full);
+			font-weight: var(--font-weight-semibold);
+		}
+		.lifetime-copy {
+			color: var(--color-fg-muted);
+			margin-block: 0 1rem;
 		}
 		.row-side {
 			text-align: end;

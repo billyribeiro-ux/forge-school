@@ -354,6 +354,53 @@ export const cartItems = pgTable(
 	]
 );
 
+/* ─── Meta-course content (the platform-as-product) ─────────────────────── */
+
+/**
+ * Course modules + lessons — the DB-backed content surface for the
+ * "meta-course" product students purchase (the `forgeschool-lifetime`
+ * product in v1). Distinct from the Markdown-on-disk curriculum under
+ * `/curriculum/*.md` — that content is instructor-facing (the book
+ * you're reading); these rows are customer-facing (the course Billy's
+ * students pay for).
+ */
+export const courseModules = pgTable(
+	'course_modules',
+	{
+		id: uuid('id').primaryKey().defaultRandom(),
+		productId: uuid('product_id')
+			.notNull()
+			.references(() => products.id, { onDelete: 'cascade' }),
+		slug: text('slug').notNull(),
+		title: text('title').notNull(),
+		orderIndex: integer('order_index').notNull(),
+		createdAt: createdAt()
+	},
+	(t) => [
+		uniqueIndex('course_modules_product_slug_uq').on(t.productId, t.slug),
+		index('course_modules_product_order_idx').on(t.productId, t.orderIndex)
+	]
+);
+
+export const courseLessons = pgTable(
+	'course_lessons',
+	{
+		id: uuid('id').primaryKey().defaultRandom(),
+		moduleId: uuid('module_id')
+			.notNull()
+			.references(() => courseModules.id, { onDelete: 'cascade' }),
+		slug: text('slug').notNull(),
+		title: text('title').notNull(),
+		body: text('body').notNull(),
+		orderIndex: integer('order_index').notNull(),
+		createdAt: createdAt()
+	},
+	(t) => [
+		uniqueIndex('course_lessons_module_slug_uq').on(t.moduleId, t.slug),
+		index('course_lessons_module_order_idx').on(t.moduleId, t.orderIndex)
+	]
+);
+
 /* ─── Integrity — Stripe webhook idempotency ────────────────────────────── */
 
 export const webhookEvents = pgTable(
@@ -385,6 +432,8 @@ export type Subscription = typeof subscriptions.$inferSelect;
 export type NewSubscription = typeof subscriptions.$inferInsert;
 export type Entitlement = typeof entitlements.$inferSelect;
 export type NewEntitlement = typeof entitlements.$inferInsert;
+export type ProductCategory = typeof productCategories.$inferSelect;
+export type ProductKindValue = (typeof productKind.enumValues)[number];
 export type Coupon = typeof coupons.$inferSelect;
 export type NewCoupon = typeof coupons.$inferInsert;
 export type CouponRedemption = typeof couponRedemptions.$inferSelect;
@@ -392,3 +441,7 @@ export type Cart = typeof carts.$inferSelect;
 export type CartItem = typeof cartItems.$inferSelect;
 export type WebhookEvent = typeof webhookEvents.$inferSelect;
 export type NewWebhookEvent = typeof webhookEvents.$inferInsert;
+export type CourseModule = typeof courseModules.$inferSelect;
+export type NewCourseModule = typeof courseModules.$inferInsert;
+export type CourseLesson = typeof courseLessons.$inferSelect;
+export type NewCourseLesson = typeof courseLessons.$inferInsert;

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CartBadge from '$lib/cart/CartBadge.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -21,7 +22,69 @@
 		<p class="eyebrow">Catalog</p>
 		<h1>Every ForgeSchool product</h1>
 		<p class="lede">Browse by kind — lifetime courses, subscription plans, bundles.</p>
+		<p class="hero-actions">
+			<a class="search-link" href="/products/search">Search products →</a>
+			<CartBadge />
+		</p>
 	</header>
+
+	{#if data.categories.length > 0}
+		<section class="categories" aria-labelledby="browse-heading">
+			<h2 id="browse-heading">Browse by category</h2>
+			<ul class="category-strip">
+				{#each data.categories as category (category.id)}
+					<li>
+						<a href="/products/category/{category.slug}">
+							<span class="cat-name">{category.name}</span>
+							<span class="cat-count">{category.productCount}</span>
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</section>
+	{/if}
+
+	<section class="filters" aria-labelledby="filters-heading">
+		<h2 id="filters-heading" class="sr-only">Filter products</h2>
+		<form method="GET" class="filter-form">
+			<label>
+				<span>Kind</span>
+				<select name="kind">
+					<option value="">Any</option>
+					{#each data.kinds as kind (kind)}
+						<option value={kind} selected={data.filters.kind === kind}>{kind}</option>
+					{/each}
+				</select>
+			</label>
+			<label>
+				<span>Category</span>
+				<select name="category">
+					<option value="">Any</option>
+					{#each data.categories as category (category.id)}
+						<option
+							value={category.slug}
+							selected={data.filters.categorySlug === category.slug}
+						>
+							{category.name}
+						</option>
+					{/each}
+				</select>
+			</label>
+			<label>
+				<span>Max price ($)</span>
+				<input
+					type="number"
+					name="maxPrice"
+					min="0"
+					step="1"
+					value={data.filters.maxPriceDollars ?? ''}
+					placeholder="—"
+				/>
+			</label>
+			<button type="submit">Apply</button>
+			<a class="reset" href="/products">Reset</a>
+		</form>
+	</section>
 
 	{#if data.featured.length > 0}
 		<section class="featured">
@@ -97,6 +160,13 @@
 		.lede {
 			color: var(--color-fg-muted);
 		}
+		.hero-actions {
+			margin-block-start: 1rem;
+		}
+		.search-link {
+			color: var(--color-brand);
+			font-weight: var(--font-weight-medium);
+		}
 		section {
 			margin-block-end: 2.5rem;
 		}
@@ -164,6 +234,92 @@
 			background-color: var(--color-bg-sunken);
 			border-radius: var(--radius-sm);
 			color: var(--color-fg-muted);
+		}
+		.category-strip {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			list-style: none;
+			padding: 0;
+		}
+		.category-strip a {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding-inline: 0.9rem;
+			padding-block: 0.5rem;
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-md);
+			color: var(--color-fg);
+			text-decoration: none;
+			background-color: var(--color-bg-raised);
+			transition: border-color var(--duration-fast) var(--easing-standard);
+		}
+		.category-strip a:hover {
+			border-color: var(--color-brand);
+		}
+		.cat-count {
+			font-size: var(--font-size-xs);
+			font-variant-numeric: tabular-nums;
+			color: var(--color-fg-muted);
+			background-color: var(--color-bg-sunken);
+			padding-inline: 0.4rem;
+			padding-block: 0.1rem;
+			border-radius: var(--radius-sm);
+		}
+		.filter-form {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.75rem;
+			align-items: end;
+			padding: 1rem;
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-lg);
+			background-color: var(--color-bg-raised);
+		}
+		.filter-form label {
+			display: flex;
+			flex-direction: column;
+			font-size: var(--font-size-xs);
+			color: var(--color-fg-muted);
+			gap: 0.25rem;
+		}
+		.filter-form select,
+		.filter-form input {
+			padding-inline: 0.6rem;
+			padding-block: 0.4rem;
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-md);
+			background-color: var(--color-bg);
+			color: var(--color-fg);
+			font-size: var(--font-size-sm);
+			min-inline-size: 10rem;
+		}
+		.filter-form button {
+			padding-inline: 1rem;
+			padding-block: 0.45rem;
+			background-color: var(--color-brand);
+			color: var(--color-brand-fg);
+			border: 0;
+			border-radius: var(--radius-md);
+			font-weight: var(--font-weight-medium);
+			cursor: pointer;
+		}
+		.filter-form .reset {
+			font-size: var(--font-size-sm);
+			color: var(--color-fg-muted);
+			padding-inline: 0.5rem;
+		}
+		.sr-only {
+			position: absolute;
+			inline-size: 1px;
+			block-size: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border-width: 0;
 		}
 	}
 </style>

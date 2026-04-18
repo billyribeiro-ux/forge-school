@@ -21,7 +21,9 @@ import postgres from 'postgres';
 import * as schema from '../src/lib/server/db/schema.ts';
 import { loadEnv, refuseIfProdLike, requireDatabaseUrl } from './lib/env.ts';
 import { createStripe } from './lib/stripe.ts';
+import { seedCategories } from './seed-categories.ts';
 import { seedCoupons } from './seed-coupons.ts';
+import { seedCourse } from './seed-course.ts';
 import { seedPersonas } from './seed-personas.ts';
 
 loadEnv();
@@ -213,7 +215,9 @@ async function main(): Promise<void> {
 	try {
 		console.log('[seed] inserting dev fixtures...');
 		await seedProducts(db);
+		await seedCategories(db);
 		await seedCoupons(db);
+		await seedCourse(db);
 		await seedPersonas(db);
 		console.log('[seed] done');
 	} finally {
