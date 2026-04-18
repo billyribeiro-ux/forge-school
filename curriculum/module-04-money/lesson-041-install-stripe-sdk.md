@@ -8,7 +8,7 @@ moduleTitle: Money
 phase: 4
 step: 2
 previous: 40
-next: null
+next: 42
 estimatedMinutes: 15
 filesTouched:
   - package.json

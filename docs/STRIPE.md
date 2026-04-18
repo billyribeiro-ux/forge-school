@@ -56,6 +56,45 @@ Test mode protects against real money moving. It does NOT protect against:
 
 Every one of these is rejected by the architecture in Module 4. See `docs/ARCHITECTURE.md §4.3` for the grant-truth rule.
 
-## 6. Change log
+## 6. Local webhook forwarding via the Stripe CLI
+
+Stripe's CLI forwards real test-mode webhook events from Stripe's infrastructure to your local dev server. Without it, webhooks only fire to deployed HTTPS endpoints — unreachable from `localhost`.
+
+### 6.1 Install
+
+macOS:
+```bash
+brew install stripe/stripe-cli/stripe
+```
+
+Linux / Windows: see https://stripe.com/docs/stripe-cli#install.
+
+### 6.2 Authenticate
+
+```bash
+stripe login
+```
+
+Opens a browser window to confirm. Grants the CLI read/write access to your Stripe test account.
+
+### 6.3 Forward
+
+```bash
+stripe listen --forward-to localhost:5173/api/webhooks/stripe
+```
+
+The CLI prints `Ready! Your webhook signing secret is whsec_...`. Copy that value into `.env.local` as `STRIPE_WEBHOOK_SECRET`.
+
+**The secret rotates on every `stripe listen` invocation.** If you restart the CLI, update `.env.local` and restart the dev server.
+
+### 6.4 Trigger a test event
+
+```bash
+stripe trigger checkout.session.completed
+```
+
+Fires a synthetic event of that type against your local webhook. Useful for integration testing handlers before running a real checkout flow.
+
+## 7. Change log
 
 - **2026-04-18** — Initial draft; tracks the Stripe test-mode setup for Module 4.
