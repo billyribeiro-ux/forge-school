@@ -1,0 +1,36 @@
+# ForgeSchool — local development services.
+#
+# Spins up a Postgres 16 instance that matches the DATABASE_URL in
+# .env.example. Run `docker compose up -d` to start, `docker compose down`
+# to stop (data persists in the named volume). For a full wipe, run
+# `docker compose down -v` or `pnpm db:reset`.
+#
+# This file exists for local dev only. Production and staging provision
+# Postgres via their host platform (RDS, Supabase, etc.) — not this compose.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: forgeschool-postgres
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: forgeschool
+      POSTGRES_PASSWORD: forgeschool
+      POSTGRES_DB: forgeschool
+      # UTC across the board — timestamps in app code assume UTC.
+      TZ: UTC
+      PGTZ: UTC
+    volumes:
+      - forgeschool_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U forgeschool -d forgeschool']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  forgeschool_postgres_data:
+    name: forgeschool_postgres_data
