@@ -18,7 +18,7 @@ filesTouched:
 
 `src/lib/cart/cart-math.ts` (lesson 069) is 80 lines of pure function. Every function has a narrow contract — `subtotalCents` sums, `addOrIncrement` merges or appends, `assertSingleCurrency` throws on mismatch. This lesson ships exhaustive unit coverage so those contracts never drift.
 
-Tests run against the pure module — zero Drizzle, zero Svelte, zero Postgres. Vitest completes the suite in < 1s.
+Tests run against the pure module — zero Drizzle, zero Svelte, zero Postgres. Vitest completes the suite in under 1 second.
 
 ## The command
 
@@ -89,7 +89,7 @@ pnpm exec vitest run tests/unit/cart-math.test.ts
 
 - **Typed `items: CartLineItem[]` in the test fixture** — the production signature is `readonly CartLineItem[]`. Matching the `readonly` caught a potential mutation bug in `addOrIncrement` that strict readonly would have flagged.
 - **Expected `removeItem([], 'nope')` to throw** — it doesn't; no-op is the intended behavior.
-- **Tested `setQuantity(items, id, -5)` expecting removal** — any `<= 0` triggers removal. The test now uses exactly 0 to match the documented threshold.
+- **Tested `setQuantity(items, id, -5)` expecting removal** — any non-positive quantity triggers removal. The test now uses exactly 0 to match the documented threshold.
 
 ## Commit
 

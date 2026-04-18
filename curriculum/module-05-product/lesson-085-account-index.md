@@ -73,7 +73,7 @@ The PE7 choice — **thin load over locals, tier card + three links, CSS `:has()
 **Fix:** Check the webhook logs (lesson 050); confirm the subscription's entitlement row exists and is non-revoked.
 
 **Symptom:** `:has()` selector doesn't work on older browsers
-**Cause:** Safari < 15.4, Firefox < 121 lack native `:has()`.
+**Cause:** Safari before 15.4 and Firefox before 121 lack native `:has()`.
 **Fix:** The gradient-style degrades gracefully — the card still renders with default border. Acceptable progressive enhancement.
 
 **Symptom:** Every navigation to `/account` re-fires the entitlement query
@@ -94,7 +94,7 @@ pnpm dev
 
 - **Used `$derived` inside the load function** — runes can only be used inside components / `.svelte.ts` files. Moved the derivation inline at load-return time.
 - **Returned the raw tier string without a display label** — UI would render `'free'` in lowercase. Added `tierLabel` helper from lesson 074.
-- **Forgot to set `<meta name="robots" content="noindex">`** — per-session account pages shouldn't be indexed. Added.
+- **Forgot to set the `robots: noindex` meta tag** — per-session account pages shouldn't be indexed. Added.
 
 ## Commit
 

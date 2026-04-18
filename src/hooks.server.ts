@@ -13,6 +13,7 @@
  * correlation key a support request can quote back to us.
  */
 import type { Handle, HandleServerError } from '@sveltejs/kit';
+import { building } from '$app/environment';
 import { db } from '$lib/server/db';
 import { getSessionTier } from '$lib/server/entitlements/tier-queries';
 import { logger } from '$lib/server/logger';
@@ -21,10 +22,24 @@ import { ensureSessionCookie } from '$lib/server/session';
 export const handle: Handle = async ({ event, resolve }) => {
 	const startedAt = performance.now();
 
-	// Every request gets a session cookie + a derived tier on `locals`.
-	// Downstream loads read `event.locals.tier` without re-querying.
-	event.locals.sessionId = ensureSessionCookie(event.cookies);
-	event.locals.tier = await getSessionTier(db, event.locals.sessionId);
+	// Build-time prerender can't set cookies or reach Postgres. Static
+	// pages (/, /lessons/*, /pricing) are tier-agnostic anyway, so
+	// degrade to an empty locals shape during prerender.
+	if (building) {
+		event.locals.sessionId = '';
+		event.locals.tier = 'free';
+	} else {
+		event.locals.sessionId = ensureSessionCookie(event.cookies);
+		try {
+			event.locals.tier = await getSessionTier(db, event.locals.sessionId);
+		} catch (err) {
+			// DB unreachable (e.g. local dev without `docker compose up`).
+			// Treat as logged-out; routes that truly require a DB raise
+			// their own errors downstream.
+			logger.warn({ err }, 'tier lookup failed; defaulting to free');
+			event.locals.tier = 'free';
+		}
+	}
 
 	const response = await resolve(event);
 	const durationMs = Math.round((performance.now() - startedAt) * 100) / 100;
