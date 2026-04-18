@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ForgeMark from '$lib/icons/generated/ForgeMark.svelte';
 	import RevealOnScroll from '$lib/components/marketing/RevealOnScroll.svelte';
+	import BigCTA from '$lib/components/marketing/BigCTA.svelte';
 	import FAQ from '$lib/components/marketing/FAQ.svelte';
 	import StackGrid from '$lib/components/marketing/StackGrid.svelte';
 	import ValueProp from '$lib/components/marketing/ValueProp.svelte';
@@ -97,6 +98,7 @@
 	<FAQ />
 
 	<section class="pe7-callout" aria-labelledby="pe7-heading">
+		<!-- PE7 callout retained above the CTA -->
 		<div class="section-inner">
 			<h2 id="pe7-heading">Why PE7?</h2>
 			<p>
@@ -108,6 +110,8 @@
 			</p>
 		</div>
 	</section>
+
+	<BigCTA />
 </main>
 
 <style>
