@@ -8,7 +8,7 @@ moduleTitle: Money
 phase: 4
 step: 1
 previous: 39
-next: null
+next: 41
 estimatedMinutes: 10
 filesTouched:
   - docs/STRIPE.md
