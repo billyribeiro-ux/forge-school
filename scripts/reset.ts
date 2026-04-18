@@ -2,60 +2,22 @@
  * ForgeSchool — database reset.
  *
  * Drops every table, type, and function in the public schema, then
- * re-applies every migration. Use this to wipe a development database
- * back to a freshly-migrated state without needing to restart Docker or
- * delete the volume.
- *
- * REFUSES to run against anything that looks like a production DATABASE_URL.
- * The guard is a belt-and-suspenders check on top of NODE_ENV — a leaked
- * staging URL in an env file should not cause a reset by accident.
+ * re-applies every migration. Local-dev only; refuses to run against
+ * anything that looks like a production DATABASE_URL.
  *
  * Invoke via:
  *     pnpm db:reset
  */
-import { config } from 'dotenv';
 import { spawnSync } from 'node:child_process';
 import postgres from 'postgres';
+import { loadEnv, refuseIfProdLike, requireDatabaseUrl } from './lib/env.ts';
 
-config({ path: '.env.local' });
-config();
-
-const databaseUrl = process.env.DATABASE_URL;
-
-if (databaseUrl === undefined || databaseUrl === '') {
-	console.error('[reset] DATABASE_URL is not set.');
-	process.exit(1);
-}
-
-function refuseIfProdLike(url: string): void {
-	const redFlags = [
-		/prod/i,
-		/production/i,
-		/\.amazonaws\.com/i,
-		/\.rds\./i,
-		/\.supabase\.co/i,
-		/\.neon\.tech/i,
-		/\.railway\.app/i,
-		/\.render\.com/i
-	];
-	const hit = redFlags.find((pattern) => pattern.test(url));
-	if (hit !== undefined) {
-		console.error(
-			`[reset] DATABASE_URL matches "${hit.source}" — refusing to drop.\n` +
-				'        This script only runs against local development databases.'
-		);
-		process.exit(1);
-	}
-	if (process.env.NODE_ENV === 'production') {
-		console.error('[reset] NODE_ENV=production — refusing to drop.');
-		process.exit(1);
-	}
-}
+loadEnv();
+const databaseUrl = requireDatabaseUrl('reset');
+refuseIfProdLike('reset', databaseUrl);
 
 async function main(): Promise<void> {
-	refuseIfProdLike(databaseUrl as string);
-
-	const client = postgres(databaseUrl as string, { max: 1, prepare: false });
+	const client = postgres(databaseUrl, { max: 1, prepare: false });
 	try {
 		console.log('[reset] dropping public schema...');
 		await client.unsafe('DROP SCHEMA IF EXISTS public CASCADE');
