@@ -7,7 +7,11 @@
  * for the database shape; migrations are derived artifacts.
  */
 import { defineConfig } from 'drizzle-kit';
-import 'dotenv/config';
+import { config } from 'dotenv';
+
+// Load .env.local first (local overrides), then .env as fallback.
+config({ path: '.env.local' });
+config();
 
 const databaseUrl = process.env.DATABASE_URL;
 
