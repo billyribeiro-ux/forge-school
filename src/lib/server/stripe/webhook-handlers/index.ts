@@ -21,6 +21,7 @@ import {
 	handleSubscriptionDeleted,
 	handleSubscriptionUpdated
 } from './subscription-lifecycle.ts';
+import { handleTrialWillEnd } from './trial-will-end.ts';
 
 export async function dispatchEvent(event: Stripe.Event): Promise<void> {
 	switch (event.type) {
@@ -36,8 +37,11 @@ export async function dispatchEvent(event: Stripe.Event): Promise<void> {
 		case 'customer.subscription.deleted':
 			await handleSubscriptionDeleted(event);
 			return;
+		case 'customer.subscription.trial_will_end':
+			await handleTrialWillEnd(event);
+			return;
 
-		// Invoice / refund handlers land in lessons 051-053.
+		// Invoice / refund handlers land in lessons 052-053.
 
 		default:
 			logger.info(
