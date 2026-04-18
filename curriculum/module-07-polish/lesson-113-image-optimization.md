@@ -37,7 +37,7 @@ pnpm check
 
 **Alt 1: Cloudinary / imgproxy.** Third-party hop per request. Fine for scale; overkill for v1.
 **Alt 2: Ship raw JPEGs.** Wastes bandwidth; Lighthouse flags.
-**Alt 3: Only AVIF, no fallbacks.** Safari < 16 blanks. JPEG fallback is the last-line compatibility.
+**Alt 3: Only AVIF, no fallbacks.** Safari before 16 blanks. JPEG fallback is the last-line compatibility.
 
 ## Verify
 
