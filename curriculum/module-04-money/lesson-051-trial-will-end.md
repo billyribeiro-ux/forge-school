@@ -8,7 +8,7 @@ moduleTitle: Money
 phase: 4
 step: 12
 previous: 50
-next: null
+next: 52
 estimatedMinutes: 10
 filesTouched:
   - src/lib/server/stripe/webhook-handlers/trial-will-end.ts
