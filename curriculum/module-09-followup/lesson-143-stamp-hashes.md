@@ -1,5 +1,6 @@
 ---
 number: 143
+commit: 92a5001fa9e55837d7f167c5e251331f8dc7f551
 slug: stamp-hashes
 title: Stamp every lesson's front-matter with its commit hash
 module: 9

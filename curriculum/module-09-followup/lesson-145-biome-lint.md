@@ -1,5 +1,6 @@
 ---
 number: 145
+commit: cf5844c4aa619a339943bb001b9cc1a27f73c554
 slug: biome-lint
 title: Install Biome + wire `pnpm lint`
 module: 9

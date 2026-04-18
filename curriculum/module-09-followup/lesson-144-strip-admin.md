@@ -1,5 +1,6 @@
 ---
 number: 144
+commit: 59d6d81200ae10d4e991dcfe9604104fdb4ee841
 slug: strip-admin
 title: Strip /admin from the production bundle via a Vite plugin
 module: 9
