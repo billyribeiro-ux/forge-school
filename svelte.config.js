@@ -1,21 +1,43 @@
 import adapter from '@sveltejs/adapter-auto';
 import { mdsvex, escapeSvelte } from 'mdsvex';
+import { createHighlighter } from 'shiki';
 
 /**
- * Minimal pre-shiki highlighter. mdsvex wraps the returned string inside a
- * Svelte template literal (`{@html \`...\`}`), so every backtick and dollar
- * sign we emit must be pre-escaped to survive that wrapping.
- * escapeSvelte from mdsvex handles backtick + $ escaping correctly.
+ * Shiki-backed syntax highlighter. Runs at build time via mdsvex; produces
+ * inline-styled HTML with VS Code-grade grammars. escapeSvelte pipes the
+ * output through the `{@html \`...\`}` template-literal wrapping mdsvex
+ * inserts, handling backtick and $ escaping without losing the styling.
  *
- * Lesson 034 replaces this with a shiki-based highlighter.
+ * Dual-theme: light / dark switched via the html[data-theme] attribute or
+ * the @media (prefers-color-scheme: dark) cascade. Shiki emits both themes
+ * as inline styles and toggles between them via CSS variables.
  */
-function plainHighlighter(code, lang) {
-	const safe = code
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;');
-	const wrapped = `<pre class="language-${lang ?? 'text'}"><code>${safe}</code></pre>`;
-	return escapeSvelte(wrapped);
+const shiki = await createHighlighter({
+	themes: ['github-light', 'github-dark'],
+	langs: [
+		'bash',
+		'css',
+		'diff',
+		'html',
+		'javascript',
+		'json',
+		'markdown',
+		'shell',
+		'sql',
+		'svelte',
+		'typescript',
+		'yaml'
+	]
+});
+
+function shikiHighlighter(code, lang) {
+	const resolved = lang && shiki.getLoadedLanguages().includes(lang) ? lang : 'text';
+	const html = shiki.codeToHtml(code, {
+		lang: resolved,
+		themes: { light: 'github-light', dark: 'github-dark' },
+		defaultColor: false
+	});
+	return escapeSvelte(html);
 }
 
 /** @type {import('mdsvex').MdsvexOptions} */
@@ -25,7 +47,7 @@ const mdsvexOptions = {
 		dashes: 'oldschool'
 	},
 	highlight: {
-		highlighter: plainHighlighter
+		highlighter: shikiHighlighter
 	}
 };
 

@@ -8,7 +8,7 @@ moduleTitle: Content Pipeline
 phase: 3
 step: 5
 previous: 32
-next: null
+next: 34
 estimatedMinutes: 25
 filesTouched:
   - src/routes/lessons/[slug]/+page.ts
