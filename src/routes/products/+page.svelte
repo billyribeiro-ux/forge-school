@@ -23,6 +23,22 @@
 		<p class="lede">Browse by kind — lifetime courses, subscription plans, bundles.</p>
 	</header>
 
+	{#if data.categories.length > 0}
+		<section class="categories" aria-labelledby="browse-heading">
+			<h2 id="browse-heading">Browse by category</h2>
+			<ul class="category-strip">
+				{#each data.categories as category (category.id)}
+					<li>
+						<a href="/products/category/{category.slug}">
+							<span class="cat-name">{category.name}</span>
+							<span class="cat-count">{category.productCount}</span>
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</section>
+	{/if}
+
 	{#if data.featured.length > 0}
 		<section class="featured">
 			<h2>Featured</h2>
@@ -164,6 +180,38 @@
 			background-color: var(--color-bg-sunken);
 			border-radius: var(--radius-sm);
 			color: var(--color-fg-muted);
+		}
+		.category-strip {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			list-style: none;
+			padding: 0;
+		}
+		.category-strip a {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding-inline: 0.9rem;
+			padding-block: 0.5rem;
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-md);
+			color: var(--color-fg);
+			text-decoration: none;
+			background-color: var(--color-bg-raised);
+			transition: border-color var(--duration-fast) var(--easing-standard);
+		}
+		.category-strip a:hover {
+			border-color: var(--color-brand);
+		}
+		.cat-count {
+			font-size: var(--font-size-xs);
+			font-variant-numeric: tabular-nums;
+			color: var(--color-fg-muted);
+			background-color: var(--color-bg-sunken);
+			padding-inline: 0.4rem;
+			padding-block: 0.1rem;
+			border-radius: var(--radius-sm);
 		}
 	}
 </style>
