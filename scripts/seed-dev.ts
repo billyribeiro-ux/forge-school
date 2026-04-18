@@ -27,16 +27,57 @@ loadEnv();
 const databaseUrl = requireDatabaseUrl('seed');
 refuseIfProdLike('seed', databaseUrl);
 
+async function seedProducts(db: ReturnType<typeof drizzle<typeof schema>>): Promise<void> {
+	console.log('[seed] products + prices...');
+
+	const [lifetime] = await db
+		.insert(schema.products)
+		.values({
+			slug: 'forgeschool-lifetime',
+			name: 'ForgeSchool — Lifetime',
+			description:
+				'One-time purchase, permanent access to every lesson and every future module.',
+			kind: 'lifetime',
+			status: 'active',
+			stripeProductId: 'prod_test_forgeschool_lifetime'
+		})
+		.onConflictDoNothing({ target: schema.products.slug })
+		.returning();
+
+	// `returning()` on a skipped conflict returns an empty array. Look the row
+	// up explicitly so the price insert has a productId to point at.
+	const lifetimeRow =
+		lifetime ??
+		(await db.query.products.findFirst({
+			where: (p, { eq }) => eq(p.slug, 'forgeschool-lifetime')
+		}));
+
+	if (lifetimeRow === undefined) {
+		throw new Error('[seed] failed to locate ForgeSchool Lifetime product after upsert');
+	}
+
+	await db
+		.insert(schema.prices)
+		.values({
+			productId: lifetimeRow.id,
+			stripePriceId: 'price_test_forgeschool_lifetime_497',
+			currency: 'usd',
+			unitAmountCents: 49700,
+			interval: 'one_time',
+			active: true
+		})
+		.onConflictDoNothing({ target: schema.prices.stripePriceId });
+
+	console.log('[seed]   ✓ ForgeSchool Lifetime @ $497 (test mode)');
+}
+
 async function main(): Promise<void> {
 	const client = postgres(databaseUrl, { max: 1, prepare: false });
 	const db = drizzle(client, { schema });
 
 	try {
 		console.log('[seed] inserting dev fixtures...');
-		// Intentional placeholder — lesson 025 fills this in with the first
-		// real product + price seed. Keeping the skeleton green (no-op) now
-		// so `pnpm db:seed` is callable and the guard path is exercised.
-		await db.execute('SELECT 1');
+		await seedProducts(db);
 		console.log('[seed] done');
 	} finally {
 		await client.end({ timeout: 5 });
