@@ -1,0 +1,58 @@
+/* -----------------------------------------------------------------------------
+   ForgeSchool — 9-tier breakpoint scale
+
+   This file is the single source of truth for every viewport breakpoint in
+   the system. Every @media rule in every component references one of these
+   nine widths — no ad-hoc pixel values anywhere else in the codebase.
+
+   The scale is intentionally dense at the low end (320 → 480 → 768 → 1024)
+   to cover the modern device population, and intentionally broad at the high
+   end (1536 → 1920 → 2560 → 3840) to serve the high-DPI desktop + 4K
+   trading-station audience this platform targets.
+
+   NAMING CONVENTION (the contract every component honors):
+
+     xs   320px   — compact phones, portrait (smallest iPhone SE)
+     sm   480px   — phones, landscape / large phones, portrait
+     md   768px   — tablets, portrait (iPad mini/Air)
+     lg   1024px  — tablets, landscape / small laptops
+     xl   1280px  — laptops, small desktops
+     xl2  1536px  — standard desktops
+     xl3  1920px  — 1080p+ desktops (FullHD baseline)
+     xl4  2560px  — 1440p / QHD displays (common for trading rigs)
+     xl5  3840px  — 4K / UHD displays
+
+   USAGE INSIDE A COMPONENT:
+
+     .card {
+       padding: 1rem;
+     }
+     @media (min-width: 768px) {      // md breakpoint
+       .card { padding: 1.5rem; }
+     }
+     @media (min-width: 1280px) {     // xl breakpoint
+       .card { padding: 2rem; }
+     }
+
+   Vanilla @media with literal pixel values is the only form that works
+   across the entire browser matrix in 2026 without a build-time plugin.
+   The canonical pixel values are documented in the comments above, and the
+   same values are exposed as CSS custom properties below for JavaScript
+   consumers (e.g., matchMedia listeners, container query fallbacks).
+----------------------------------------------------------------------------- */
+
+@layer tokens {
+	:root {
+		/* Breakpoint values exposed for JS consumption via
+		   getComputedStyle(document.documentElement).getPropertyValue('--bp-md') */
+		--bp-xs: 320px;
+		--bp-sm: 480px;
+		--bp-md: 768px;
+		--bp-lg: 1024px;
+		--bp-xl: 1280px;
+		--bp-xl2: 1536px;
+		--bp-xl3: 1920px;
+		--bp-xl4: 2560px;
+		--bp-xl5: 3840px;
+	}
+}
