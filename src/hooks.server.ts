@@ -13,10 +13,19 @@
  * correlation key a support request can quote back to us.
  */
 import type { Handle, HandleServerError } from '@sveltejs/kit';
+import { db } from '$lib/server/db';
+import { getSessionTier } from '$lib/server/entitlements/tier-queries';
 import { logger } from '$lib/server/logger';
+import { ensureSessionCookie } from '$lib/server/session';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const startedAt = performance.now();
+
+	// Every request gets a session cookie + a derived tier on `locals`.
+	// Downstream loads read `event.locals.tier` without re-querying.
+	event.locals.sessionId = ensureSessionCookie(event.cookies);
+	event.locals.tier = await getSessionTier(db, event.locals.sessionId);
+
 	const response = await resolve(event);
 	const durationMs = Math.round((performance.now() - startedAt) * 100) / 100;
 
