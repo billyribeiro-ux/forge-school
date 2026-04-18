@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+
+# Build output
+.svelte-kit/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+test-results/
+playwright-report/
+
+# Logs
+*.log
+logs/
+
+# Database
+drizzle/meta/
+
+# Stripe CLI
+.stripe/
+
+# Sentry
+.sentryclirc
