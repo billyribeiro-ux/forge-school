@@ -3,16 +3,15 @@
 	from the `forge_cart` cookie on first client render, then observes
 	cart mutations via $effect and writes back to the cookie.
 
-	Renders nothing. Zero DOM. Server-side: the cookie is already set
-	by a previous response; this component runs client-side only (the
-	`{#if browser}` guard in the wrapper keeps SSR inert).
+	Renders nothing. Zero DOM. Effects never run during SSR, so the
+	cookie I/O below is implicitly client-only — no `browser` guard
+	needed.
 
 	A small debounce (~150ms) coalesces rapid mutations — e.g., an
 	add-to-cart click that bumps quantity twice in quick succession
 	produces one cookie write, not two.
 -->
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { useCart } from './cart.svelte';
 	import {
 		CART_COOKIE_MAX_AGE,
@@ -39,8 +38,9 @@
 		document.cookie = `${CART_COOKIE_NAME}=${value}; Path=/; Max-Age=${CART_COOKIE_MAX_AGE}; SameSite=Lax${secure}`;
 	}
 
+	// $effect never runs on the server, so no `browser` guard is needed.
 	$effect(() => {
-		if (!browser || hydrated) return;
+		if (hydrated) return;
 		const existing = readCookie(CART_COOKIE_NAME);
 		const items = deserializeCart(existing);
 		if (items.length > 0) cart.hydrate(items);
@@ -50,7 +50,7 @@
 	let writeTimer: ReturnType<typeof setTimeout> | null = null;
 
 	$effect(() => {
-		if (!browser || !hydrated) return;
+		if (!hydrated) return;
 		const snapshot = cart.items;
 		if (writeTimer !== null) clearTimeout(writeTimer);
 		writeTimer = setTimeout(() => {
