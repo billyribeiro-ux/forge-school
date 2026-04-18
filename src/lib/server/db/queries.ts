@@ -5,7 +5,7 @@
  * functions / endpoints) gives us a testable, named surface for every
  * data-access pattern the app uses. One function == one test.
  */
-import { and, eq, sql } from 'drizzle-orm';
+import { and, eq, ilike, or, sql } from 'drizzle-orm';
 import type { Db } from './index.ts';
 import {
 	prices,
@@ -114,6 +114,53 @@ export async function listProductsByCategorySlug(
 	}
 
 	return { category, products: [...byId.values()] };
+}
+
+/**
+ * Case-insensitive product search across name, description, and tags.
+ * Returns active products only, joined with their active prices.
+ *
+ * Implementation: `ILIKE '%query%'` on name and description + a tag
+ * containment check. Fine at our current scale (three products, dozens
+ * at most). A `tsvector` column is justified once the catalog exceeds
+ * ~100 rows or users complain about search quality.
+ */
+export async function searchActiveProducts(
+	db: Db,
+	query: string
+): Promise<ProductWithPrices[]> {
+	const trimmed = query.trim();
+	if (trimmed === '') return [];
+	const pattern = `%${trimmed.replaceAll('%', '\\%').replaceAll('_', '\\_')}%`;
+
+	const rows = await db
+		.select({ product: products, price: prices })
+		.from(products)
+		.leftJoin(prices, and(eq(prices.productId, products.id), eq(prices.active, true)))
+		.where(
+			and(
+				eq(products.status, 'active'),
+				or(
+					ilike(products.name, pattern),
+					ilike(products.description, pattern),
+					sql`exists (select 1 from unnest(${products.tags}) t where t ilike ${pattern})`
+				)
+			)
+		)
+		.orderBy(products.name, prices.createdAt);
+
+	const byId = new Map<string, ProductWithPrices>();
+	for (const row of rows) {
+		let existing = byId.get(row.product.id);
+		if (existing === undefined) {
+			existing = { ...row.product, prices: [] };
+			byId.set(row.product.id, existing);
+		}
+		if (row.price !== null) {
+			existing.prices.push(row.price);
+		}
+	}
+	return [...byId.values()];
 }
 
 /**

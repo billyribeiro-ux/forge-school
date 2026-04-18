@@ -21,6 +21,9 @@
 		<p class="eyebrow">Catalog</p>
 		<h1>Every ForgeSchool product</h1>
 		<p class="lede">Browse by kind — lifetime courses, subscription plans, bundles.</p>
+		<p class="hero-actions">
+			<a class="search-link" href="/products/search">Search products →</a>
+		</p>
 	</header>
 
 	{#if data.categories.length > 0}
@@ -112,6 +115,13 @@
 		}
 		.lede {
 			color: var(--color-fg-muted);
+		}
+		.hero-actions {
+			margin-block-start: 1rem;
+		}
+		.search-link {
+			color: var(--color-brand);
+			font-weight: var(--font-weight-medium);
 		}
 		section {
 			margin-block-end: 2.5rem;
