@@ -8,7 +8,7 @@ moduleTitle: Content Pipeline
 phase: 3
 step: 3
 previous: 30
-next: null
+next: 32
 estimatedMinutes: 25
 filesTouched:
   - src/lib/curriculum/index.ts

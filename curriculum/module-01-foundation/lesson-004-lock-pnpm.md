@@ -85,7 +85,7 @@ Lockfile is up to date, resolution step is skipped
 **What the four mechanisms actually do, each on its own:**
 
 - **`packageManager: "pnpm@10.7.0"`** — Read by Corepack (shipped with Node 16.9+) to download and exec the exact pnpm version when any `pnpm` command is invoked. Also read by `package-manager-strict-version=true` to refuse to proceed if the active pnpm binary doesn't match.
-- **`engines.node`** — Combined with `engine-strict=true`, pnpm refuses to install on Node < 22.11. A developer on Node 18 hits a hard stop with a clear error, not a mysterious runtime failure three weeks in.
+- **`engines.node`** — Combined with `engine-strict=true`, pnpm refuses to install on Node earlier than 22.11. A developer on Node 18 hits a hard stop with a clear error, not a mysterious runtime failure three weeks in.
 - **`preinstall: "npx -y only-allow pnpm"`** — When someone runs `npm install`, npm executes the `preinstall` script first. `only-allow pnpm` checks the invoking user agent and exits with a loud error if it's not pnpm. This is the belt-and-suspenders guard for humans who ignore docs.
 - **`auto-install-peers=true`** — Separate concern but related hygiene. With peer dependencies auto-installed, we never ship a repo where `pnpm install` succeeds but the app fails at runtime because a peer wasn't explicitly added. Every package's peer requirements are satisfied.
 

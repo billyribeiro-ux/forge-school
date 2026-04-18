@@ -130,8 +130,8 @@ Expected: columns `id`, `session_id`, `stripe_checkout_session_id`, `status`, `c
 
 ## Why we chose this — the PE7 judgment
 
-**Alternative 1: Apply the migration by running `psql < 0000_*.sql` manually**
-Works for one migration. Breaks the moment you have two, because there's nothing tracking which have run. A second `psql < 0000_*.sql` would try to re-create every table. The migrator maintains a `__drizzle_migrations` ledger so each file runs exactly once.
+**Alternative 1: Apply the migration by running `psql` with the SQL file piped in**
+Works for one migration. Breaks the moment you have two, because there's nothing tracking which have run. A second `psql` invocation against the same file would try to re-create every table. The migrator maintains a `__drizzle_migrations` ledger so each file runs exactly once.
 
 **Alternative 2: Use `drizzle-kit migrate` as the runner**
 `drizzle-kit migrate` works — it's the CLI-wrapping version of our runner. We chose the typed script for two reasons. First, it depends only on `drizzle-orm` + `postgres`, which we already ship as runtime deps; `drizzle-kit` is a dev dep that we don't want in production. Second, a typed script has a call-stack we can step into from CI / a debugger / a log aggregator; a CLI subshell is opaque.

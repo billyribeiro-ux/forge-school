@@ -117,7 +117,7 @@ The PE7 choice â€” `drizzle-kit generate` + committed SQL + committed snapshot â
 **Fix:** The explicit `config({ path: '.env.local' })` from the `drizzle.config.ts` edit above. Verify `DATABASE_URL` appears in `.env.local` (it should, from lesson 006).
 
 **Symptom:** The generated SQL uses `gen_random_uuid()` but your Postgres throws "function does not exist"
-**Cause:** Older Postgres versions (< 13) or fresh installs without the pgcrypto extension. `gen_random_uuid()` is built into Postgres 13+ via the `pgcrypto` module, which is included by default on 13+ and enabled automatically for UUID columns.
+**Cause:** Older Postgres versions (earlier than 13) or fresh installs without the pgcrypto extension. `gen_random_uuid()` is built into Postgres 13+ via the `pgcrypto` module, which is included by default on 13+ and enabled automatically for UUID columns.
 **Fix:** You're on Postgres 16 (from lesson 017's Docker Compose), so this shouldn't happen. If it does, confirm the container is actually running Postgres 16: `docker exec forgeschool-postgres psql -U forgeschool -c "SHOW server_version;"`.
 
 **Symptom:** Running `drizzle-kit generate` produces a second migration instead of updating the first

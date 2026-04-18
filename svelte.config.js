@@ -1,11 +1,31 @@
 import adapter from '@sveltejs/adapter-auto';
-import { mdsvex } from 'mdsvex';
+import { mdsvex, escapeSvelte } from 'mdsvex';
+
+/**
+ * Minimal pre-shiki highlighter. mdsvex wraps the returned string inside a
+ * Svelte template literal (`{@html \`...\`}`), so every backtick and dollar
+ * sign we emit must be pre-escaped to survive that wrapping.
+ * escapeSvelte from mdsvex handles backtick + $ escaping correctly.
+ *
+ * Lesson 034 replaces this with a shiki-based highlighter.
+ */
+function plainHighlighter(code, lang) {
+	const safe = code
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;');
+	const wrapped = `<pre class="language-${lang ?? 'text'}"><code>${safe}</code></pre>`;
+	return escapeSvelte(wrapped);
+}
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md', '.svx'],
 	smartypants: {
 		dashes: 'oldschool'
+	},
+	highlight: {
+		highlighter: plainHighlighter
 	}
 };
 
@@ -33,7 +53,19 @@ const config = {
 		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
 		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: adapter()
+		adapter: adapter(),
+		prerender: {
+			// Lesson 032 renders /lessons with anchors to /lessons/[slug]. Lesson
+			// 033 creates the [slug] route; until then, prerender must tolerate
+			// those dangling links rather than failing the build.
+			handleHttpError: ({ path, referrer, message }) => {
+				if (path.startsWith('/lessons/')) {
+					console.warn(`[prerender] ${message} (from ${referrer}) — expected until lesson 033`);
+					return;
+				}
+				throw new Error(message);
+			}
+		}
 	}
 };
 
