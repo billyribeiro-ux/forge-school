@@ -53,19 +53,7 @@ const config = {
 		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
 		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: adapter(),
-		prerender: {
-			// Lesson 032 renders /lessons with anchors to /lessons/[slug]. Lesson
-			// 033 creates the [slug] route; until then, prerender must tolerate
-			// those dangling links rather than failing the build.
-			handleHttpError: ({ path, referrer, message }) => {
-				if (path.startsWith('/lessons/')) {
-					console.warn(`[prerender] ${message} (from ${referrer}) — expected until lesson 033`);
-					return;
-				}
-				throw new Error(message);
-			}
-		}
+		adapter: adapter()
 	}
 };
 

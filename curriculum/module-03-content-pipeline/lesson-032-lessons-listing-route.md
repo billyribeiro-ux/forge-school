@@ -8,7 +8,7 @@ moduleTitle: Content Pipeline
 phase: 3
 step: 4
 previous: 31
-next: null
+next: 33
 estimatedMinutes: 20
 filesTouched:
   - src/routes/lessons/+page.ts
@@ -25,7 +25,7 @@ The loader works. Now we build the first route that consumes it: `/lessons` — 
 
 Two meaningful concerns this lesson also solves:
 
-1. **mdsvex + template-literal escape.** mdsvex wraps compiled code blocks in Svelte `{@html \`...\`}` template literals. Default Prism highlighting emits HTML that contains raw `$` characters, which JavaScript interprets as template-literal substitutions at render time — producing a build-time "reference error" if any emitted code contains shell-variable syntax (`$f`, `$(...)`, `${VAR}`). We install a minimal pre-shiki highlighter that pipes code through `escapeSvelte` from mdsvex, which correctly escapes backticks and dollar signs. Lesson 034 replaces this with a full shiki integration; for now we just need the build not to explode.
+1. **mdsvex + template-literal escape.** mdsvex wraps compiled code blocks in Svelte `{@html \`...\`}` template literals. Default Prism highlighting emits HTML that contains raw `$` characters, which JavaScript interprets as template-literal substitutions at render time — producing a build-time "reference error" if any emitted code contains shell-variable syntax or JS template expressions. We install a minimal pre-shiki highlighter that pipes code through `escapeSvelte` from mdsvex, which correctly escapes backticks and dollar signs. Lesson 034 replaces this with a full shiki integration; for now we just need the build not to explode.
 
 2. **Prose-level `<` escaping.** Three lessons in Modules 1-2 used a bare `<` in prose — phrases of the shape `Node <space> 22.11`, `Postgres <space> 13`, and `psql <space> file.sql` — where the `<` is a literal comparison or shell redirect. mdsvex's Markdown parser interprets those as the start of malformed HTML tags and errors at parse time. Fix: rewrite the three sentences to use "earlier than" or avoid bare `<` in prose entirely. Inline backtick-delimited code blocks with `<` would also work if the parser were stricter; the prose rewrite is the simpler fix.
 
