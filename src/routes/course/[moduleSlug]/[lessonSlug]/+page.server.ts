@@ -17,6 +17,7 @@ import { db } from '$lib/server/db';
 import { getCourseLesson, getNextCourseLessonInModule } from '$lib/server/db/queries';
 import { hasEntitlement } from '$lib/server/entitlements';
 import { ensureSessionCookie } from '$lib/server/session';
+import type { Actions, PageServerLoad } from './$types';
 
 const COURSE_PRODUCT_SLUG = 'forgeschool-lifetime';
 const PROGRESS_COOKIE = 'forgeschool_progress';
@@ -58,7 +59,7 @@ function writeProgress(cookies: Cookies, progress: ProgressMap): void {
 	});
 }
 
-export const load = async ({ cookies, params }) => {
+export const load: PageServerLoad = async ({ cookies, params }) => {
 	const sessionId = ensureSessionCookie(cookies);
 
 	const entitled = await hasEntitlement(db, {
@@ -89,7 +90,7 @@ export const load = async ({ cookies, params }) => {
 	return { module: row.module, lesson: row.lesson, completed };
 };
 
-export const actions = {
+export const actions: Actions = {
 	complete: async ({ cookies, params }) => {
 		const sessionId = ensureSessionCookie(cookies);
 

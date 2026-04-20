@@ -6,6 +6,7 @@ import {
 	type ProductFilters
 } from '$lib/server/db/queries';
 import type { ProductKindValue } from '$lib/server/db/schema';
+import type { PageServerLoad } from './$types';
 
 const KINDS: readonly ProductKindValue[] = ['course', 'bundle', 'subscription', 'lifetime'];
 
@@ -21,7 +22,7 @@ function parseMaxPrice(raw: string | null): number | undefined {
 	return Math.round(n * 100);
 }
 
-export const load = async ({ url }) => {
+export const load: PageServerLoad = async ({ url }) => {
 	const kind = parseKind(url.searchParams.get('kind'));
 	const rawCategory = url.searchParams.get('category') ?? '';
 	const categorySlug = rawCategory === '' ? undefined : rawCategory;

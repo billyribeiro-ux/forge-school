@@ -1,8 +1,9 @@
 import { error } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { listProductsByCategorySlug } from '$lib/server/db/queries';
+import type { PageServerLoad } from './$types';
 
-export const load = async ({ params }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	const result = await listProductsByCategorySlug(db, params.slug);
 
 	if (result === null) {

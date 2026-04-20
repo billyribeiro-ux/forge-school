@@ -1,7 +1,8 @@
 import { error } from '@sveltejs/kit';
 import { getLesson, getLessonByNumber, getModule, listLessons } from '$lib/curriculum';
+import type { EntryGenerator, PageLoad } from './$types';
 
-export const load = ({ params }) => {
+export const load: PageLoad = ({ params }) => {
 	const lesson = getLesson(params.slug);
 	if (lesson === null) {
 		error(404, {
@@ -34,4 +35,4 @@ export const prerender = true;
 // SvelteKit discovers slugs by crawling prerendered links — which works
 // because /lessons links to every lesson — but listing entries explicitly
 // is more robust against future listing changes.
-export const entries = () => listLessons().map((l) => ({ slug: l.slug }));
+export const entries: EntryGenerator = () => listLessons().map((l) => ({ slug: l.slug }));

@@ -9,10 +9,11 @@ import { db } from '$lib/server/db';
 import { getCourseModuleWithLessons } from '$lib/server/db/queries';
 import { hasEntitlement } from '$lib/server/entitlements';
 import { ensureSessionCookie } from '$lib/server/session';
+import type { PageServerLoad } from './$types';
 
 const COURSE_PRODUCT_SLUG = 'forgeschool-lifetime';
 
-export const load = async ({ cookies, params }) => {
+export const load: PageServerLoad = async ({ cookies, params }) => {
 	const sessionId = ensureSessionCookie(cookies);
 
 	const entitled = await hasEntitlement(db, {

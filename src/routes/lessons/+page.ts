@@ -1,6 +1,7 @@
 import { listModules } from '$lib/curriculum';
+import type { PageLoad } from './$types';
 
-export const load = () => {
+export const load: PageLoad = () => {
 	const modules = listModules();
 	const totalLessons = modules.reduce((sum, m) => sum + m.lessons.length, 0);
 	const totalMinutes = modules.reduce(

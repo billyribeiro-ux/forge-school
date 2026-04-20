@@ -11,10 +11,11 @@ import { db } from '$lib/server/db';
 import { listCourseModulesByProductSlug } from '$lib/server/db/queries';
 import { hasEntitlement } from '$lib/server/entitlements';
 import { ensureSessionCookie } from '$lib/server/session';
+import type { PageServerLoad } from './$types';
 
 const COURSE_PRODUCT_SLUG = 'forgeschool-lifetime';
 
-export const load = async ({ cookies }) => {
+export const load: PageServerLoad = async ({ cookies }) => {
 	const sessionId = ensureSessionCookie(cookies);
 
 	const entitled = await hasEntitlement(db, {
